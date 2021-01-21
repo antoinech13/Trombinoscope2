@@ -11,9 +11,10 @@ import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.view.TrombViewHolder;
 
+
 import java.util.List;
 
-public class TrombiAdapter  extends RecyclerView.Adapter<TrombViewHolder> {
+public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> {
 
     // FOR DATA
     private List<Trombi> Trombis;

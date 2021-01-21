@@ -1,5 +1,6 @@
 package com.example.trombinoscope.ui.login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,10 +30,28 @@ import android.widget.CheckBox;
 import android.content.SharedPreferences;
 import android.view.inputmethod.InputMethodManager;
 
-import com.example.trombinoscope.MainActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.R;
-import com.example.trombinoscope.ui.login.LoginViewModel;
-import com.example.trombinoscope.ui.login.LoginViewModelFactory;
+import com.example.trombinoscope.data.model.LoggedInUser;
+import com.example.trombinoscope.ui.login.LoginActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handleSSLHandshake();
+
         setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -58,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         remember = (CheckBox)findViewById(R.id.rememberMe);
 
         //checkbox : Enregistrement du pseudo et MP dans le fichier Stockage
-        loginPreferences = getSharedPreferences("Stockage",MODE_PRIVATE);
+        loginPreferences = getSharedPreferences("Stockage", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -124,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                            passwordEditText.getText().toString(), LoginActivity.this );
                 }
                 return false;
             }
@@ -145,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString(), LoginActivity.this);
                 //checkbox
                 if (v == loginButton) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -177,4 +199,38 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+
+
+
+    @SuppressLint("TrulyRandom")
+    public static void handleSSLHandshake() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String arg0, SSLSession arg1) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
+        }
+    }
+
+
 }

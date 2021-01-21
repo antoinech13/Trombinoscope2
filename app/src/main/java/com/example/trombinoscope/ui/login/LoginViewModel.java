@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.content.Context;
 import android.util.Patterns;
 
 import com.example.trombinoscope.data.LoginRepository;
 import com.example.trombinoscope.data.Result;
 import com.example.trombinoscope.data.model.LoggedInUser;
 import com.example.trombinoscope.R;
+
+import java.security.acl.Owner;
 
 public class LoginViewModel extends ViewModel {
 
@@ -29,9 +32,9 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password, LoginActivity ctx) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<LoggedInUser> result = loginRepository.login(username, password, ctx);
 
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();

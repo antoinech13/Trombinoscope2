@@ -1,6 +1,9 @@
 package com.example.trombinoscope.data;
 
+import android.content.Context;
+
 import com.example.trombinoscope.data.model.LoggedInUser;
+import com.example.trombinoscope.ui.login.LoginActivity;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -43,9 +46,9 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, LoginActivity ctx) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<LoggedInUser> result = dataSource.login(username, password, ctx);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }
