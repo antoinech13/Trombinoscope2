@@ -30,8 +30,11 @@ public class LoginDataSource {
     //Map<String, String> map;
     private String pseudo = "Admin";
     private String psw = "12345678";
+    private boolean reponse;
 
-
+    public void setFlag(boolean flag){
+        this.reponse = flag;
+    }
 
     public Result<LoggedInUser> login(String username, String password, LoginActivity ctx) {
         Log.d("yolo","FIRST");
@@ -52,7 +55,19 @@ public class LoginDataSource {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("yolo","pas");
+
+                try {
+
+                    if(response.getString("res").equals("true")){
+                        Log.d("res", "je suis dans le if");
+                        setFlag(true);
+                    }
+                    else
+                        setFlag(false);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -66,8 +81,8 @@ public class LoginDataSource {
 
         Log.d("yolo","nik!!!!!");
         queue.add(jsonObjectRequest);
-
-        if(username.equals(this.pseudo) && password.equals(this.psw)){
+        //if(username.equals(this.pseudo) && password.equals(this.psw))
+        if(this.reponse){
 
             LoggedInUser fakeUser =
                     new LoggedInUser(
