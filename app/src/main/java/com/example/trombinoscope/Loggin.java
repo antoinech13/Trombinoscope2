@@ -43,7 +43,7 @@ public class Loggin extends AppCompatActivity {
             public void onClick(View v) {
                 String Pseudo = pseudo.getText().toString().trim();
                 String Password = password.getText().toString().trim();
-                Log.d("yolo","2");
+
                 if (!Pseudo.isEmpty() || !Password.isEmpty()) {
                     Login(Pseudo, Password);
 

@@ -75,7 +75,7 @@ public class trombinoscopes extends Fragment {
 
 
                         Navigation.findNavController(v).navigate(
-                                R.id.action_trombinoscopes3_to_trombiOptions, bundle);
+                                R.id.action_trombinoscopes3_to_editTrombi, bundle);
                     }
                 });
     }

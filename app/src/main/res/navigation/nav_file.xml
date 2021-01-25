@@ -3,16 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_file"
-    app:startDestination="@id/menu">
-    <fragment
-        android:id="@+id/menu"
-        android:name="com.example.trombinoscope.fragments.Menu"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
-        <action
-            android:id="@+id/action_menu_to_trombinoscopes3"
-            app:destination="@id/trombinoscopes3" />
-    </fragment>
+    app:startDestination="@id/trombinoscopes3">
     <fragment
         android:id="@+id/trombinoscopes3"
         android:name="com.example.trombinoscope.fragments.trombinoscopes"
@@ -22,8 +13,8 @@
             android:id="@+id/action_trombinoscopes3_to_addTrombinoscopes"
             app:destination="@id/addTrombinoscopes" />
         <action
-            android:id="@+id/action_trombinoscopes3_to_trombiOptions"
-            app:destination="@id/trombiOptions" />
+            android:id="@+id/action_trombinoscopes3_to_editTrombi"
+            app:destination="@id/editTrombi" />
     </fragment>
     <fragment
         android:id="@+id/addTrombinoscopes"
@@ -35,18 +26,6 @@
             app:destination="@id/trombinoscopes3" />
     </fragment>
     <fragment
-        android:id="@+id/trombiOptions"
-        android:name="com.example.trombinoscope.fragments.TrombiOptions"
-        android:label="fragment_trombi_options"
-        tools:layout="@layout/fragment_trombi_options" >
-        <action
-            android:id="@+id/action_trombiOptions_to_addToTrombi"
-            app:destination="@id/addToTrombi" />
-        <action
-            android:id="@+id/action_trombiOptions_to_editTrombi"
-            app:destination="@id/editTrombi" />
-    </fragment>
-    <fragment
         android:id="@+id/addToTrombi"
         android:name="com.example.trombinoscope.fragments.AddToTrombi"
         android:label="fragment_add_to_trombi"
@@ -55,5 +34,9 @@
         android:id="@+id/editTrombi"
         android:name="com.example.trombinoscope.fragments.EditTrombi"
         android:label="fragment_edit_trombi"
-        tools:layout="@layout/fragment_edit_trombi" />
+        tools:layout="@layout/fragment_edit_trombi" >
+        <action
+            android:id="@+id/action_editTrombi_to_addToTrombi"
+            app:destination="@id/addToTrombi" />
+    </fragment>
 </navigation>

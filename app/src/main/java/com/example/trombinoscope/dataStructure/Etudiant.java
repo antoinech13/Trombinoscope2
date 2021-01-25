@@ -10,4 +10,12 @@ public class Etudiant {
         this.prenom = prenom;
     }
 
+    public String getNom(){
+        return this.nom;
+    }
+
+    public String getPrenom(){
+        return this.prenom;
+    }
+
 }

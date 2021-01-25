@@ -85,8 +85,8 @@ public class AddToTrombi extends Fragment {
         gallerie = view.findViewById(R.id.galleryBtn);
         suivant = view.findViewById(R.id.suivant);
 
-        nom = view.findViewById(R.id.nom);
-        prenom = view.findViewById(R.id.prenom);
+        nom = view.findViewById(R.id.nomEtu);
+        prenom = view.findViewById(R.id.prenomEtu);
 
         image = view.findViewById(R.id.image);
 
