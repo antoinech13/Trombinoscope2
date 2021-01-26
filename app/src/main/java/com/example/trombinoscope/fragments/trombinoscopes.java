@@ -16,11 +16,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.adapter.TrombiAdapter;
 import com.example.trombinoscope.view.TrombinoscopesViewModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +45,7 @@ public class trombinoscopes extends Fragment {
 
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
+    private JSONObject js = new JSONObject();
 
     public static trombinoscopes newInstance() {
         return new trombinoscopes();
@@ -45,11 +56,13 @@ public class trombinoscopes extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);
-        this.configureRecyclerView();
-        trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2019-2020"));
-        trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2020-2021"));
+
+       /* trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2019-2020"));
+        trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2020-2021"));*/
         this.configureOnClickRecyclerView();
-        adapter.notifyDataSetChanged();
+        update();
+        RequestTrombis(view);
+        //adapter.notifyDataSetChanged();
         add = view.findViewById(R.id.addTro);
 
         add.setOnClickListener(new View.OnClickListener(){
@@ -99,6 +112,51 @@ public class trombinoscopes extends Fragment {
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+    }
+
+
+    private void RequestTrombis(View view) {
+        String url = "https://192.168.1.21:5000/";
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    configureRecyclerView();
+                    JSONArray Nom = response.getJSONArray("Nom");
+                    JSONArray Date = response.getJSONArray("Date");
+                    JSONArray Tag = response.getJSONArray("Tag");
+                    for(int i = 0; i < Nom.length(); i++) {
+                        trombis.add(new Trombi(Nom.getString(i), Date.getString(i), Tag.getString(i)));
+                    }
+                    adapter.notifyDataSetChanged();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+
+        queue.add(jsonObjectRequest);
+    }
+
+    private void update() {
+        try{
+            js.put("request", "trombis");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 }
