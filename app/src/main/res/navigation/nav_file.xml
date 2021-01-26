@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_file"
-    app:startDestination="@id/trombinoscopes3">
+    app:startDestination="@id/logginFragment">
     <fragment
         android:id="@+id/trombinoscopes3"
         android:name="com.example.trombinoscope.fragments.trombinoscopes"
@@ -38,5 +38,14 @@
         <action
             android:id="@+id/action_editTrombi_to_addToTrombi"
             app:destination="@id/addToTrombi" />
+    </fragment>
+    <fragment
+        android:id="@+id/logginFragment"
+        android:name="com.example.trombinoscope.fragments.LogginFragment"
+        android:label="fragment_loggin"
+        tools:layout="@layout/fragment_loggin" >
+        <action
+            android:id="@+id/action_logginFragment_to_trombinoscopes3"
+            app:destination="@id/trombinoscopes3" />
     </fragment>
 </navigation>

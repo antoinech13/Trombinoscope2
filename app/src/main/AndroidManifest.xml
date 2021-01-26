@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trombinoscope">
 
-        <activity
-            android:name=".Loggin"
-            android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent i = new Intent(this, Loggin.class);
-        startActivity(i);
+        //Intent i = new Intent(this, Loggin.class);
+        //startActivity(i);
         Certificate.handleSSLHandshake();
         setContentView(R.layout.activity_main);
     }
