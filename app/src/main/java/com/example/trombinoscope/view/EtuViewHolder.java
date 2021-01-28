@@ -30,7 +30,7 @@ public class EtuViewHolder extends RecyclerView.ViewHolder {
     public void updateWithEtu(Etudiant tab) {
         this.nom.setText(tab.getNom());
         this.prenom.setText(tab.getPrenom());
-        this.img.setBackgroundColor(Color.rgb(155, 155, 155));
+        this.img.setImageBitmap(tab.getImg());
     }
 }
     /*public interface OnClickEtu{

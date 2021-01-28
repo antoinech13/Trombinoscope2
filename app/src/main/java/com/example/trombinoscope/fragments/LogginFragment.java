@@ -136,7 +136,7 @@ public class LogginFragment extends Fragment {
 
 
     private void Login (View view, String pseudo, String password){
-        String url = "https://192.168.1.21:5000/";
+        String url = "https://192.168.43.82:5000/";
         update(pseudo, password);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

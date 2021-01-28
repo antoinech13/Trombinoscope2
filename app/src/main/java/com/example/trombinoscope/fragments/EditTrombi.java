@@ -12,11 +12,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
@@ -24,6 +33,10 @@ import com.example.trombinoscope.dataStructure.Etudiant;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.adapter.TrombiAdapter;
 import com.example.trombinoscope.view.TrombinoscopesViewModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +61,9 @@ public class EditTrombi extends Fragment {
     private List<Etudiant> etudiants;
     private EtuAdapter adapter;
     private RecyclerView recyclerView;
+    private JSONObject js = new JSONObject();
+    private Trombi promo;
+    public FtpConnection co;
     Button add;
 
     public EditTrombi() {
@@ -80,6 +96,7 @@ public class EditTrombi extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -91,10 +108,18 @@ public class EditTrombi extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_edit_trombi, container, false);
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
-        this.configureRecyclerView();
-        etudiants.add(new Etudiant("super", "du"));
-        etudiants.add(new Etudiant("yolo", "marche"));
-        adapter.notifyDataSetChanged();
+        this.promo = getArguments().getParcelable("Trombi");
+        //this.configureRecyclerView();
+        update();
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+            requestEtu();
+        }
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -120,6 +145,59 @@ public class EditTrombi extends Fragment {
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
+    }
+
+    private void requestEtu(){
+        String url = "https://192.168.43.82:5000/";
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                configureRecyclerView();
+                try {
+                    JSONArray Nom = response.getJSONArray("Nom");
+                    JSONArray Prenom = response.getJSONArray("Prenom");
+                    JSONArray Img = response.getJSONArray("Img");
+
+                    co = new FtpConnection();
+
+                    for(int i = 0; i < Nom.length(); i++){
+                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage("etu1.jpg")));
+                    }
+                    adapter.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+
+        queue.add(jsonObjectRequest);
+    }
+
+    private void update(){
+        String id = this.promo.getId();
+
+        try {
+            js.put("request", "etu");
+
+            js.put("idpromo", id);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 }

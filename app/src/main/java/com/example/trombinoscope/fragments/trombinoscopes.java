@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,7 +117,7 @@ public class trombinoscopes extends Fragment {
 
 
     private void RequestTrombis(View view) {
-        String url = "https://192.168.1.21:5000/";
+        String url = "https://192.168.43.82:5000/";
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
@@ -128,8 +129,9 @@ public class trombinoscopes extends Fragment {
                     JSONArray Nom = response.getJSONArray("Nom");
                     JSONArray Date = response.getJSONArray("Date");
                     JSONArray Tag = response.getJSONArray("Tag");
+                    JSONArray Idpromo = response.getJSONArray("Idpromo");
                     for(int i = 0; i < Nom.length(); i++) {
-                        trombis.add(new Trombi(Nom.getString(i), Date.getString(i), Tag.getString(i)));
+                        trombis.add(new Trombi(Nom.getString(i), Date.getString(i), Tag.getString(i), Idpromo.getString(i)));
                     }
                     adapter.notifyDataSetChanged();
 
