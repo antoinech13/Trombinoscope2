@@ -161,10 +161,14 @@ public class EditTrombi extends Fragment {
                     JSONArray Prenom = response.getJSONArray("Prenom");
                     JSONArray Img = response.getJSONArray("Img");
 
+                    for(int i = 0; i < Prenom.length(); i++){
+                        Log.d("huip", Img.getString(i));
+                    }
+
                     co = new FtpConnection();
 
                     for(int i = 0; i < Nom.length(); i++){
-                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage("etu1.jpg")));
+                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i))));
                     }
                     adapter.notifyDataSetChanged();
 

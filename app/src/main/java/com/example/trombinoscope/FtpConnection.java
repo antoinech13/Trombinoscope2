@@ -25,14 +25,14 @@ public class FtpConnection {
             con.connect("86.211.99.209",21);
             con.enterLocalPassiveMode();
             con.login("bsd1", "bsd1cci");
-            con.setDefaultTimeout(5000);
+            con.setDefaultTimeout(6000);
             con.setFileType(FTP.BINARY_FILE_TYPE);
 
 
             FTPFile[] ftpFiles = con.mlistDir(path);
             for (int i = 0; i < ftpFiles.length; i++) {
                 String name = ftpFiles[i].getName();
-                Log.d("aasd", name );
+
             }
 
         } catch (IOException e) {
@@ -42,15 +42,17 @@ public class FtpConnection {
 
     public Bitmap getImage(String name){
 
-        OutputStream out = null;
+        ByteArrayOutputStream out = null;
         ByteArrayOutputStream  bitO;
+        Log.d("aasd", name);
         byte[] bitA = null;
 
         try {
             out = new ByteArrayOutputStream();
-            boolean result = con.retrieveFile(path + name, out);
+            boolean result = con.retrieveFile(path + name + ".jpg", out);
+
             bitO = (ByteArrayOutputStream)out;
-            bitA = bitO.toByteArray();
+            bitA = out.toByteArray();
             out.close();
 
 
@@ -60,6 +62,7 @@ public class FtpConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return BitmapFactory.decodeByteArray(bitA, 0, bitA.length);
     }
 
