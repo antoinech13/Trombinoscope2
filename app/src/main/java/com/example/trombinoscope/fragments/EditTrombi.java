@@ -124,7 +124,7 @@ public class EditTrombi extends Fragment {
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(
-                        R.id.action_editTrombi_to_addToTrombi);
+                        R.id.action_editTrombi_to_addToTrombi, getArguments());
                 //finish();
             }
         });

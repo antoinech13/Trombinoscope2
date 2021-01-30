@@ -8,6 +8,7 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,13 +29,6 @@ public class FtpConnection {
             con.setDefaultTimeout(6000);
             con.setFileType(FTP.BINARY_FILE_TYPE);
 
-
-            FTPFile[] ftpFiles = con.mlistDir(path);
-            for (int i = 0; i < ftpFiles.length; i++) {
-                String name = ftpFiles[i].getName();
-
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +45,6 @@ public class FtpConnection {
             out = new ByteArrayOutputStream();
             boolean result = con.retrieveFile(path + name + ".jpg", out);
 
-            bitO = (ByteArrayOutputStream)out;
             bitA = out.toByteArray();
             out.close();
 
@@ -66,6 +59,19 @@ public class FtpConnection {
         return BitmapFactory.decodeByteArray(bitA, 0, bitA.length);
     }
 
+    public void sendImage(Bitmap img, String filename){
+        Log.d("fnndnd", "djqidoj");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG, 100 , bos);
+        byte[] bitmapdata = bos.toByteArray();
+        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+        try {
+            con.storeFile(path + filename, bs);
+            Log.d("fnndnd", "djqidoj222");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void disconnect(){
         try {

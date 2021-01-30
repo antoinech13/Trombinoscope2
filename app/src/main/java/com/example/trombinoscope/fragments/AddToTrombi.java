@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +22,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.R;
+import com.example.trombinoscope.dataStructure.Trombi;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +63,10 @@ public class AddToTrombi extends Fragment {
     private ImageView image;
     private TextInputEditText nom, prenom;
     private Bitmap img;
+    private JSONObject js = new JSONObject();
+    private Trombi promo;
+    private FtpConnection ftp = new FtpConnection();
+    private String imgName;
 
     public AddToTrombi() {
         // Required empty public constructor
@@ -89,7 +113,7 @@ public class AddToTrombi extends Fragment {
         prenom = view.findViewById(R.id.prenomEtu);
 
         image = view.findViewById(R.id.image);
-
+        this.promo = getArguments().getParcelable("Trombi");
         photo.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (checkPermission())
@@ -103,6 +127,12 @@ public class AddToTrombi extends Fragment {
 
         suivant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
+                String strDate = dateFormat.format(date);
+                imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate;
+                ftp.sendImage(img, imgName + ".jpg");
+                addStudent(view);
                 clear();
             }
         });
@@ -149,8 +179,47 @@ public class AddToTrombi extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
+
+
             img = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(img);
         }
+    }
+
+
+    private void addStudent(View v){
+        String url = "https://192.168.43.82:5000/";
+        update();
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Snackbar.make(v, R.string.student_add, Snackbar.LENGTH_SHORT).show();
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+
+        queue.add(jsonObjectRequest);
+    }
+
+    public void update(){
+        try {
+            js.put("request", "add");
+            js.put("prenom",this.prenom.getText());
+            js.put("nom",this.nom.getText());
+            js.put("promo",this.promo.getId());
+            js.put("img",this.imgName);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
