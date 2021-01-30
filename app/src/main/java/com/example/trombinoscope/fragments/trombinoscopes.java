@@ -46,6 +46,7 @@ public class trombinoscopes extends Fragment {
 
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
+
     private JSONObject js = new JSONObject();
 
     public static trombinoscopes newInstance() {

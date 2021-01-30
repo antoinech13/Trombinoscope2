@@ -33,12 +33,31 @@
         app:layout_constraintTop_toBottomOf="@+id/tag"
         tools:layout_editor_absoluteX="9dp" />
 
+    <Spinner
+        android:id="@+id/spinnerRegion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
     <Button
         android:id="@+id/val"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         android:text="Valider"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="159dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Ville:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 </androidx.constraintlayout.widget.ConstraintLayout>

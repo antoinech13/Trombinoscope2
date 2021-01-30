@@ -12,13 +12,29 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +48,11 @@ public class AddTrombinoscopes extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    protected TextView formation, tag, date;
-    protected Button validate;
+    private TextView formation, tag, date;
+    private Button validate;
+    private Spinner spinner;
+    private JSONObject js= new JSONObject();
+    private List<String> categories = new ArrayList<String>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,11 +96,14 @@ public class AddTrombinoscopes extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_add_trombinoscopes, container, false);
+
         formation = view.findViewById(R.id.formation);
         tag = view.findViewById(R.id.tag);
         date = view.findViewById(R.id.date);
         Bitmap img = StringToBitMap(tag.getText().toString());
         validate = view.findViewById(R.id.val);
+        spinner = view.findViewById(R.id.spinnerRegion);
+        request(view, true);
 
         validate.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -125,4 +147,75 @@ public class AddTrombinoscopes extends Fragment {
 
         return bmp;
     }
+
+
+
+    private void request (View view, boolean flag){
+        String url = "https://192.168.43.82:5000/";
+        update(flag);
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                if(flag){
+                    try {
+                        JSONArray univ = response.getJSONArray("Univ");
+                        JSONArray cp = response.getJSONArray("CP");
+                        JSONArray ville = response.getJSONArray("Ville");
+                        JSONArray pays = response.getJSONArray("Pays");
+
+                        for(int i = 0; i < univ.length(); i++){
+                            categories.add(univ.getString(i) + " " + cp.getString(i) + " " + ville.getString(i) + " " + pays.getString(i));
+                        }
+
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categories);
+                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(dataAdapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+                }
+                else{
+
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+
+        queue.add(jsonObjectRequest);
+    }
+
+
+    public void update(boolean flag){
+
+        if(flag){
+            try {
+                js.put("request", "infoUnives");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else{
+            try {
+                js.put("request", "addTrombi");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
 }
