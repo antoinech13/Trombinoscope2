@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_addTrombinoscopes_to_trombinoscopes3"
             app:destination="@id/trombinoscopes3" />
+        <action
+            android:id="@+id/action_addTrombinoscopes_to_addUniversityFragment"
+            app:destination="@id/addUniversityFragment" />
     </fragment>
     <fragment
         android:id="@+id/addToTrombi"
@@ -47,5 +50,14 @@
         <action
             android:id="@+id/action_logginFragment_to_trombinoscopes3"
             app:destination="@id/trombinoscopes3" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUniversityFragment"
+        android:name="com.example.trombinoscope.fragments.AddUniversityFragment"
+        android:label="fragment_add_university"
+        tools:layout="@layout/fragment_add_university" >
+        <action
+            android:id="@+id/action_addUniversityFragment_to_addTrombinoscopes"
+            app:destination="@id/addTrombinoscopes" />
     </fragment>
 </navigation>

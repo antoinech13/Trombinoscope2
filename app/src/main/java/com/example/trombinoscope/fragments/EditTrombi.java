@@ -1,5 +1,6 @@
 package com.example.trombinoscope.fragments;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -91,13 +92,12 @@ public class EditTrombi extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+
     }
 
     @Override
@@ -203,5 +203,7 @@ public class EditTrombi extends Fragment {
             e.printStackTrace();
         }
     }
+
+
 
 }

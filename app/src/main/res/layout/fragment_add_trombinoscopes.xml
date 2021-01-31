@@ -44,12 +44,12 @@
 
     <Button
         android:id="@+id/val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_width="410dp"
+        android:layout_height="38dp"
         android:text="Valider"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="159dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -57,7 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
-        android:text="Ville:"
+        android:text="Université:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

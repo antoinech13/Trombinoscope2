@@ -125,7 +125,7 @@ public class LogginFragment extends Fragment {
                 if (!Pseudo.isEmpty() || !Password.isEmpty()) {
                     Login(view, Pseudo, Password);
                 } else {
-                    Snackbar.make(v, "pls Enter valide values", 2000).show();
+                    Snackbar.make(v, "pls Enter valide values", 1000).show();
                 }
             }
         });
