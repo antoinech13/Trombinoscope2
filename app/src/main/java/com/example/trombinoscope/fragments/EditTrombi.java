@@ -148,7 +148,7 @@ public class EditTrombi extends Fragment {
     }
 
     private void requestEtu(){
-        String url = "https://192.168.1.27:5000/";
+        String url = "https://192.168.142.75:5000/";
 
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

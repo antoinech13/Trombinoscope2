@@ -103,8 +103,6 @@ public class AddTrombinoscopes extends Fragment {
         // Inflate the layout for this fragment
 
 
-
-        Log.d("csio","dddinfdon");
         View view = inflater.inflate(R.layout.fragment_add_trombinoscopes, container, false);
         categories.clear();
         formation = view.findViewById(R.id.formation);
@@ -166,7 +164,7 @@ public class AddTrombinoscopes extends Fragment {
 
 
     private void request (View view, boolean flag){
-        String url = "https://192.168.43.82:5000/";
+        String url = "https://192.168.142.75:5000/";
         update(flag);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {

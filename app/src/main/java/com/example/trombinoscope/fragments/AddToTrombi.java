@@ -61,7 +61,7 @@ public class AddToTrombi extends Fragment {
 
     private Button photo, gallerie, suivant;
     private ImageView image;
-    private TextInputEditText nom, prenom;
+    private TextInputEditText nom, prenom, email;
     private Bitmap img;
     private JSONObject js = new JSONObject();
     private Trombi promo;
@@ -111,6 +111,7 @@ public class AddToTrombi extends Fragment {
 
         nom = view.findViewById(R.id.nomEtu);
         prenom = view.findViewById(R.id.prenomEtu);
+        email = view.findViewById(R.id.email);
 
         image = view.findViewById(R.id.image);
         this.promo = getArguments().getParcelable("Trombi");
@@ -130,8 +131,8 @@ public class AddToTrombi extends Fragment {
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
                 String strDate = dateFormat.format(date);
-                imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate;
-                ftp.sendImage(img, imgName + ".jpg");
+                imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate + ".jpg";
+                ftp.sendImage(img, imgName);
                 addStudent(view);
                 clear();
             }
@@ -143,6 +144,7 @@ public class AddToTrombi extends Fragment {
 
     private void clear() {
         this.nom.getText().clear();
+        this.email.getText().clear();
         this.prenom.getText().clear();
         this.image.setImageResource(android.R.color.transparent);;
         this.img.recycle();
@@ -188,7 +190,7 @@ public class AddToTrombi extends Fragment {
 
 
     private void addStudent(View v){
-        String url = "https://192.168.43.82:5000/";
+        String url = "https://192.168.142.75:5000/";
         update();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -216,6 +218,7 @@ public class AddToTrombi extends Fragment {
             js.put("nom",this.nom.getText());
             js.put("promo",this.promo.getId());
             js.put("img",this.imgName);
+            js.put("email", this.email.getText());
 
         } catch (JSONException e) {
             e.printStackTrace();
