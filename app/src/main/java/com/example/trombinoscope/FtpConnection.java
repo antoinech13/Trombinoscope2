@@ -43,7 +43,7 @@ public class FtpConnection {
 
         try {
             out = new ByteArrayOutputStream();
-            boolean result = con.retrieveFile(path + name + ".jpg", out);
+            boolean result = con.retrieveFile(path + name, out);
 
             bitA = out.toByteArray();
             out.close();
@@ -60,14 +60,12 @@ public class FtpConnection {
     }
 
     public void sendImage(Bitmap img, String filename){
-        Log.d("fnndnd", "djqidoj");
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.JPEG, 100 , bos);
         byte[] bitmapdata = bos.toByteArray();
         ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
         try {
             con.storeFile(path + filename, bs);
-            Log.d("fnndnd", "djqidoj222");
         } catch (IOException e) {
             e.printStackTrace();
         }

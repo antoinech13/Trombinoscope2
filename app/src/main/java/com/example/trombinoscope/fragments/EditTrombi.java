@@ -148,7 +148,7 @@ public class EditTrombi extends Fragment {
     }
 
     private void requestEtu(){
-        String url = "https://192.168.43.82:5000/";
+        String url = "https://192.168.1.27:5000/";
 
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -160,6 +160,7 @@ public class EditTrombi extends Fragment {
                     JSONArray Nom = response.getJSONArray("Nom");
                     JSONArray Prenom = response.getJSONArray("Prenom");
                     JSONArray Img = response.getJSONArray("Img");
+                    JSONArray Email = response.getJSONArray("Email");
 
                     for(int i = 0; i < Prenom.length(); i++){
                         Log.d("huip", Img.getString(i));
@@ -168,7 +169,7 @@ public class EditTrombi extends Fragment {
                     co = new FtpConnection();
 
                     for(int i = 0; i < Nom.length(); i++){
-                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i))));
+                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
                     }
                     adapter.notifyDataSetChanged();
 

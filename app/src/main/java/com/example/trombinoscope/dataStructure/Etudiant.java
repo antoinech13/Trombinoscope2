@@ -5,16 +5,15 @@ import android.graphics.Bitmap;
 
 public class Etudiant {
 
-    private String nom;
-    private String prenom;
-    private String imgName;
+    private String nom, prenom, imgName, email;
     private Bitmap img;
 
-    public Etudiant(String nom, String prenom, String imgName, Bitmap img){
+    public Etudiant(String nom, String prenom, String imgName, Bitmap img, String email){
         this.nom = nom;
         this.prenom = prenom;
         this.imgName = imgName;
         this.img = img;
+        this.email = email;
 
     }
 
