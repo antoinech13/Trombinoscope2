@@ -76,20 +76,27 @@
 
     <!--Création d'une CheckBox pour maintenir la connexion afin d'éviter que le prof ne se reconnecte à chaque fois-->
     <!-- Création d'un lien distinct pour créer son compte lorsque le compte n'a pas été créé-->
+
     <CheckBox
         android:id="@+id/rememberMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="48dp"
-        android:layout_marginBottom="88dp"
+        android:layout_margin="60dp"
         android:text="@string/Remember_me"
         android:textColor="#918B8B"
         android:textSize="18sp"
         android:visibility="visible"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="64dp"
+        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
         android:id="@+id/btn_register"
@@ -99,6 +106,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

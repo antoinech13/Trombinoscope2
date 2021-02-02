@@ -164,7 +164,7 @@ public class AddTrombinoscopes extends Fragment {
 
 
     private void request (View view, boolean flag){
-        String url = "https://192.168.43.244:5000/";
+        String url = "https://192.168.1.50:5000/";
         update(flag);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
@@ -205,7 +205,7 @@ public class AddTrombinoscopes extends Fragment {
                             Snackbar.make(view, "Promotion ajouté", 1000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);}
                         else if(response.getString("res") == "none") {
-                            Snackbar.make(view, "Promotion déjà éxistante. Contactez l'administrateur de la promotion.", 2000).show();
+                            Snackbar.make(view, "Promotion déjà existante. Contactez l'administrateur de la promotion.", 2000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);
                         }
 

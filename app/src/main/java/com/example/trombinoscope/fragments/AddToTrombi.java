@@ -169,7 +169,7 @@ public class AddToTrombi extends Fragment {
         if(checkPermission())
             openCamera();
         else
-            Toast.makeText(getContext(), "Vous devez autoriser l'accée a la caméra pour utiliser cette fonctionalité", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Vous devez autoriser l'accès à la caméra pour utiliser cette fonctionalité", Toast.LENGTH_SHORT).show();
     }
 
     private void openCamera() {
@@ -190,7 +190,7 @@ public class AddToTrombi extends Fragment {
 
 
     private void addStudent(View v){
-        String url = "https://192.168.43.244:5000/";
+        String url = "https://192.168.1.50:5000/";
         update();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

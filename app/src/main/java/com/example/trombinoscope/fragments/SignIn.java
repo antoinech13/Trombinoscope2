@@ -128,7 +128,7 @@ public class SignIn extends Fragment {
 
     //Ajouter un membre
     private void addUser(View v){
-        String url = "https://192.168.43.244:5000/";
+        String url = "https://192.168.1.50:5000/";
         update();
         Log.d(" update executé", " update executé");
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

@@ -3,15 +3,15 @@
     <string name="app_name">Trombi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Connexion</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Entrer</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Valider</string>
+    <string name="action_sign_in_short">Inscription</string>
+    <string name="welcome">"Bienvenue !"</string>
+    <string name="invalid_username">Prenom invalide</string>
+    <string name="invalid_password">Mot de passe doit etre > 5 charactères</string>
+    <string name="login_failed">"Echec connexion"</string>
     <string name="title_activity_add_trombi">AddTrombiActivity</string>
     <string name="Remember_me">Se souvenir de moi</string>
     <string name="Dont_have_account">Vous ne possédez pas de compte ?</string>
@@ -19,14 +19,14 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Retour</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="student_add">étudiant ajouté</string>
+    <string name="student_add">Etudiant ajouté</string>
     <string name="mot_de_passe">Mot de passe</string>
-    <string name="confirmez_mot_de_passe">Confirmez mot_de_passe</string>
+    <string name="confirmez_mot_de_passe">Confirmez votre mot de passe</string>
     <string name="nom">Nom</string>
     <string name="pseudonyme">Pseudonyme</string>
     <string name="Msg_err_saisie_SignIn">Saisie invalide, Veuillez compléter tous les champs</string>
@@ -34,5 +34,6 @@
     <string name="Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
     <string name="SignIn_pseudo_email_invalid">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
     <string name="action_create_acount">Pas de compte ?</string>
+    <string name="protect_data">J\'accepte que mes données soient sauvegardées</string>
 
 </resources>

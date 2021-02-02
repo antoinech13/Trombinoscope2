@@ -11,16 +11,15 @@
 
     <EditText
         android:id="@+id/Name"
-        android:layout_width="322dp"
-        android:layout_height="37dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="top"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="648dp"
-        android:hint="@string/nom" />
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Nom"/>
 
     <EditText
         android:id="@+id/Prenom"
@@ -30,7 +29,8 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="70dp"
         android:hint="Prenom"/>
 
     <EditText
@@ -39,12 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="555dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="120dp"
         android:inputType="textEmailAddress"
         android:hint="@string/prompt_email"/>
 
@@ -56,7 +54,8 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="170dp"
         android:hint="@string/pseudonyme"/>
 
     <EditText
@@ -68,7 +67,8 @@
         android:layout_centerInParent="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="220dp"
         android:hint="@string/mot_de_passe"
         android:inputType="textPassword" />
 
@@ -82,7 +82,8 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="270dp"
         android:hint="@string/confirmez_mot_de_passe"
         android:inputType="textPassword" />
 
@@ -93,8 +94,21 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="350dp"
-        android:layout_marginBottom="289dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="89dp"
         android:text="S'inscrire" />
+
+    <CheckBox
+        android:id="@+id/protect_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/protect_data"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="250dp"/>
 
 </RelativeLayout>

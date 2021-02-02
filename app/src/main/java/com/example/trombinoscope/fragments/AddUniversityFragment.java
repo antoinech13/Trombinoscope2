@@ -98,7 +98,7 @@ public class AddUniversityFragment extends Fragment {
     }
 
     public void request(View view){
-        String url = "https://192.168.43.244:5000/";
+        String url = "https://192.168.1.50:5000/";
         update();
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
