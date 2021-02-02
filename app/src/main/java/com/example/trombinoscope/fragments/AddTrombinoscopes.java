@@ -164,7 +164,7 @@ public class AddTrombinoscopes extends Fragment {
 
 
     private void request (View view, boolean flag){
-        String url = "https://192.168.142.75:5000/";
+        String url = "https://192.168.43.244:5000/";
         update(flag);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {

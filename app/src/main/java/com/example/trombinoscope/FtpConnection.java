@@ -21,7 +21,7 @@ public class FtpConnection {
     private String path = "/Web/imageTrombi/";
 
    public FtpConnection(){
-
+// NE PAS TOUCHER AUX IP !!!!
         try {
             con.connect("86.211.99.209",21);
             con.enterLocalPassiveMode();

@@ -1,6 +1,7 @@
 package com.example.trombinoscope.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -40,6 +41,7 @@ public class LogginFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private Button btn_loggin;
+    private Button btn_register; //register
     private EditText pseudo, password;
     private JSONObject js = new JSONObject();
     private CheckBox rememberCheckbox;
@@ -77,9 +79,6 @@ public class LogginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
     }
 
     @Override
@@ -88,6 +87,7 @@ public class LogginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_loggin, container, false);
 
+        btn_register = view.findViewById(R.id.btn_register);
         btn_loggin = view.findViewById(R.id.login);
         pseudo = view.findViewById(R.id.username);
         password = view.findViewById(R.id.password);
@@ -100,6 +100,12 @@ public class LogginFragment extends Fragment {
         password.setText(userValuesSave.getString("userPw", ""));
         rememberCheckbox.setChecked(userValuesSave.getBoolean("CheckBox", false));
 
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate((R.id.action_logginFragment_to_signIn));
+            }
+        });
 
         btn_loggin.setOnClickListener(new View.OnClickListener() {
 
@@ -125,7 +131,7 @@ public class LogginFragment extends Fragment {
                 if (!Pseudo.isEmpty() || !Password.isEmpty()) {
                     Login(view, Pseudo, Password);
                 } else {
-                    Snackbar.make(v, "pls Enter valide values", 1000).show();
+                    Snackbar.make(v, "Entrez des données valides", 1000).show();
                 }
             }
         });
@@ -136,7 +142,7 @@ public class LogginFragment extends Fragment {
 
 
     private void Login (View view, String pseudo, String password){
-        String url = "https://192.168.142.75:5000/";
+        String url = "https://192.168.43.244:5000/";
         update(pseudo, password);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());

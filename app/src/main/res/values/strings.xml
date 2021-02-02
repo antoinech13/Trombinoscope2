@@ -29,5 +29,10 @@
     <string name="confirmez_mot_de_passe">Confirmez mot_de_passe</string>
     <string name="nom">Nom</string>
     <string name="pseudonyme">Pseudonyme</string>
+    <string name="Msg_err_saisie_SignIn">Saisie invalide, Veuillez compléter tous les champs</string>
+    <string name="Msg_Err_MDP_diff">Les mots de passe saisis sont diférents</string>
+    <string name="Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
+    <string name="SignIn_pseudo_email_invalid">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
+    <string name="action_create_acount">Pas de compte ?</string>
 
 </resources>
