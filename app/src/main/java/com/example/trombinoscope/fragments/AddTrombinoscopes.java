@@ -115,7 +115,7 @@ public class AddTrombinoscopes extends Fragment {
 
         validate.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                String[] str = spinner.getSelectedItem().toString().split(" ");
+                String[] str = spinner.getSelectedItem().toString().split(", ");
                 Univ = str[0];
                 CP = str[1];
                 Ville = str[2];
@@ -164,7 +164,7 @@ public class AddTrombinoscopes extends Fragment {
 
 
     private void request (View view, boolean flag){
-        String url = "https://192.168.1.50:5000/";
+        String url = "https://192.168.2.141:5000/";
         update(flag);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
@@ -178,7 +178,7 @@ public class AddTrombinoscopes extends Fragment {
                         JSONArray pays = response.getJSONArray("Pays");
 
                         for(int i = 0; i < univ.length(); i++){
-                            categories.add(univ.getString(i) + " " + cp.getString(i) + " " + ville.getString(i) + " " + pays.getString(i));
+                            categories.add(univ.getString(i) + ", " + cp.getString(i) + ", " + ville.getString(i) + ", " + pays.getString(i));
                         }
                         Collections.sort(categories);
                         categories.add("+ Ajouter une université");
@@ -201,10 +201,10 @@ public class AddTrombinoscopes extends Fragment {
                 else{
 
                     try {
-                        if(response.getString("res") == "true"){
+                        if(response.getString("res").equals("true")){
                             Snackbar.make(view, "Promotion ajouté", 1000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);}
-                        else if(response.getString("res") == "none") {
+                        else if(response.getString("res").equals("none")) {
                             Snackbar.make(view, "Promotion déjà existante. Contactez l'administrateur de la promotion.", 2000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);
                         }

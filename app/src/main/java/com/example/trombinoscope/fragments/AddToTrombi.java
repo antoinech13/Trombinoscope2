@@ -190,7 +190,7 @@ public class AddToTrombi extends Fragment {
 
 
     private void addStudent(View v){
-        String url = "https://192.168.1.50:5000/";
+        String url = "https://192.168.2.141:5000/";
         update();
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
