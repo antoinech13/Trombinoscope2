@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 
 import org.json.JSONArray;
@@ -98,9 +99,10 @@ public class AddUniversityFragment extends Fragment {
     }
 
     public void request(View view){
-        String url = "https://192.168.2.141:5000/";
+        MySingleton s = MySingleton.getInstance(getContext());
+        String url = s.getUrl();
         update();
-        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -116,7 +118,7 @@ public class AddUniversityFragment extends Fragment {
         });
 
 
-        queue.add(jsonObjectRequest);
+        s.addToRequestQueue(jsonObjectRequest);
     }
 
 

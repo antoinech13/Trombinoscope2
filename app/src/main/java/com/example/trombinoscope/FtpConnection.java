@@ -28,8 +28,8 @@ public class FtpConnection {
             con.login("bsd1", "bsd1cci");
             con.setDefaultTimeout(6000);
             con.setFileType(FTP.BINARY_FILE_TYPE);
-
-        } catch (IOException e) {
+//Modif ajouter du prof
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
