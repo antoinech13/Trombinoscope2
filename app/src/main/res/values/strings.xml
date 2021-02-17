@@ -35,5 +35,6 @@
     <string name="SignIn_pseudo_email_invalid">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
     <string name="action_create_acount">Pas de compte ?</string>
     <string name="protect_data">J\'accepte que mes données soient sauvegardées</string>
+    <string name="Msg_err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
 
 </resources>

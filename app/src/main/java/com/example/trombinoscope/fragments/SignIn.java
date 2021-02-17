@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -51,6 +52,8 @@ public class SignIn extends Fragment {
 
     private Button register;
     private EditText nom, prenom, email, pseudo, pw, pwc ;
+
+    private CheckBox checkBox;
 
     public SignIn() {
         // Required empty public constructor
@@ -95,6 +98,7 @@ public class SignIn extends Fragment {
         pseudo= view.findViewById(R.id.Pseudo);
         pw= view.findViewById(R.id.Password);
         pwc= view.findViewById(R.id.PasswordConfirm);
+        checkBox= view.findViewById(R.id.protect_data);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +116,12 @@ public class SignIn extends Fragment {
                 if (Nom.isEmpty() || Prenom.isEmpty() ||Pseudo.isEmpty() || Email.isEmpty()
                         || Pw.isEmpty() || Pwc.isEmpty()){
                     Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_SignIn), 1000).show();
-                } else {
+                }
+                else if (!(checkBox.isChecked())) {
+                    Log.d("test check box", "la checkbox n'a pas été cochée");
+                    Snackbar.make(v, getResources().getString(R.string.Msg_err_Accept_Give_Data), 1000).show();
+                }
+                 else {
                     if (!Pw.equals(Pwc))
                         Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
                     else{
