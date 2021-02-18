@@ -87,10 +87,7 @@ public class trombinoscopes extends Fragment {
                         // 2 - Show result in a Toast
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Trombi", trombi);
-
-
-                        Navigation.findNavController(v).navigate(
-                                R.id.action_trombinoscopes3_to_editTrombi, bundle);
+                        Navigation.findNavController(v).navigate(R.id.action_trombinoscopes3_to_editTrombi, bundle);
                     }
                 });
     }
