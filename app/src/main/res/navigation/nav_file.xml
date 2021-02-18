@@ -32,7 +32,11 @@
         android:id="@+id/addToTrombi"
         android:name="com.example.trombinoscope.fragments.AddToTrombi"
         android:label="fragment_add_to_trombi"
-        tools:layout="@layout/fragment_add_to_trombi" />
+        tools:layout="@layout/fragment_add_to_trombi" >
+        <action
+            android:id="@+id/action_addToTrombi_to_editTrombi"
+            app:destination="@id/editTrombi" />
+    </fragment>
     <fragment
         android:id="@+id/editTrombi"
         android:name="com.example.trombinoscope.fragments.EditTrombi"

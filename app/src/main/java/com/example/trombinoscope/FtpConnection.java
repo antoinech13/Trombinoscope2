@@ -66,7 +66,7 @@ public class FtpConnection {
         ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
         try {
             con.storeFile(path + filename, bs);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

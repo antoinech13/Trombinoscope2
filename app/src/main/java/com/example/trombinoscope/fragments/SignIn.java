@@ -22,7 +22,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.FtpConnection;
-import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.android.material.snackbar.Snackbar;
@@ -138,11 +137,10 @@ public class SignIn extends Fragment {
 
     //Ajouter un membre
     private void addUser(View v){
-        MySingleton s = MySingleton.getInstance(getContext());
-        String url = s.getUrl();
+        String url = "https://192.168.2.141:5000/";
         update();
         Log.d(" update executé", " update executé");
-
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -166,7 +164,7 @@ public class SignIn extends Fragment {
                 error.printStackTrace();
             }
         });
-        s.addToRequestQueue(jsonObjectRequest);
+        queue.add(jsonObjectRequest);
     }
 
     //Envoi les variables a flask
