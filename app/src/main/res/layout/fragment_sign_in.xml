@@ -95,20 +95,35 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="400dp"
-        android:layout_marginBottom="89dp"
+        android:layout_marginBottom="110dp"
         android:text="S'inscrire" />
 
     <CheckBox
         android:id="@+id/protect_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/protect_data"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginBottom="250dp"/>
+        android:layout_marginBottom="50dp"
+        android:text="@string/protect_data" />
+
+    <TextView
+        android:id="@+id/ConditionUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ConditionUser"
+        android:layout_centerInParent="true"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"/>
 
 </RelativeLayout>

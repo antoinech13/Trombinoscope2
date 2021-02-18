@@ -1,5 +1,6 @@
 package com.example.trombinoscope.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -53,6 +55,7 @@ public class SignIn extends Fragment {
     private EditText nom, prenom, email, pseudo, pw, pwc ;
 
     private CheckBox checkBox;
+    private TextView ConditionUser;
 
     public SignIn() {
         // Required empty public constructor
@@ -98,6 +101,14 @@ public class SignIn extends Fragment {
         pw= view.findViewById(R.id.Password);
         pwc= view.findViewById(R.id.PasswordConfirm);
         checkBox= view.findViewById(R.id.protect_data);
+        ConditionUser=view.findViewById(R.id.ConditionUser);
+
+        ConditionUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_signIn_to_userCondition);
+            }
+        });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
