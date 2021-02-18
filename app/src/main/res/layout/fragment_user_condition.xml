@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
-        android:layout_width="337dp"
+        android:layout_width="339dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -55,6 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
+                android:justificationMode="inter_word"
+                android:layout_marginRight="16dp"
                 android:text="@string/description_condition_user" />
 
             <TextView
@@ -71,6 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
+                android:justificationMode="inter_word"
+                android:layout_marginRight="16dp"
                 android:text="@string/service_condition_text" />
         </LinearLayout>
 
