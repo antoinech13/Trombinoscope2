@@ -1,10 +1,14 @@
 package com.example.trombinoscope.fragments;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -32,16 +36,24 @@ import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +72,7 @@ public class AddToTrombi extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button photo, gallerie, suivant;
+    private Button photo, gallerie, suivant, ocr;
     private ImageView image;
     private TextInputEditText nom, prenom, email;
     private Bitmap img;
@@ -69,6 +81,11 @@ public class AddToTrombi extends Fragment {
     private FtpConnection ftp = new FtpConnection();
     private String imgName;
 
+
+
+    private Uri imageUri;
+    private ContentValues values;
+    private String imageurl;
     public AddToTrombi() {
         // Required empty public constructor
     }
@@ -109,6 +126,7 @@ public class AddToTrombi extends Fragment {
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);
         suivant = view.findViewById(R.id.suivant);
+        ocr = view.findViewById(R.id.ocr);
 
         nom = view.findViewById(R.id.nomEtu);
         prenom = view.findViewById(R.id.prenomEtu);
@@ -116,6 +134,15 @@ public class AddToTrombi extends Fragment {
 
         image = view.findViewById(R.id.image);
         this.promo = getArguments().getParcelable("Trombi");
+
+        ocr.setOnClickListener(new View.OnClickListener(){
+           public void onClick(View view){
+               runTextRecognition();
+               Log.e("dji", imageurl);
+           }
+        });
+
+
         photo.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (checkPermission())
@@ -174,11 +201,19 @@ public class AddToTrombi extends Fragment {
     }
 
     private void openCamera() {
-        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(camera, CAMERA_REQUEST_CODE);
+        values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+        imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+
+        //Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //startActivityForResult(camera, CAMERA_REQUEST_CODE);
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
@@ -187,8 +222,46 @@ public class AddToTrombi extends Fragment {
             img = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(img);
         }
+    }*/
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+
+            case CAMERA_REQUEST_CODE:
+                if (requestCode == CAMERA_REQUEST_CODE)
+                    if (resultCode == getActivity().RESULT_OK) {
+                        try {
+                            img = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
+                            Matrix matrix = new Matrix();
+
+                            matrix.postRotate(90);
+                            img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+                            imageurl = getFilePath(imageUri);
+                            File fdelete = new File(imageurl);
+                            fdelete.delete();
+                            image.setImageBitmap(img);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+        }
     }
 
+    private String getFilePath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+
+        Cursor cursor = getContext().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(projection[0]);
+            String picturePath = cursor.getString(columnIndex); // returns null
+            cursor.close();
+            return picturePath;
+        }
+        return null;
+    }
 
     private void addStudent(View v){
         MySingleton s = MySingleton.getInstance(getContext());
@@ -224,6 +297,33 @@ public class AddToTrombi extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void runTextRecognition(){
+        FirebaseVisionImage imageOcr = FirebaseVisionImage.fromBitmap(this.img);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
+        detector.processImage(imageOcr).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                processTextRecognitionResult(firebaseVisionText);
+            }
+        });
+    }
+
+    private void processTextRecognitionResult(FirebaseVisionText texts){
+        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
+        if(blocks.size() == 0){
+            Log.e("dn", "pas de text");
+            return;
+        }
+        for (int i = 0; i < blocks.size(); i++){
+            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
+            for(int j = 0; j < lines.size(); j++){
+                Log.e("cndsj", lines.get(j).getText());
+            }
+        }
+
 
     }
 }

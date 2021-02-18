@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation files('libs/commons-net-3.7.2.jar')
     implementation 'com.google.android.material:material:1.1.0-alpha07'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
 
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
