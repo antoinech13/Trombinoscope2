@@ -6,6 +6,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.CookieStore;
+
 public class MySingleton {
     private static MySingleton instance;
     private RequestQueue requestQueue;
@@ -29,6 +36,10 @@ public class MySingleton {
         if (requestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
+            CookieStore cookieStore = new CookieManager().getCookieStore();;
+            CookieManager manager = new CookieManager( cookieStore, CookiePolicy.ACCEPT_ALL );
+            CookieHandler.setDefault( manager  );
+
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
         }
         return requestQueue;

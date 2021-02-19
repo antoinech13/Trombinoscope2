@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
@@ -36,6 +37,7 @@ import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.example.trombinoscope.view.AddToTrombiViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -80,7 +82,7 @@ public class AddToTrombi extends Fragment {
     private Trombi promo;
     private FtpConnection ftp = new FtpConnection();
     private String imgName;
-
+    private AddToTrombiViewModel mViewModel;
 
 
     private Uri imageUri;
@@ -115,6 +117,8 @@ public class AddToTrombi extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mViewModel = ViewModelProviders.of(this).get(AddToTrombiViewModel.class);
+        imageUri = mViewModel.getUri();
     }
 
     @Override
@@ -122,7 +126,7 @@ public class AddToTrombi extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
-
+        Log.e("dsnj", "création");
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);
         suivant = view.findViewById(R.id.suivant);
@@ -205,6 +209,7 @@ public class AddToTrombi extends Fragment {
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
         imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        mViewModel.setUri(imageUri);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
@@ -232,13 +237,14 @@ public class AddToTrombi extends Fragment {
                     if (resultCode == getActivity().RESULT_OK) {
                         try {
                             img = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
-                            Matrix matrix = new Matrix();
-
-                            matrix.postRotate(90);
-                            img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
                             imageurl = getFilePath(imageUri);
                             File fdelete = new File(imageurl);
                             fdelete.delete();
+                            Matrix matrix = new Matrix();
+                            matrix.postRotate(90);
+                            img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+
+
                             image.setImageBitmap(img);
                         } catch (Exception e) {
                             e.printStackTrace();
