@@ -117,8 +117,8 @@ public class AddToTrombi extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        mViewModel = ViewModelProviders.of(this).get(AddToTrombiViewModel.class);
-        imageUri = mViewModel.getUri();
+        mViewModel = AddToTrombiViewModel.getInstance();
+
     }
 
     @Override
@@ -138,7 +138,7 @@ public class AddToTrombi extends Fragment {
 
         image = view.findViewById(R.id.image);
         this.promo = getArguments().getParcelable("Trombi");
-
+        imageUri = mViewModel.getUri();
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
