@@ -37,6 +37,7 @@ import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.example.trombinoscope.dataStructure.addEtu;
 import com.example.trombinoscope.view.AddToTrombiViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -83,7 +84,7 @@ public class AddToTrombi extends Fragment {
     private FtpConnection ftp = new FtpConnection();
     private String imgName;
     private AddToTrombiViewModel mViewModel;
-
+    private addEtu ae;
 
     private Uri imageUri;
     private ContentValues values;
@@ -126,6 +127,7 @@ public class AddToTrombi extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
+        ae = savedInstanceState.getParcelable("data");
         Log.e("dsnj", "création");
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);
@@ -133,12 +135,18 @@ public class AddToTrombi extends Fragment {
         ocr = view.findViewById(R.id.ocr);
 
         nom = view.findViewById(R.id.nomEtu);
+        nom.setText(ae.getNom());
+
         prenom = view.findViewById(R.id.prenomEtu);
+        prenom.setText(ae.getPrenom());
+
         email = view.findViewById(R.id.email);
+        email.setText(ae.getEmail());
+
+        imageUri = Uri.parse(ae.getImage());
 
         image = view.findViewById(R.id.image);
         this.promo = getArguments().getParcelable("Trombi");
-        imageUri = mViewModel.getUri();
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
@@ -217,6 +225,14 @@ public class AddToTrombi extends Fragment {
         //Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //startActivityForResult(camera, CAMERA_REQUEST_CODE);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("data", new addEtu(imageUri.toString(), nom.getText().toString(), prenom.getText().toString(), email.getText().toString()));
+    }
+
+
 
     /*@Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -12,6 +12,7 @@ public class AddToTrombiViewModel {
     private Uri imageUri;
     private static AddToTrombiViewModel instance;
 
+
     public static synchronized AddToTrombiViewModel getInstance(){
         if (instance == null) {
             instance = new AddToTrombiViewModel();
