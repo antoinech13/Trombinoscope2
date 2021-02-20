@@ -84,6 +84,8 @@ public class AddToTrombi extends Fragment {
     private ContentValues values;
     private String imageurl;
     private View view;
+
+
     public AddToTrombi() {
         // Required empty public constructor
     }
@@ -122,6 +124,20 @@ public class AddToTrombi extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
+        image = view.findViewById(R.id.image);
+        if(getArguments() != null){
+            if(getArguments().containsKey("BitmapImage")) {
+                img = getArguments().getParcelable("BitmapImage");
+                Log.e("bitmap2", img.toString());
+                if (img != null) {
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(90);
+                    img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+                    image.setImageBitmap(img);
+                }
+            }
+        }
+
 
         Log.e("dsnj", "création");
         photo = view.findViewById(R.id.photo);
@@ -136,7 +152,7 @@ public class AddToTrombi extends Fragment {
 
         email = view.findViewById(R.id.email);
 
-        if(savedInstanceState != null){
+        /*if(savedInstanceState != null){
             if(savedInstanceState.containsKey("data")){
                 ae = savedInstanceState.getParcelable("data");
                 imageUri = Uri.parse(ae.getImage());
@@ -144,9 +160,9 @@ public class AddToTrombi extends Fragment {
                 prenom.setText(ae.getPrenom());
                 nom.setText(ae.getNom());
             }
-        }
+        }*/
 
-        image = view.findViewById(R.id.image);
+
         this.promo = getArguments().getParcelable("Trombi");
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
@@ -248,7 +264,7 @@ public class AddToTrombi extends Fragment {
             img = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(img);
         }
-    }*/
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -288,7 +304,7 @@ public class AddToTrombi extends Fragment {
             return picturePath;
         }
         return null;
-    }
+    }*/
 
     private void addStudent(View v){
         MySingleton s = MySingleton.getInstance(getContext());

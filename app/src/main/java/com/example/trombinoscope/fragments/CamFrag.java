@@ -19,6 +19,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.camera.core.*;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,7 +143,11 @@ public class CamFrag extends Fragment {
                         //get bitmap from image
                         Bitmap bitmap = imageProxyToBitmap(image);
                         super.onCaptureSuccess(image);
-                        Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi);
+                        Bundle b = new Bundle();
+                        b.putParcelable("BitmapImage", bitmap);
+
+                        Log.e("bitmap", bitmap.toString());
+                        Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi, b);
                     }
 
                     @Override
