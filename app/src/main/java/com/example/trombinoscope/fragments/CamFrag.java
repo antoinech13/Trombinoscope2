@@ -211,5 +211,4 @@ public class CamFrag extends Fragment {
     }
 
 
-
 }
