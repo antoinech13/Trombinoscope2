@@ -91,5 +91,9 @@
         android:id="@+id/camFrag2"
         android:name="com.example.trombinoscope.fragments.CamFrag"
         android:label="fragment_cam"
-        tools:layout="@layout/fragment_cam" />
+        tools:layout="@layout/fragment_cam" >
+        <action
+            android:id="@+id/action_camFrag2_to_addToTrombi"
+            app:destination="@id/addToTrombi" />
+    </fragment>
 </navigation>

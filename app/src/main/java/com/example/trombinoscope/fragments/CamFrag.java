@@ -1,5 +1,7 @@
 package com.example.trombinoscope.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,10 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.toolbox.ByteArrayPool;
 import com.example.trombinoscope.R;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +53,7 @@ public class CamFrag extends Fragment {
     private PreviewView previewView;
     private View view;
     private Button btn;
+
 
     public CamFrag() {
         // Required empty public constructor
@@ -117,7 +124,7 @@ public class CamFrag extends Fragment {
 
         preview.setSurfaceProvider(previewView.createSurfaceProvider());
 
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview);
+        Camera camera = cameraProvider.bindToLifecycle(getViewLifecycleOwner(), cameraSelector, preview);
 
         ImageCapture imageCapture =
                 new ImageCapture.Builder()
@@ -128,15 +135,31 @@ public class CamFrag extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageCapture.OnImageCapturedCallback(){
+                ExecutorService cameraExecutor = Executors.newSingleThreadExecutor();
+                imageCapture.takePicture(cameraExecutor,new ImageCapture.OnImageCapturedCallback() {
                     @Override
-                    public void onCaptureSucess(ImageProxy image){
-
+                    public void onCaptureSuccess(ImageProxy image) {
+                        //get bitmap from image
+                        Bitmap bitmap = imageProxyToBitmap(image);
+                        super.onCaptureSuccess(image);
+                        Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi);
                     }
-                }
+
+                    @Override
+                    public void onError(ImageCaptureException exception) {
+                        super.onError(exception);
+                    }
+                });
             }
         });
+    }
 
+    private Bitmap imageProxyToBitmap(ImageProxy image){
+        ImageProxy.PlaneProxy planeProxy = image.getPlanes()[0];
+        ByteBuffer buffer = planeProxy.getBuffer();
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
 
