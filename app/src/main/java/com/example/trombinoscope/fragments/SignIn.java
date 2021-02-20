@@ -132,7 +132,8 @@ public class SignIn extends Fragment {
                     Log.d("test check box", "la checkbox n'a pas été cochée");
                     Snackbar.make(v, getResources().getString(R.string.Msg_err_Accept_Give_Data), 1000).show();
                 }
-                 else {
+
+                else {
                     if (!Pw.equals(Pwc))
                         Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
                     else{
