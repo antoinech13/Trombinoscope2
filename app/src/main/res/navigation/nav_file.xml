@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_addToTrombi_to_editTrombi"
             app:destination="@id/editTrombi" />
+        <action
+            android:id="@+id/action_addToTrombi_to_camFrag2"
+            app:destination="@id/camFrag2" />
     </fragment>
     <fragment
         android:id="@+id/editTrombi"
@@ -84,4 +87,9 @@
         android:name="com.example.trombinoscope.fragments.UserCondition"
         android:label="fragment_user_condition"
         tools:layout="@layout/fragment_user_condition" />
+    <fragment
+        android:id="@+id/camFrag2"
+        android:name="com.example.trombinoscope.fragments.CamFrag"
+        android:label="fragment_cam"
+        tools:layout="@layout/fragment_cam" />
 </navigation>

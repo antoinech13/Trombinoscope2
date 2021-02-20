@@ -6,16 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
@@ -28,11 +25,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
@@ -42,7 +37,6 @@ import com.example.trombinoscope.view.AddToTrombiViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
@@ -89,6 +83,7 @@ public class AddToTrombi extends Fragment {
     private Uri imageUri;
     private ContentValues values;
     private String imageurl;
+    private View view;
     public AddToTrombi() {
         // Required empty public constructor
     }
@@ -126,8 +121,8 @@ public class AddToTrombi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
-        ae = savedInstanceState.getParcelable("data");
+        view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
+
         Log.e("dsnj", "création");
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);
@@ -135,15 +130,21 @@ public class AddToTrombi extends Fragment {
         ocr = view.findViewById(R.id.ocr);
 
         nom = view.findViewById(R.id.nomEtu);
-        nom.setText(ae.getNom());
+
 
         prenom = view.findViewById(R.id.prenomEtu);
-        prenom.setText(ae.getPrenom());
 
         email = view.findViewById(R.id.email);
-        email.setText(ae.getEmail());
 
-        imageUri = Uri.parse(ae.getImage());
+        if(savedInstanceState != null){
+            if(savedInstanceState.containsKey("data")){
+                ae = savedInstanceState.getParcelable("data");
+                imageUri = Uri.parse(ae.getImage());
+                email.setText(ae.getEmail());
+                prenom.setText(ae.getPrenom());
+                nom.setText(ae.getNom());
+            }
+        }
 
         image = view.findViewById(R.id.image);
         this.promo = getArguments().getParcelable("Trombi");
@@ -213,28 +214,32 @@ public class AddToTrombi extends Fragment {
     }
 
     private void openCamera() {
-        values = new ContentValues();
+        /*values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
         imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         mViewModel.setUri(imageUri);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);*/
 
         //Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //startActivityForResult(camera, CAMERA_REQUEST_CODE);
+
+       /* Intent intent = new Intent(getContext(), CamAct.class);
+        startActivity(intent);*/
+        Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2);
     }
 
-    @Override
+    /*@Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable("data", new addEtu(imageUri.toString(), nom.getText().toString(), prenom.getText().toString(), email.getText().toString()));
-    }
+    }*/
 
 
 
-    /*@Override
+    /*@Override-
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
