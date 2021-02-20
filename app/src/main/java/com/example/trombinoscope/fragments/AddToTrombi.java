@@ -119,9 +119,7 @@ public class AddToTrombi extends Fragment {
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
                 if (img != null) {
-                    Matrix matrix = new Matrix();
-                    matrix.postRotate(90);
-                    img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+
                     image.setImageBitmap(img);
                 }
             }

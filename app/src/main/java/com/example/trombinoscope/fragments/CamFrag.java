@@ -2,6 +2,7 @@ package com.example.trombinoscope.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -128,9 +131,27 @@ public class CamFrag extends Fragment {
         Camera camera = cameraProvider.bindToLifecycle(getViewLifecycleOwner(), cameraSelector, preview);
 
         ImageCapture imageCapture =
-                new ImageCapture.Builder()
-                        .setTargetRotation(view.getDisplay().getRotation())
-                        .build();
+                new ImageCapture.Builder().build();
+        OrientationEventListener orientationEventListener = new OrientationEventListener(getContext()) {
+            @Override
+            public void onOrientationChanged(int orientation) {
+                int rotation;
+
+                // Monitors orientation values to determine the target rotation value
+                if (orientation >= 45 && orientation < 135) {
+                    rotation = Surface.ROTATION_270;
+                } else if (orientation >= 135 && orientation < 225) {
+                    rotation = Surface.ROTATION_180;
+                } else if (orientation >= 225 && orientation < 315) {
+                    rotation = Surface.ROTATION_90;
+                } else {
+                    rotation = Surface.ROTATION_0;
+                }
+                imageCapture.setTargetRotation(rotation);
+            }
+        };
+
+        orientationEventListener.enable();
         cameraProvider.bindToLifecycle(getViewLifecycleOwner(), cameraSelector, imageCapture, preview);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +164,25 @@ public class CamFrag extends Fragment {
                         //get bitmap from image
                         Bitmap bitmap = imageProxyToBitmap(image);
                         super.onCaptureSuccess(image);
+
+                        Matrix matrix = new Matrix();
+                        int angle = imageCapture.getTargetRotation();
+                        Log.e("enjk", String.valueOf(angle) +" id" );
+
+                        if(angle == 0) {
+                            matrix.postRotate(90);
+                        }
+                        else if(angle == 1 ){
+                            matrix.postRotate(0);
+                        }
+                        else if(angle == 3){
+                            matrix.postRotate(-180);
+                        }
+                        else if(angle == 2){
+                            matrix.postRotate(270);
+                        }
+
+                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                         Bundle b = new Bundle();
                         b.putParcelable("BitmapImage", bitmap);
 
