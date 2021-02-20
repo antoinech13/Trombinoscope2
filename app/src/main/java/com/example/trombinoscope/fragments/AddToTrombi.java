@@ -128,7 +128,6 @@ public class AddToTrombi extends Fragment {
         if(getArguments() != null){
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
-                Log.e("bitmap2", img.toString());
                 if (img != null) {
                     Matrix matrix = new Matrix();
                     matrix.postRotate(90);
@@ -138,8 +137,6 @@ public class AddToTrombi extends Fragment {
             }
         }
 
-
-        Log.e("dsnj", "création");
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);
         suivant = view.findViewById(R.id.suivant);
@@ -152,22 +149,12 @@ public class AddToTrombi extends Fragment {
 
         email = view.findViewById(R.id.email);
 
-        /*if(savedInstanceState != null){
-            if(savedInstanceState.containsKey("data")){
-                ae = savedInstanceState.getParcelable("data");
-                imageUri = Uri.parse(ae.getImage());
-                email.setText(ae.getEmail());
-                prenom.setText(ae.getPrenom());
-                nom.setText(ae.getNom());
-            }
-        }*/
-
 
         this.promo = getArguments().getParcelable("Trombi");
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
-               Log.e("dji", imageurl);
+
            }
         });
 
@@ -230,81 +217,10 @@ public class AddToTrombi extends Fragment {
     }
 
     private void openCamera() {
-        /*values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-        imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        mViewModel.setUri(imageUri);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);*/
 
-        //Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //startActivityForResult(camera, CAMERA_REQUEST_CODE);
-
-       /* Intent intent = new Intent(getContext(), CamAct.class);
-        startActivity(intent);*/
         Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2);
     }
 
-    /*@Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("data", new addEtu(imageUri.toString(), nom.getText().toString(), prenom.getText().toString(), email.getText().toString()));
-    }*/
-
-
-
-    /*@Override-
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE) {
-
-
-            img = (Bitmap) data.getExtras().get("data");
-            image.setImageBitmap(img);
-        }
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-
-            case CAMERA_REQUEST_CODE:
-                if (requestCode == CAMERA_REQUEST_CODE)
-                    if (resultCode == getActivity().RESULT_OK) {
-                        try {
-                            img = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
-                            imageurl = getFilePath(imageUri);
-                            File fdelete = new File(imageurl);
-                            fdelete.delete();
-                            Matrix matrix = new Matrix();
-                            matrix.postRotate(90);
-                            img = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
-
-
-                            image.setImageBitmap(img);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-        }
-    }
-
-    private String getFilePath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-
-        Cursor cursor = getContext().getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(projection[0]);
-            String picturePath = cursor.getString(columnIndex); // returns null
-            cursor.close();
-            return picturePath;
-        }
-        return null;
-    }*/
 
     private void addStudent(View v){
         MySingleton s = MySingleton.getInstance(getContext());
@@ -324,7 +240,6 @@ public class AddToTrombi extends Fragment {
             }
         });
 
-
         s.addToRequestQueue(jsonObjectRequest);
     }
 
@@ -340,7 +255,6 @@ public class AddToTrombi extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     private void runTextRecognition(){
@@ -366,7 +280,5 @@ public class AddToTrombi extends Fragment {
                 Log.e("cndsj", lines.get(j).getText());
             }
         }
-
-
     }
 }
