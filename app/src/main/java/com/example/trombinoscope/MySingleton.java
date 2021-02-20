@@ -36,9 +36,7 @@ public class MySingleton {
         if (requestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
-            CookieStore cookieStore = new CookieManager().getCookieStore();;
-            CookieManager manager = new CookieManager( cookieStore, CookiePolicy.ACCEPT_ALL );
-            CookieHandler.setDefault( manager  );
+
 
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
         }
