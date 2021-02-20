@@ -138,6 +138,7 @@ public class AddToTrombi extends Fragment {
 
 
         this.promo = getArguments().getParcelable("Trombi");
+
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
@@ -182,7 +183,7 @@ public class AddToTrombi extends Fragment {
 
     }
 
-
+    //Permission
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {

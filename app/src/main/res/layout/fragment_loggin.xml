@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:importantForAutofill="no"
         android:drawableEnd="@drawable/ic_user_email_icon"/>
+
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
@@ -32,16 +33,27 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:drawableEnd="@drawable/ic_user_pw_icon"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        android:importantForAutofill="no"
-        android:drawableEnd="@drawable/ic_user_pw_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <TextView
+        android:id="@+id/ForgotPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/ForgotPw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"/>
+
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
@@ -52,7 +64,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
         android:enabled="true"
-        android:text="@string/action_sign_in"
+        android:text="@string/Valid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,5 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

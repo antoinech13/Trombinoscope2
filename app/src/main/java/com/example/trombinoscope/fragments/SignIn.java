@@ -1,34 +1,25 @@
 package com.example.trombinoscope.fragments;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
-import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,20 +117,18 @@ public class SignIn extends Fragment {
                 //Verification que les champs sont remplis
                 if (Nom.isEmpty() || Prenom.isEmpty() ||Pseudo.isEmpty() || Email.isEmpty()
                         || Pw.isEmpty() || Pwc.isEmpty()){
-                    Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_SignIn), 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_chp_vide), 1000).show();
                 }
-                else if (!(checkBox.isChecked())) {
-                    Log.d("test check box", "la checkbox n'a pas été cochée");
+                else if (!(checkBox.isChecked()))
                     Snackbar.make(v, getResources().getString(R.string.Msg_err_Accept_Give_Data), 1000).show();
-                }
+                    //ajouter au ressource String le text
+                else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(Email).matches()))
+                    Snackbar.make(v, getResources().getString(R.string.mail_invalid), 1000).show();
                  else {
                     if (!Pw.equals(Pwc))
                         Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
-                    else{
-                        Log.d(" 2eme test passé", " 2eme test passé");
+                    else
                         addUser(v);
-                        Log.d(" adduser executé", " adduser executé");
-                    }
                 }
                 clear();
             }
@@ -152,7 +141,6 @@ public class SignIn extends Fragment {
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
         update();
-        Log.d(" update executé", " update executé");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
@@ -160,7 +148,6 @@ public class SignIn extends Fragment {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
                         Snackbar.make(v, getResources().getString(R.string.Inscription_valid), Snackbar.LENGTH_LONG).show(); // Trouver comment envoyer mail à l'utilisateur
-                        Log.d(" Je suis enregistré", " Je suis enregistré");
                         Navigation.findNavController(v).navigate(R.id.action_signIn_to_logginFragment);//Retour à la page d'acceuil
 
                     }
