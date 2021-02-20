@@ -265,7 +265,26 @@ public class AddToTrombi extends Fragment {
         for (int i = 0; i < blocks.size(); i++){
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
             for(int j = 0; j < lines.size(); j++){
-                Log.e("cndsj", lines.get(j).getText());
+                Log.e("line", lines.get(j).getText());
+                String[] elements = lines.get(j).getText().split(":");
+                ocrPlacement(elements);
+
+            }
+        }
+    }
+
+
+    public void ocrPlacement(String[] tab){
+
+        for(int i = 0; i < tab.length; i++){
+            if(tab[i].toLowerCase().equals("email")){
+                email.setText(tab[i+1]);
+            }
+            else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prènom")){
+                prenom.setText(tab[i+1]);
+            }
+            else if(tab[i].toLowerCase().equals("nom")){
+                nom.setText(tab[i+1]);
             }
         }
     }
