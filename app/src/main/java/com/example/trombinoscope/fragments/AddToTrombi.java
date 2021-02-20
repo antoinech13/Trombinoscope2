@@ -1,11 +1,8 @@
 package com.example.trombinoscope.fragments;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
@@ -29,7 +26,6 @@ import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
-import com.example.trombinoscope.view.AddToTrombiViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -43,9 +39,12 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -267,25 +266,50 @@ public class AddToTrombi extends Fragment {
             for(int j = 0; j < lines.size(); j++){
                 Log.e("line", lines.get(j).getText());
                 String[] elements = lines.get(j).getText().split(":");
-                ocrPlacement(elements);
+                Map<String, String> map = ocrPlacement(elements);
+                if(map.size() < 3){
+                    elements = null;
+                    elements = lines.get(j).getText().split(" ");
+                    Map<String, String> map2 = ocrPlacement(elements);
+                    if(map2.size() > map.size()){
+                        setText(map2);
+                    }
+                    else{
+                        setText(map);
+                    }
+                }
+                else{
+                    setText(map);
+                }
 
             }
         }
     }
 
 
-    public void ocrPlacement(String[] tab){
-
+    public Map<String, String> ocrPlacement(String[] tab){
+        Map<String, String> m = new HashMap<String, String>();
         for(int i = 0; i < tab.length; i++){
-            if(tab[i].toLowerCase().equals("email")){
-                email.setText(tab[i+1]);
+            if(tab[i].toLowerCase().equals("email") || tab[i].toLowerCase().equals("email:")){
+                m.put("email", tab[i+1]);
             }
-            else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prènom")){
-                prenom.setText(tab[i+1]);
+            else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prenom:") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prénom:")  || tab[i].toLowerCase().equals("prènom") || tab[i].toLowerCase().equals("prènom:")){
+                m.put("prenom", tab[i+1]);
             }
-            else if(tab[i].toLowerCase().equals("nom")){
-                nom.setText(tab[i+1]);
+            else if(tab[i].toLowerCase().equals("nom") || tab[i].toLowerCase().equals("nom:")){
+                m.put("nom", tab[i+1]);
             }
         }
+        return m;
+    }
+
+    public void setText(Map<String, String> m){
+        if(m.containsKey("email"))
+            email.setText(m.get("email"));
+        else if(m.containsKey("prenom"))
+            prenom.setText(m.get("prenom"));
+        else if(m.containsKey("nom"))
+            nom.setText(m.get("nom"));
+
     }
 }
