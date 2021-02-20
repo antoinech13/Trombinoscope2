@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile2"
-        android:name="com.example.trombinoscope.profile"
+        android:name="com.example.trombinoscope.fragments.profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
