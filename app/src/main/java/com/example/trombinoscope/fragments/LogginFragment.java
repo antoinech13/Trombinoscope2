@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -47,7 +46,6 @@ public class LogginFragment extends Fragment {
     private EditText pseudo, password;
     private JSONObject js = new JSONObject();
     private CheckBox rememberCheckbox;
-    private TextView forgotPw;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,7 +93,6 @@ public class LogginFragment extends Fragment {
         pseudo = view.findViewById(R.id.username);
         password = view.findViewById(R.id.password);
         rememberCheckbox = view.findViewById(R.id.rememberMe);
-        forgotPw=view.findViewById(R.id.ForgotPw);
         SharedPreferences userValuesSave = this.getActivity().getSharedPreferences("userValuesSave", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userValuesSave.edit();
 
@@ -110,14 +107,6 @@ public class LogginFragment extends Fragment {
                 Navigation.findNavController(view).navigate((R.id.action_logginFragment_to_signIn));
             }
         });
-
-        forgotPw.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate((R.id.action_logginFragment_to_forgotPw));
-            }
-        });
-
 
         btn_loggin.setOnClickListener(new View.OnClickListener() {
 
