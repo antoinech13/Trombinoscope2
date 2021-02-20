@@ -122,6 +122,7 @@ public class EditTrombi extends Fragment {
             requestEtu();
         }
 
+
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(
@@ -129,7 +130,6 @@ public class EditTrombi extends Fragment {
                 //finish();
             }
         });
-
 
         return view;
     }

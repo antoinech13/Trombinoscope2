@@ -54,6 +54,7 @@ public class trombinoscopes extends Fragment {
         return new trombinoscopes();
     }
 
+    // ca c est pour trombi a addtrombi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class trombinoscopes extends Fragment {
         return view;
     }
 
+    //methode pour naviguer entre trombi a edit trombi c est celle qui va m interesser
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(recyclerView, R.layout.layout_tromb_frag)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
