@@ -115,6 +115,7 @@ public class AddToTrombi extends Fragment {
         image = view.findViewById(R.id.image);
 
         if(getArguments() != null){
+            this.promo = getArguments().getParcelable("Trombi");
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
                 if (img != null) {
@@ -137,7 +138,10 @@ public class AddToTrombi extends Fragment {
         email = view.findViewById(R.id.email);
 
 
-        this.promo = getArguments().getParcelable("Trombi");
+
+
+
+
 
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
@@ -205,8 +209,9 @@ public class AddToTrombi extends Fragment {
     }
 
     private void openCamera() {
-
-        Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2);
+        Bundle b = new Bundle();
+        b.putParcelable("Trombi", this.promo);
+        Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2, b);
     }
 
 

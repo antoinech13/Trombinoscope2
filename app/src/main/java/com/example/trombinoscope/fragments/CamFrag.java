@@ -30,6 +30,7 @@ import android.widget.Button;
 
 import com.android.volley.toolbox.ByteArrayPool;
 import com.example.trombinoscope.R;
+import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.nio.ByteBuffer;
@@ -185,6 +186,8 @@ public class CamFrag extends Fragment {
                         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                         Bundle b = new Bundle();
                         b.putParcelable("BitmapImage", bitmap);
+                        Trombi t = getArguments().getParcelable("Trombi");
+                        b.putParcelable("Trombi", t);
 
                         Log.e("bitmap", bitmap.toString());
                         Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi, b);

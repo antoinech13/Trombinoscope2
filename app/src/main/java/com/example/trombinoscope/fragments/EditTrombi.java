@@ -111,6 +111,7 @@ public class EditTrombi extends Fragment {
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");
         //this.configureRecyclerView();
+
         update();
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
