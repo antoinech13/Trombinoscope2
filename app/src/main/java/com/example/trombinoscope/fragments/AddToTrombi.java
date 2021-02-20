@@ -2,9 +2,7 @@ package com.example.trombinoscope.fragments;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -15,7 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +29,6 @@ import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
-import com.example.trombinoscope.dataStructure.addEtu;
 import com.example.trombinoscope.view.AddToTrombiViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,7 +41,6 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -77,12 +72,6 @@ public class AddToTrombi extends Fragment {
     private Trombi promo;
     private FtpConnection ftp = new FtpConnection();
     private String imgName;
-    private AddToTrombiViewModel mViewModel;
-    private addEtu ae;
-
-    private Uri imageUri;
-    private ContentValues values;
-    private String imageurl;
     private View view;
 
 
@@ -115,7 +104,7 @@ public class AddToTrombi extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        mViewModel = AddToTrombiViewModel.getInstance();
+
 
     }
 
@@ -125,6 +114,7 @@ public class AddToTrombi extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
         image = view.findViewById(R.id.image);
+
         if(getArguments() != null){
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
