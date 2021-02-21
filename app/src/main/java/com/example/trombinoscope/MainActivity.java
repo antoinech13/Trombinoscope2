@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         CookieHandler.setDefault(manager);
     }
 
+
     public void onTaskRemoved(Intent rootIntent) {
         cookieStore.removeAll();
     }

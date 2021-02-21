@@ -1,19 +1,16 @@
 package com.example.trombinoscope.fragments;
 
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,20 +18,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.FtpConnection;
-import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
 import com.example.trombinoscope.dataStructure.Etudiant;
 import com.example.trombinoscope.dataStructure.Trombi;
-import com.example.trombinoscope.adapter.TrombiAdapter;
-import com.example.trombinoscope.view.TrombinoscopesViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,8 +57,9 @@ public class EditTrombi extends Fragment {
     private RecyclerView recyclerView;
     private JSONObject js = new JSONObject();
     private Trombi promo;
-    public FtpConnection co;
-    Button add;
+    //public FtpConnection co;
+
+    private Button add;
 
     public EditTrombi() {
         // Required empty public constructor
@@ -126,8 +119,8 @@ public class EditTrombi extends Fragment {
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(
-                        R.id.action_editTrombi_to_addToTrombi, getArguments());
+                Log.e("djzio", getArguments().toString());
+                Navigation.findNavController(view).navigate(R.id.action_editTrombi_to_addToTrombi, getArguments());
                 //finish();
             }
         });
@@ -157,27 +150,27 @@ public class EditTrombi extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 configureRecyclerView();
+
+                JSONArray Nom = null;
                 try {
-                    JSONArray Nom = response.getJSONArray("Nom");
+                    Nom = response.getJSONArray("Nom");
                     JSONArray Prenom = response.getJSONArray("Prenom");
                     JSONArray Img = response.getJSONArray("Img");
                     JSONArray Email = response.getJSONArray("Email");
+                    JSONArray Image = response.getJSONArray("Image");
 
                     for(int i = 0; i < Prenom.length(); i++){
                         Log.d("huip", Img.getString(i));
+                        byte[] decodedString = Base64.decode(Image.getString(i), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), decodedByte, Email.getString(i)));
                     }
-
-                    co = new FtpConnection();
-
-                    for(int i = 0; i < Nom.length(); i++){
-                        etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
-                    }
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                        //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
 
+                    adapter.notifyDataSetChanged();
 
             }
 
@@ -195,10 +188,9 @@ public class EditTrombi extends Fragment {
 
     private void update(){
         String id = this.promo.getId();
-
+        js = new JSONObject();
         try {
             js.put("request", "etu");
-
             js.put("idpromo", id);
 
 
@@ -206,7 +198,4 @@ public class EditTrombi extends Fragment {
             e.printStackTrace();
         }
     }
-
-
-
 }

@@ -21,11 +21,11 @@ public class FtpConnection {
     private String path = "/Web/imageTrombi/";
 
    public FtpConnection(){
-// NE PAS TOUCHER AUX IP !!!!
+// NE PAS TOUCHER AUX IP !!!! "86.211.99.209
         try {
-            con.connect("86.211.99.209",21);
+            con.connect("192.168.1.17",21);
             con.enterLocalPassiveMode();
-            con.login("bsd1", "bsd1cci");
+            con.login("bsd1", "admincci1");
             con.setDefaultTimeout(6000);
             con.setFileType(FTP.BINARY_FILE_TYPE);
 //Modif ajouter du prof

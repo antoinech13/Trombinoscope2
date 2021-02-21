@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,8 +71,8 @@ public class AddToTrombi extends Fragment {
     private Bitmap img;
     private JSONObject js = new JSONObject();
     private Trombi promo;
-    private FtpConnection ftp = new FtpConnection();
-    private String imgName;
+   // private FtpConnection ftp = new FtpConnection();
+    private String imgName, Image = "null";
     private View view;
 
 
@@ -120,6 +122,7 @@ public class AddToTrombi extends Fragment {
                 img = getArguments().getParcelable("BitmapImage");
                 if (img != null) {
 
+                    Image = bitmapToBase64(img);
                     image.setImageBitmap(img);
                 }
             }
@@ -168,7 +171,7 @@ public class AddToTrombi extends Fragment {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
                 String strDate = dateFormat.format(date);
                 imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate + ".jpg";
-                ftp.sendImage(img, imgName);
+               // ftp.sendImage(img, imgName);
                 addStudent(view);
                 clear();
             }
@@ -243,6 +246,7 @@ public class AddToTrombi extends Fragment {
             js.put("nom",this.nom.getText());
             js.put("promo",this.promo.getId());
             js.put("img",this.imgName);
+            js.put("image", this.Image);
             js.put("email", this.email.getText());
 
         } catch (JSONException e) {
@@ -317,5 +321,12 @@ public class AddToTrombi extends Fragment {
         else if(m.containsKey("nom"))
             nom.setText(m.get("nom"));
 
+    }
+
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }
