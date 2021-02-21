@@ -7,7 +7,20 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
+    android:background="@drawable/background"
     tools:context=".fragments.SignIn">
+
+    <TextView
+        android:id="@+id/title_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:fontFamily="@font/allan"
+        android:text="Inscription"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/Name"
@@ -18,8 +31,12 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Nom"/>
+        android:layout_marginTop="70dp"
+        android:hint="Nom"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/Prenom"
@@ -30,8 +47,12 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="70dp"
-        android:hint="Prenom"/>
+        android:layout_marginTop="140dp"
+        android:hint="Prénom"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/userEmail"
@@ -42,9 +63,13 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="210dp"
         android:inputType="textEmailAddress"
-        android:hint="@string/prompt_email"/>
+        android:hint="@string/prompt_email"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/Pseudo"
@@ -55,8 +80,11 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="170dp"
-        android:hint="@string/pseudonyme"/>
+        android:layout_marginTop="280dp"
+        android:hint="@string/pseudonyme"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/Password"
@@ -68,9 +96,13 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="350dp"
         android:hint="@string/mot_de_passe"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/PasswordConfirm"
@@ -83,9 +115,13 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="420dp"
         android:hint="@string/confirmez_mot_de_passe"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/et_bg"
+        android:padding="16dp"/>
 
     <Button
         android:id="@+id/btnRegister"
@@ -94,8 +130,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="400dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/et_bg"
         android:text="S'inscrire" />
 
     <CheckBox
@@ -105,10 +142,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/protect_data" />
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:text="@string/protect_data"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/ConditionUser"
@@ -116,14 +156,15 @@
         android:layout_height="wrap_content"
         android:text="@string/ConditionUser"
         android:layout_centerInParent="true"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="italic"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
         android:clickable="true"/>
 
 </RelativeLayout>
