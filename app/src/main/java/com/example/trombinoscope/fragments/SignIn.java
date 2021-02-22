@@ -94,15 +94,15 @@ public class SignIn extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_sign_in, container, false);
-        register=view.findViewById(R.id.btnRegister);
+        register = view.findViewById(R.id.btnRegister);
         nom = view.findViewById(R.id.Name);
         prenom = view.findViewById(R.id.Prenom);
         email = view.findViewById(R.id.userEmail);
-        pseudo= view.findViewById(R.id.Pseudo);
-        pw= view.findViewById(R.id.Password);
-        pwc= view.findViewById(R.id.PasswordConfirm);
-        checkBox= view.findViewById(R.id.protect_data);
-        ConditionUser=view.findViewById(R.id.ConditionUser);
+        pseudo = view.findViewById(R.id.Pseudo);
+        pw = view.findViewById(R.id.Password);
+        pwc = view.findViewById(R.id.PasswordConfirm);
+        checkBox = view.findViewById(R.id.protect_data);
+        ConditionUser = view.findViewById(R.id.ConditionUser);
 
         ConditionUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +120,8 @@ public class SignIn extends Fragment {
                 String Prenom = prenom.getText().toString().trim();
                 String Email = email.getText().toString().trim();
                 String Pseudo = pseudo.getText().toString().trim();
-                String Pw= pw.getText().toString().trim();
-                String Pwc= pwc.getText().toString().trim();
+                String Pw = pw.getText().toString().trim();
+                String Pwc = pwc.getText().toString().trim();
 
                 //Verification que les champs sont remplis
                 if (Nom.isEmpty() || Prenom.isEmpty() ||Pseudo.isEmpty() || Email.isEmpty()

@@ -17,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
@@ -27,6 +29,7 @@ import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
 import com.example.trombinoscope.dataStructure.Etudiant;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,6 +60,7 @@ public class EditTrombi extends Fragment {
     private RecyclerView recyclerView;
     private JSONObject js = new JSONObject();
     private Trombi promo;
+    private JSONArray Link, Email, Img, Prenom;
     //public FtpConnection co;
 
     private Button add;
@@ -138,7 +142,7 @@ public class EditTrombi extends Fragment {
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
-        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
     }
 
@@ -154,23 +158,29 @@ public class EditTrombi extends Fragment {
                 JSONArray Nom = null;
                 try {
                     Nom = response.getJSONArray("Nom");
-                    JSONArray Prenom = response.getJSONArray("Prenom");
-                    JSONArray Img = response.getJSONArray("Img");
-                    JSONArray Email = response.getJSONArray("Email");
-                    JSONArray Image = response.getJSONArray("Image");
+                    Prenom = response.getJSONArray("Prenom");
+                    Img = response.getJSONArray("Img");
+                    Email = response.getJSONArray("Email");
+                    Link = response.getJSONArray("Link");
 
-                    for(int i = 0; i < Prenom.length(); i++){
+                    for(int i = 0; i < Nom.length(); i++){
+                        Log.e("i", String.valueOf(i));
+                        requestImg(Link.getString(i), Img.getString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));
+                    }
+
+
+                   /* for(int i = 0; i < Prenom.length(); i++){
                         Log.d("huip", Img.getString(i));
                         byte[] decodedString = Base64.decode(Image.getString(i), Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), decodedByte, Email.getString(i)));
-                    }
+                    }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                         //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
 
-                    adapter.notifyDataSetChanged();
+
 
             }
 
@@ -182,8 +192,31 @@ public class EditTrombi extends Fragment {
             }
         });
 
-
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy( DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(jsonObjectRequest);
+    }
+
+    private void requestImg(String mImageURLString, String img, String nom, String prenom, String email){
+        MySingleton s = MySingleton.getInstance(getContext());
+        String url = s.getUrl();
+
+        ImageRequest imageRequest = new ImageRequest(mImageURLString, new Response.Listener<Bitmap>() { // Bitmap listener
+            @Override
+            public void onResponse(Bitmap response) {
+                Log.e("on", "good");
+                etudiants.add(new Etudiant(nom, prenom, img, response, email));
+                adapter.notifyDataSetChanged();
+            }
+        }, 0, 0, null, new Response.ErrorListener() { // Error listener
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something with error response
+                        error.printStackTrace();
+                        Log.e("err", "pas good");
+                    }
+                });
+        s.addToRequestQueue(imageRequest);
+
     }
 
     private void update(){
