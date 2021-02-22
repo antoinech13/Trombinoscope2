@@ -51,5 +51,22 @@
     <string name="profile">Profile</string>
     <string name="editer">Editer</string>
     <string name="supprimer">Supprimer</string>
+    <string name="emial_non_val">Email non valide</string>
+    <string name="send_Code">Envoyer le code</string>
+    <string name="consigne_Recupération_mdp">Veuillez renseigner votre email pour vous envoyer le code de récupération de votre mot de passe</string>
+    <string name="chp_email_vide">Veuillez renseigner votre email</string>
+    <string name="code_Send">Un code vient de vous être envoyé par email</string>
+    <string name="account_doesnt_exist">Le compte n\'existe pas</string>
+    <string name="enter_code">Entrez le code reçu par Email</string>
+    <string name="valid">Valider</string>
+    <string name="Msg_err_saisie_chp_vide">Saisie invalide, veuillez compléter tous les champs</string>
+    <string name="Err_code">Le code est faux</string>
+    <string name="forgot_Pw">Mot de passe oublié ?</string>
+    <string name="rest_Pw">Réinitialiser votre mot de passe</string>
+    <string name="new_Pw">Nouveau mot de passe</string>
+    <string name="confirm_Reset_Pw">Corfirmez nouveau mot de passe</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="reset_Pw_valid">Le changement du mot de passe a été pris en compte</string>
+    <string name="erreur_Reset_Pw">Une erreur est survenue</string>
 
 </resources>

@@ -120,6 +120,7 @@ public class AddToTrombi extends Fragment {
             this.promo = getArguments().getParcelable("Trombi");
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
+                Log.e("img", img.toString() );
                 if (img != null) {
 
                     Image = bitmapToBase64(img);
@@ -227,6 +228,7 @@ public class AddToTrombi extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Snackbar.make(v, R.string.student_add, Snackbar.LENGTH_SHORT).show();
+                Log.e("snackbar", "etu ajout");
             }
 
         }, new Response.ErrorListener() {
@@ -324,8 +326,10 @@ public class AddToTrombi extends Fragment {
     }
 
     private String bitmapToBase64(Bitmap bitmap) {
+        Bitmap bitmap2= bitmap.copy(bitmap.getConfig(), true);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+        bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }

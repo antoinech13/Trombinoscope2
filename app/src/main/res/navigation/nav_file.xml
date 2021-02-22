@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_logginFragment_to_signIn"
             app:destination="@id/signIn" />
+        <action
+            android:id="@+id/action_logginFragment_to_forgot_Pw"
+            app:destination="@id/forgot_Pw" />
     </fragment>
     <fragment
         android:id="@+id/addUniversityFragment"
@@ -104,5 +107,32 @@
         <action
             android:id="@+id/action_profile2_to_editTrombi"
             app:destination="@id/editTrombi" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgot_Pw"
+        android:name="com.example.trombinoscope.fragments.Forgot_Pw"
+        android:label="fragment_forgot__pw"
+        tools:layout="@layout/fragment_forgot__pw" >
+        <action
+            android:id="@+id/action_forgot_Pw_to_code_Recup_Pw"
+            app:destination="@id/code_Recup_Pw" />
+    </fragment>
+    <fragment
+        android:id="@+id/code_Recup_Pw"
+        android:name="com.example.trombinoscope.fragments.Code_Recup_Pw"
+        android:label="fragment_code__recup__pw"
+        tools:layout="@layout/fragment_code__recup__pw" >
+        <action
+            android:id="@+id/action_code_Recup_Pw_to_reset_Pw"
+            app:destination="@id/reset_Pw" />
+    </fragment>
+    <fragment
+        android:id="@+id/reset_Pw"
+        android:name="com.example.trombinoscope.fragments.Reset_Pw"
+        android:label="fragment_reset__pw"
+        tools:layout="@layout/fragment_reset__pw" >
+        <action
+            android:id="@+id/action_reset_Pw_to_logginFragment"
+            app:destination="@id/logginFragment" />
     </fragment>
 </navigation>
