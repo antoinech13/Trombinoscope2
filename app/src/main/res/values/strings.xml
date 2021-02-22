@@ -25,10 +25,12 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="student_add">Etudiant ajouté</string>
+    <!--Fragment connexion-->
     <string name="mot_de_passe">Mot de passe</string>
     <string name="confirmez_mot_de_passe">Confirmez votre mot de passe</string>
     <string name="nom">Nom</string>
     <string name="pseudonyme">Pseudonyme</string>
+    <!--Fragment inscription-->
     <string name="Msg_err_saisie_SignIn">Saisie invalide, Veuillez compléter tous les champs</string>
     <string name="Msg_Err_MDP_diff">Les mots de passe saisis sont diférents</string>
     <string name="Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
@@ -36,6 +38,7 @@
     <string name="action_create_acount">Pas de compte ?</string>
     <string name="protect_data">J\'accepte que mes données soient sauvegardées</string>
     <string name="Msg_err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
+    <!--condition utilisateurs-->
     <string name="ConditionUser">En savoir plus sur les conditions d\'utilisation!</string>
     <string name="condition_header">Confidentialité et sécurité</string>
     <string name="condition_subtitle">Conditions d’utilisation</string>
@@ -44,6 +47,7 @@
     <string name="welcome_condition">Bienvenue sur Trombi</string>
     <string name="service_subtitle_condition">"Le Service Trombi "</string>
     <string name="service_condition_text">"Nous acceptons de vous fournir le Service Trombi. Le Service comprend l\’ensemble des produits, des fonctionnalités, des applications, des services, des technologies et des logiciels Trombi que nous vous fournissons afin d\’accomplir la vocation du Trombi : vous permettre de réaliser un trombinoscope rapidement et facilement. Le Service inclut les aspects suivants : Offrir des opportunités pour créer et communiquer les trombinoscopes. Nous souhaitons renforcer votre environnement de travail et/ou d’études. Nous utilisons ces informations afin de vous aider à créer, à trouver, et à partager vos trombinoscopes. Cela consiste notamment à vous offrir divers moyens d\’utiliser Trombi en fonction de ce que vous et d\’autres personnes faites sur Trombi et en dehors. Créer un environnement positif, inclusif et sûr Nous développons et utilisons des outils, et offrons des ressources aux membres de notre communauté afin de contribuer à rendre leurs expériences positives et inclusives, y compris lorsque nous pensons qu\’ils pourraient avoir besoin de notre aide.    Nous utilisons toutes les informations à notre disposition, y compris les vôtres, pour tenter de maintenir la sécurité de notre plateforme. Il se peut également que nous partagions des informations concernant une utilisation abusive ou du contenu préjudiciable avec d\’autres Entités de l\’université d’Aix-Marseille ou avec les autorités. Développer et utiliser des technologies nous permettant d’offrir constamment des services à notre communauté grandissante La gestion et l\’analyse des informations pour notre communauté grandissante sont essentielles à notre Service. Les technologies automatisées nous permettent également d\’assurer le fonctionnement et l\’intégrité de notre Service. Fournir des expériences homogènes et fluides sur les autres Produits de l\’université d’Aix-Marseille, qui partagent des technologies, des systèmes, des statistiques et des informations, y compris des informations vous concernant dont nous disposons, afin de fournir des services de meilleure qualité, plus sûrs et plus sécurisés. Afin de faire fonctionner notre Service, nous devons stocker et transférer des données à travers nos systèmes. "</string>
+    <!--Fragment editer la page de l'étudiant-->
     <string name="profile">Profile</string>
     <string name="editer">Editer</string>
     <string name="supprimer">Supprimer</string>

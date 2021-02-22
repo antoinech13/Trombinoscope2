@@ -27,7 +27,8 @@
         android:importantForAutofill="no"
         android:background="@drawable/et_bg"
         android:padding="16dp"
-        android:drawableEnd="@drawable/ic_email_name"/>
+        android:drawableEnd="@drawable/ic_email_name"
+        android:textColorHint="@color/white"/>
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
@@ -46,7 +47,8 @@
         android:importantForAutofill="no"
         android:background="@drawable/et_bg"
         android:padding="16dp"
-        android:drawableEnd="@drawable/ic_eyes_name" />
+        android:drawableEnd="@drawable/ic_eyes_name"
+        android:textColorHint="@color/white"/>
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
