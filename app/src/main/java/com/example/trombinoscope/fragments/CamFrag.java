@@ -167,20 +167,20 @@ public class CamFrag extends Fragment {
                         super.onCaptureSuccess(image);
 
                         Matrix matrix = new Matrix();
-                        int angle = imageCapture.getTargetRotation();
-                        Log.e("enjk", String.valueOf(angle) +" id" );
+
+                        int angle = image.getImageInfo().getRotationDegrees();
 
                         if(angle == 0) {
-                            matrix.postRotate(90);
+                            matrix.postRotate(angle);
                         }
                         else if(angle == 1 ){
-                            matrix.postRotate(0);
+                            matrix.postRotate(angle);
                         }
                         else if(angle == 3){
-                            matrix.postRotate(-180);
+                            matrix.postRotate(angle);
                         }
                         else if(angle == 2){
-                            matrix.postRotate(270);
+                            matrix.postRotate(angle);
                         }
 
                         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);

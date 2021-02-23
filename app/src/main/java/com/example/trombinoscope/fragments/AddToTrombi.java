@@ -306,13 +306,13 @@ public class AddToTrombi extends Fragment {
     public Map<String, String> ocrPlacement(String[] tab){
         Map<String, String> m = new HashMap<String, String>();
         for(int i = 0; i < tab.length; i++){
-            if(tab[i].toLowerCase().equals("email") || tab[i].toLowerCase().equals("email:")){
+            if(tab[i].toLowerCase().equals("email") || tab[i].toLowerCase().equals("email:") || tab[i].toLowerCase().equals("email=")){
                 m.put("email", tab[i+1]);
             }
-            else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prenom:") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prénom:")  || tab[i].toLowerCase().equals("prènom") || tab[i].toLowerCase().equals("prènom:")){
+            else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prenom:") || tab[i].toLowerCase().equals("prenom=") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prénom:") || tab[i].toLowerCase().equals("prénom=") || tab[i].toLowerCase().equals("prènom") || tab[i].toLowerCase().equals("prènom:") || tab[i].toLowerCase().equals("prènom=")){
                 m.put("prenom", tab[i+1]);
             }
-            else if(tab[i].toLowerCase().equals("nom") || tab[i].toLowerCase().equals("nom:")){
+            else if(tab[i].toLowerCase().equals("nom") || tab[i].toLowerCase().equals("nom:") || tab[i].toLowerCase().equals("nom=")){
                 m.put("nom", tab[i+1]);
             }
         }
