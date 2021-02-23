@@ -2,14 +2,18 @@ package com.example.trombinoscope.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.transition.Transition;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +27,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
@@ -60,7 +67,7 @@ public class EditTrombi extends Fragment {
     private RecyclerView recyclerView;
     private JSONObject js = new JSONObject();
     private Trombi promo;
-    private JSONArray Link, Email, Img, Prenom;
+    private JSONArray Link, Email, Img, Prenom, Nom;
     //public FtpConnection co;
 
     private Button add;
@@ -142,7 +149,7 @@ public class EditTrombi extends Fragment {
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
-        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
     }
 
@@ -154,18 +161,18 @@ public class EditTrombi extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 configureRecyclerView();
-
-                JSONArray Nom = null;
+                Log.e("link", "icii");
+                Nom = null;
                 try {
                     Nom = response.getJSONArray("Nom");
                     Prenom = response.getJSONArray("Prenom");
                     Img = response.getJSONArray("Img");
                     Email = response.getJSONArray("Email");
                     Link = response.getJSONArray("Link");
-
+                    Log.e("je me fais catche", "walla3");
                     for(int i = 0; i < Nom.length(); i++){
                         Log.e("i", String.valueOf(i));
-                        requestImg(Link.getString(i), Img.getString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));
+                        requestImg(Link.getString(i), Img.optString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));
                     }
 
 
@@ -177,6 +184,7 @@ public class EditTrombi extends Fragment {
                     }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("je me fais catche", "walla2");
                 }
                         //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
 
@@ -189,12 +197,37 @@ public class EditTrombi extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Log.e("link", "volley marche pas");
             }
         });
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy( DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(jsonObjectRequest);
     }
+
+  /*  private void requestImg(String mImageURLString, String img, String nom, String prenom, String email) {
+
+        Glide.with(this)
+                .asBitmap()
+                .load(mImageURLString)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(new CustomTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable com.bumptech.glide.request.transition.Transition<? super Bitmap> transition) {
+                        etudiants.add(new Etudiant(nom, prenom, img, resource, email));
+                        adapter.notifyDataSetChanged();
+                        Log.e("link", " cfgjvhbj");
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        Log.e("test","yolo");
+                    }
+                });
+
+
+    }*/
 
     private void requestImg(String mImageURLString, String img, String nom, String prenom, String email){
         MySingleton s = MySingleton.getInstance(getContext());
@@ -212,6 +245,7 @@ public class EditTrombi extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something with error response
                         error.printStackTrace();
+                        requestImg(mImageURLString, img, nom, prenom, email);
                         Log.e("err", "pas good");
                     }
                 });
