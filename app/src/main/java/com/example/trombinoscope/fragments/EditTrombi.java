@@ -245,10 +245,11 @@ public class EditTrombi extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // Do something with error response
                         error.printStackTrace();
-                        requestImg(mImageURLString, img, nom, prenom, email);
+                        //requestImg(mImageURLString, img, nom, prenom, email);
                         Log.e("err", "pas good");
                     }
                 });
+        imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(imageRequest);
 
     }
