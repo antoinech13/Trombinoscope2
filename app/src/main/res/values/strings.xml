@@ -36,7 +36,7 @@
     <string name="Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
     <string name="SignIn_pseudo_email_invalid">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
     <string name="action_create_acount">Pas de compte ?</string>
-    <string name="protect_data">J\'accepte que mes données soient sauvegardées</string>
+    <string name="protect_data">J\'accepte les conditions d\'utilisation</string>
     <string name="Msg_err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
     <!--condition utilisateurs-->
     <string name="ConditionUser">En savoir plus sur les conditions d\'utilisation!</string>
@@ -68,5 +68,15 @@
     <string name="reset">Réinitialiser</string>
     <string name="reset_Pw_valid">Le changement du mot de passe a été pris en compte</string>
     <string name="erreur_Reset_Pw">Une erreur est survenue</string>
+    <string name="inscription">Inscription</string>
+    <string name="prenom">Prénom</string>
+    <string name="inscrire">S\'inscrire</string>
+    <string name="background_welcome">Bienvenue sur Trombi</string>
+    <string name="trombi">Trombi</string>
+    <string name="formation">Formation</string>
+    <string name="universite">Université:</string>
+    <string name="date">date</string>
+    <string name="tag">Tag</string>
+    <string name="title_add_trombi">Ajouter un trombinoscope</string>
 
 </resources>

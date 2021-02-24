@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addTro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,6 +18,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.615"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
