@@ -1,47 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingTop="0dp"
+    android:paddingRight="0dp"
+    android:paddingBottom="0dp"
     tools:context=".fragments.UserCondition">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <TextView
         android:id="@+id/condition_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginBottom="39dp"
         android:autoLink="web"
         android:fontFamily="@font/allan"
         android:text="@string/condition_header"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/bleu_cobalt"
-        android:textStyle="bold" />
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
-        android:layout_width="339dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="30dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/condition_subheading"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:text="@string/condition_subtitle"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+                android:textColor="@color/grey"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/welcome_condition"
@@ -58,8 +78,8 @@
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
                 android:justificationMode="inter_word"
-                android:layout_marginRight="16dp"
-                android:text="@string/description_condition_user" />
+                android:text="@string/description_condition_user"
+                tools:targetApi="o" />
 
             <TextView
                 android:id="@+id/service_subtitle_condition"
@@ -76,10 +96,10 @@
                 android:layout_marginTop="10dp"
                 android:autoLink="web"
                 android:justificationMode="inter_word"
-                android:layout_marginRight="16dp"
-                android:text="@string/service_condition_text" />
+                android:text="@string/service_condition_text"
+                tools:targetApi="o" />
         </LinearLayout>
-
     </ScrollView>
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
