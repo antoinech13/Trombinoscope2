@@ -16,6 +16,7 @@ import android.os.StrictMode;
 import android.transition.Transition;
 import android.util.Base64;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,20 @@ import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
 import com.example.trombinoscope.dataStructure.Etudiant;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StreamDownloadTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,9 +74,12 @@ public class EditTrombi extends Fragment {
     private JSONObject js = new JSONObject();
     private Trombi promo;
     private JSONArray Link, Email, Img, Prenom, Nom;
+    private int cpt;
     //public FtpConnection co;
 
     private Button add;
+    // Get a non-default Storage bucket
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
 
     public EditTrombi() {
         // Required empty public constructor
@@ -165,13 +177,34 @@ public class EditTrombi extends Fragment {
                     Prenom = response.getJSONArray("Prenom");
                     Img = response.getJSONArray("Img");
                     Email = response.getJSONArray("Email");
-                    Link = response.getJSONArray("Link");
+                    //Link = response.getJSONArray("Link");
                     Log.e("je me fais catche", "walla3");
-                    for(int i = 0; i < Nom.length(); i++){
+                    /*for(int i = 0; i < Nom.length(); i++){
                         Log.e("i", String.valueOf(i));
                         requestImg(Link.getString(i), Img.optString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));
-                    }
+                    }*/
+                    StorageReference ref;
+                    StreamDownloadTask Task;
 
+                    for (int i = 0; i < Nom.length(); i++) {
+                        ref = storage.getReference("trombiImages/" + Img.getString(i));
+                        Task = ref.getStream();
+                        int finalI = i;
+                        Task.addOnSuccessListener(new OnSuccessListener<StreamDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(StreamDownloadTask.TaskSnapshot taskSnapshot) {
+                                InputStream jean = taskSnapshot.getStream();
+                                Bitmap bmp = BitmapFactory.decodeStream(jean);
+                                try {
+                                    etudiants.add(new Etudiant(Nom.getString(finalI), Prenom.getString(finalI), Img.getString(finalI), bmp, Email.getString(finalI)));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        });
+                    }
 
                    /* for(int i = 0; i < Prenom.length(); i++){
                         Log.d("huip", Img.getString(i));

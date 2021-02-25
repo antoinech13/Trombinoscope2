@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -25,16 +26,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.FtpConnection;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +82,7 @@ public class AddToTrombi extends Fragment {
    // private FtpConnection ftp = new FtpConnection();
     private String imgName, Image = "null";
     private View view;
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
 
     public AddToTrombi() {
         // Required empty public constructor
@@ -173,7 +180,18 @@ public class AddToTrombi extends Fragment {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
                 String strDate = dateFormat.format(date);
                 imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate + ".jpg";
-               // ftp.sendImage(img, imgName);
+                StorageReference ref = storage.getReference("trombiImages/"+imgName);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                img.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                byte[] imgByte = outputStream.toByteArray();
+                UploadTask uT = ref.putBytes(imgByte);
+                uT.addOnCompleteListener( new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                Log.e("ça marche ", "yolo");
+                            }
+                        });
+                        // ftp.sendImage(img, imgName);
                 addStudent(view);
                 clear();
             }
