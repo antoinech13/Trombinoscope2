@@ -187,7 +187,7 @@ public class EditTrombi extends Fragment {
                     StreamDownloadTask Task;
 
                     for (int i = 0; i < Nom.length(); i++) {
-                        ref = storage.getReference("trombiImages/" + Img.getString(i));
+                        ref = storage.getReference(Img.getString(i));
                         Task = ref.getStream();
                         int finalI = i;
                         Task.addOnSuccessListener(new OnSuccessListener<StreamDownloadTask.TaskSnapshot>() {

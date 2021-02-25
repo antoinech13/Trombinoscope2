@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -121,7 +119,7 @@ public class Code_Recup_Pw extends Fragment {
 
                 //Verification que les champs sont remplis
                 if (Case1.isEmpty() || Case2.isEmpty() || Case3.isEmpty() || Case4.isEmpty() || Case5.isEmpty())
-                    Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_chp_vide), 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Err_Saisie_Chp_Vide), 1000).show();
                 else {
                     code = convert(vectorCode);
                     checkCode(v, code);

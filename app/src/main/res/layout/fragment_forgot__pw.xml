@@ -33,7 +33,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="bottom"
             android:layout_marginTop="44dp"
-            android:hint="@string/prompt_email"
+            android:hint="@string/Hint_Email"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

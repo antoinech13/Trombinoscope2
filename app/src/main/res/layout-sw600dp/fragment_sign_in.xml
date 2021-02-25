@@ -79,7 +79,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="190dp"
         android:inputType="textEmailAddress"
-        android:hint="@string/prompt_email"
+        android:hint="@string/Hint_Email"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:background="@drawable/et_bg"

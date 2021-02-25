@@ -69,6 +69,7 @@ public class AddToTrombi extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     public static final int CAMERA_REQUEST_CODE = 102;
     private static final int PERMISSION_REQUEST_CODE = 200;
+    public static final int DEFAULT_MAX_RETRIES = 0;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -113,8 +114,6 @@ public class AddToTrombi extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -128,9 +127,7 @@ public class AddToTrombi extends Fragment {
             this.promo = getArguments().getParcelable("Trombi");
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
-                Log.e("img", img.toString() );
                 if (img != null) {
-
                     Image = bitmapToBase64(img);
                     image.setImageBitmap(img);
                 }
@@ -141,27 +138,16 @@ public class AddToTrombi extends Fragment {
         gallerie = view.findViewById(R.id.galleryBtn);
         suivant = view.findViewById(R.id.suivant);
         ocr = view.findViewById(R.id.ocr);
-
         nom = view.findViewById(R.id.nomEtu);
-
-
         prenom = view.findViewById(R.id.prenomEtu);
-
         email = view.findViewById(R.id.email);
-
-
-
-
-
 
 
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
-
            }
         });
-
 
         photo.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -169,7 +155,6 @@ public class AddToTrombi extends Fragment {
                     openCamera();
                 else
                     requestPermission();
-
                 //finish();
             }
         });
@@ -179,8 +164,8 @@ public class AddToTrombi extends Fragment {
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
                 String strDate = dateFormat.format(date);
-                imgName = nom.getText() + "_" + prenom.getText() + "_" + strDate + ".jpg";
-                StorageReference ref = storage.getReference("trombiImages/"+imgName);
+                imgName ="trombiImages/"+ nom.getText() + "_" + prenom.getText() + "_" + strDate + ".jpg";
+                StorageReference ref = storage.getReference(imgName);
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 img.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 byte[] imgByte = outputStream.toByteArray();
@@ -196,18 +181,18 @@ public class AddToTrombi extends Fragment {
                 clear();
             }
         });
-
         return view;
-
     }
 
     private void clear() {
         this.nom.getText().clear();
         this.email.getText().clear();
         this.prenom.getText().clear();
-        this.image.setImageResource(android.R.color.transparent);;
-        this.img.recycle();
-
+        this.image.setImageResource(android.R.color.transparent);
+        if (this.img != null) {
+            this.img.recycle();
+            this.img = null;
+        }
     }
 
     //Permission
@@ -221,14 +206,13 @@ public class AddToTrombi extends Fragment {
     }
 
     private void requestPermission() {
-
         ActivityCompat.requestPermissions(getActivity(),
                 new String[]{Manifest.permission.CAMERA},
                 PERMISSION_REQUEST_CODE);
         if(checkPermission())
             openCamera();
         else
-            Toast.makeText(getContext(), "Vous devez autoriser l'accès à la caméra pour utiliser cette fonctionalité", Toast.LENGTH_SHORT).show();
+           Snackbar.make(getView(), getResources().getString(R.string.camera_acces), Snackbar.LENGTH_SHORT).show();
     }
 
     private void openCamera() {
@@ -246,19 +230,21 @@ public class AddToTrombi extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Snackbar.make(v, R.string.student_add, Snackbar.LENGTH_SHORT).show();
-                Log.e("snackbar", "etu ajout");
+                Snackbar.make(v, getResources().getString(R.string.student_add), Snackbar.LENGTH_LONG).show();
+                Log.i("snackbar", "etu ajout");
             }
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("ca marche pas", "fuck");
                 error.printStackTrace();
             }
         });
+
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(jsonObjectRequest);
     }
@@ -270,7 +256,7 @@ public class AddToTrombi extends Fragment {
             js.put("nom",this.nom.getText());
             js.put("promo",this.promo.getId());
             js.put("img",this.imgName);
-            js.put("image", this.Image);
+           // js.put("image", this.Image);
             js.put("email", this.email.getText());
 
         } catch (JSONException e) {

@@ -1,34 +1,25 @@
 package com.example.trombinoscope.fragments;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
-import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -130,7 +121,7 @@ public class SignIn extends Fragment {
                 else if (!Email.contains("@"))
                     Snackbar.make(v, getResources().getString(R.string.emial_non_val), 1000).show();
                 else if (!(checkBox.isChecked())) {
-                    Snackbar.make(v, getResources().getString(R.string.Msg_err_Accept_Give_Data), 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Err_Accept_Give_Data), 1000).show();
                 }
 
                 else {

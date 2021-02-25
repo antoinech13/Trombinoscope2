@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +121,7 @@ public class Reset_Pw extends Fragment {
                         Navigation.findNavController(v).navigate(R.id.action_reset_Pw_to_logginFragment);//Retour à la page d'acceuil
                     }
                     else
-                        Snackbar.make(v, getResources().getString(R.string.erreur_Reset_Pw), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Err_Reset_Pw), Snackbar.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,7 +118,7 @@ public class Forgot_Pw extends Fragment {
                         Navigation.findNavController(v).navigate(R.id.action_forgot_Pw_to_code_Recup_Pw, bundle);//Nav vers page code verification + transfert via bundle de l'eamil
                     }
                     else
-                        Snackbar.make(v, getResources().getString(R.string.account_doesnt_exist), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Err_Account_Doesnt_Exist), Snackbar.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
