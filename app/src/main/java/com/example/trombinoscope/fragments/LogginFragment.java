@@ -133,7 +133,7 @@ public class LogginFragment extends Fragment {
                     editor.putBoolean("CheckBox", true);
 
                     editor.commit();
-                    Snackbar.make(btn_loggin, "Saved", 2000).show();
+                    Snackbar.make(btn_loggin, "Saved", 1000).show();
                 }
                 else {
                     editor.clear();

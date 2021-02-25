@@ -7,6 +7,7 @@
     <string name="Action_Valider">Valider</string>
     <string name="Action_Sign_In">Inscription</string>
     <string name="Label_Welcome">"Bienvenue !"</string>
+    <string name= "action_sign_in_short">N\'importe quoi</string>
 
     <string name="Title_Activity_Add_Trombi">AddTrombiActivity</string>
     <string name="Action_Remember_Me">Se souvenir de moi</string>
