@@ -73,10 +73,18 @@
     <string name="inscrire">S\'inscrire</string>
     <string name="background_welcome">Bienvenue sur Trombi</string>
     <string name="trombi">Trombi</string>
+    //je crois que c'est à partir de là que tu peux copié le string
     <string name="formation">Formation</string>
     <string name="universite">Université:</string>
     <string name="date">date</string>
     <string name="tag">Tag</string>
     <string name="title_add_trombi">Ajouter un trombinoscope</string>
+    <string name="title_add_university">Ajouter une université</string>
+    <string name="university_name">Nom de l\'université</string>
+    <string name="ville">Ville</string>
+    <string name="code_postale">Code postale</string>
+    <string name="pays">pays</string>
+    <string name="ajouter">AJOUTER</string>
+    <string name="hello">Hello</string>
 
 </resources>

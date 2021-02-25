@@ -4,7 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
     tools:context=".fragments.AddUniversityFragment">
+
+    <ImageView
+        android:id="@+id/woman_work"
+        android:layout_width="247dp"
+        android:layout_height="414dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/background_welcome"
+        android:src="@drawable/woman2"
+        app:layout_constraintBottom_toTopOf="@+id/title_add_trombi"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/subUniv"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:id="@+id/title_add_trombi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:fontFamily="@font/allan"
+        android:text="@string/title_add_university"
+        android:textColor="@color/bleu_cobalt"
+        android:textSize="30sp"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -17,7 +53,13 @@
             android:id="@+id/universityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom de l'université" />
+            android:layout_marginTop="80dp"
+            android:background="@drawable/white_bg"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:hint="@string/university_name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -32,7 +74,12 @@
             android:id="@+id/city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ville" />
+            android:background="@drawable/white_bg"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:hint="@string/ville" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +93,12 @@
             android:id="@+id/cp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Code postale" />
+            android:background="@drawable/white_bg"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:hint="@string/code_postale" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,13 +112,23 @@
             android:id="@+id/pays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pays" />
+            android:background="@drawable/white_bg"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:hint="@string/pays" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/subUniv"
-        android:layout_width="408dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg"
+        android:text="@string/valid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
