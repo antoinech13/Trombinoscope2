@@ -93,4 +93,6 @@
     <string name="Err_Invalid_Pw">Le mot de passe doit etre doit contenir plus de caractères</string>
     <string name="Err_Login_Failed">"Echec connexion"</string>
     <string name="camera_acces">Vous devez autoriser l\'utilisation de la camera</string>
+
+
 </resources>

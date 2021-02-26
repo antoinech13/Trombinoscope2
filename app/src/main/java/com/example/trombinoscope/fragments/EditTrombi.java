@@ -158,7 +158,7 @@ public class EditTrombi extends Fragment {
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
-        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
     }
 
