@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.HachageMDP;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,6 +49,8 @@ public class LogginFragment extends Fragment {
     private JSONObject js = new JSONObject();
     private CheckBox rememberCheckbox;
     private TextView forgotPw;
+    private HachageMDP hash = new HachageMDP();
+    private String pwHash;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -139,8 +142,8 @@ public class LogginFragment extends Fragment {
                     editor.clear();
                     editor.commit();
                 }
-                Log.d("yolo", "2");
                 if (!Pseudo.isEmpty() || !Password.isEmpty()) {
+                    pwHash=hash.hachageMDP(Password);
                     Login(view, Pseudo, Password);
                 } else {
                     Snackbar.make(v, "Entrez des données valides", 1000).show();
@@ -188,7 +191,7 @@ public class LogginFragment extends Fragment {
         try {
             js.put("request", "authentification");
             js.put("username", username);
-            js.put("password", password);
+            js.put("password", pwHash);
         } catch (JSONException e) {
             e.printStackTrace();
         }

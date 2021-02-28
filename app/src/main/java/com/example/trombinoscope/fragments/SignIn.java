@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.trombinoscope.HachageMDP;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,6 +49,8 @@ public class SignIn extends Fragment {
 
     private CheckBox checkBox;
     private TextView ConditionUser;
+    private HachageMDP hash = new HachageMDP();
+    private String pwHash;
 
     public SignIn() {
         // Required empty public constructor
@@ -127,8 +131,12 @@ public class SignIn extends Fragment {
                 else {
                     if (!Pw.equals(Pwc))
                         Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
-                    else
+                    else{
+                        pwHash = hash.hachageMDP(Pw);
                         addUser(v);
+                    }
+
+
 
                 }
                 clear();
@@ -141,6 +149,7 @@ public class SignIn extends Fragment {
     private void addUser(View v){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
+
         update();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
@@ -175,7 +184,7 @@ public class SignIn extends Fragment {
             js.put("nom",this.nom.getText());
             js.put("pseudo",this.pseudo.getText());
             js.put("email",this.email.getText());
-            js.put("password",this.pw.getText());
+            js.put("password", pwHash);
         } catch (JSONException e) {
             e.printStackTrace();
             // Obligatoire avec jsonObject

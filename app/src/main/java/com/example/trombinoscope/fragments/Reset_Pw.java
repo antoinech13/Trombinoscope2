@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.trombinoscope.HachageMDP;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -42,6 +43,8 @@ public class Reset_Pw extends Fragment {
     private Button btn_Reset;
     private EditText pw, pwc ;
     private String email;
+    private HachageMDP hash = new HachageMDP();
+    private String pwHash;
 
     public Reset_Pw() {
         // Required empty public constructor
@@ -96,8 +99,10 @@ public class Reset_Pw extends Fragment {
                     Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_SignIn), 1000).show();
                 else if (!Pw.equals(Pwc))
                     Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
-                else
+                else {
+                    pwHash = hash.hachageMDP(Pw);
                     resetPw(v);
+                }
 
 
             }
@@ -140,7 +145,7 @@ public class Reset_Pw extends Fragment {
     public void update(){
         try {
             js.put("request", "resetPw");
-            js.put("password",this.pw.getText());
+            js.put("password",pwHash);
             js.put("email", email);
         } catch (JSONException e) {
             e.printStackTrace();
