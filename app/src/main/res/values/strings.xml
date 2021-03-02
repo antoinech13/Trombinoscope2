@@ -94,5 +94,7 @@
     <string name="Err_Login_Failed">"Echec connexion"</string>
     <string name="camera_acces">Vous devez autoriser l\'utilisation de la camera</string>
 
-
+    <!-- Strings used for le fragment profile -->
+    <string name="Delete_member">\"Le membre a bien etait supprimé \"</string>
+    <string name="Delete_member_invalid">Le membre n a pas pu etre supprime</string>
 </resources>
