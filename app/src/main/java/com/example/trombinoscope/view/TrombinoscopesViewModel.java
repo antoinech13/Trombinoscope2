@@ -13,7 +13,7 @@ public class TrombinoscopesViewModel extends ViewModel {
 
     public void initTrrombinoscopesViewModel() {
         if (trombis == null){
-            trombis = new ArrayList<>();
+            trombis = new ArrayList<Trombi>();
             cpt = 0;
         }
         else {
