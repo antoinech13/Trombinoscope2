@@ -1,15 +1,43 @@
 package com.example.trombinoscope.view;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
 import androidx.lifecycle.ViewModel;
+import com.example.trombinoscope.dataStructure.Trombi;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TrombinoscopesViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+    private List<Trombi> trombis;
+    private int cpt;
+
+
+    public void initTrrombinoscopesViewModel() {
+        if (trombis == null){
+            trombis = new ArrayList<>();
+            cpt = 0;
+        }
+        else {
+            this.trombis = trombis;
+            cpt = 1;
+        }
+    }
+
+    public List<Trombi> getTrombinoscopesViewModel(){
+        return trombis;
+    }
+
+    public void setTrombinoscopesViewModel(List<Trombi> trombis){
+        this.trombis= trombis;
+    }
+
+    public int getCpt(){
+        return cpt;
+    }
+
+    public void clear(){
+        trombis=null;
+        cpt=0;
+    }
 
 
 

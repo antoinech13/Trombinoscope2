@@ -1,12 +1,14 @@
 package com.example.trombinoscope;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.trombinoscope.certificate.Certificate;
+import com.example.trombinoscope.view.MainViewModel;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -24,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Certificate.handleSSLHandshake();
         setContentView(R.layout.activity_main);
-        cookieStore = new CookieManager().getCookieStore();;
-        manager = new CookieManager( cookieStore, CookiePolicy.ACCEPT_ALL);
+        MainViewModel model = new ViewModelProvider(this).get(MainViewModel.class);
+        cookieStore=model.getCookie();
+        manager=model.getManager();
         CookieHandler.setDefault(manager);
     }
 

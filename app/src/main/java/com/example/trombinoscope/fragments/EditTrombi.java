@@ -321,7 +321,7 @@ public class EditTrombi extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Etu",etu);
                         bundle.putParcelable("idTrombi",promo); //testons
-                        //Log.e("salut","ok");
+                        //Log.e("Id Trombi","[id.promo]");
                         Navigation.findNavController(v).navigate(R.id.action_editTrombi_to_profile,bundle);
                     }
                 });

@@ -5,14 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/blue_white_bg"
     tools:context=".fragments.SignIn">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/background_welcome"
-        android:src="@drawable/white_background_bot" />
 
     <TextView
         android:paddingLeft="16dp"
