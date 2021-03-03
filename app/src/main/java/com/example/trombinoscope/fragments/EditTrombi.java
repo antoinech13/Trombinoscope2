@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -29,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.FtpConnection;
+import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
@@ -77,6 +79,8 @@ public class EditTrombi extends Fragment {
     private int cpt;
     //public FtpConnection co;
 
+
+
     private Button add;
     // Get a non-default Storage bucket
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
@@ -123,8 +127,10 @@ public class EditTrombi extends Fragment {
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");
+        // Log.e("this.promo", String.valueOf(promo)); // afficher la valeur de promo
         //this.configureRecyclerView();
 
+        this.configureOnClickRecyclerView(); //methode pour passer dans la fiche profile
         update();
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -149,7 +155,7 @@ public class EditTrombi extends Fragment {
     }
 
 
-   private void configureRecyclerView(){
+    private void configureRecyclerView(){
         // 3.1 - Reset list
         this.etudiants = new ArrayList<>();
 
@@ -216,7 +222,7 @@ public class EditTrombi extends Fragment {
                     e.printStackTrace();
                     Log.e("je me fais catche", "walla2");
                 }
-                        //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
+                //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
 
 
 
@@ -271,14 +277,14 @@ public class EditTrombi extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         }, 0, 0, null, new Response.ErrorListener() { // Error listener
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Do something with error response
-                        error.printStackTrace();
-                        //requestImg(mImageURLString, img, nom, prenom, email);
-                        Log.e("err", "pas good");
-                    }
-                });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Do something with error response
+                error.printStackTrace();
+                //requestImg(mImageURLString, img, nom, prenom, email);
+                Log.e("err", "pas good");
+            }
+        });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(imageRequest);
 
@@ -290,10 +296,40 @@ public class EditTrombi extends Fragment {
         try {
             js.put("request", "etu");
             js.put("idpromo", id);
+            Log.e("[id.promo]",id);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
+//Log.e("promo : ", String.valueOf(promo)); chercher le promo
+        //test flo pour la navigation entre les 2 fragments
+
+    //methode pour naviguer entre trombi a edit trombi c est celle qui va m interesser
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(recyclerView, R.layout.layout_etu_frag)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                        // 1 - Get user from adapter
+                        Etudiant etu = adapter.getEtu(position);
+                        // 2 - Show result in a Toast
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("Etu",etu);
+                        bundle.putParcelable("idTrombi",promo); //testons
+                        //Log.e("salut","ok");
+                        Navigation.findNavController(v).navigate(R.id.action_editTrombi_to_profile,bundle);
+                    }
+                });
+    }
+
+
+
+
+
+
 }

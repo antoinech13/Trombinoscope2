@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_editTrombi_to_addToTrombi"
             app:destination="@id/addToTrombi" />
+        <action
+            android:id="@+id/action_editTrombi_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/logginFragment"
@@ -100,12 +103,12 @@
             app:destination="@id/addToTrombi" />
     </fragment>
     <fragment
-        android:id="@+id/profile2"
-        android:name="com.example.trombinoscope.fragments.profile"
+        android:id="@+id/profile"
+        android:name="com.example.trombinoscope.fragments.Profile_trombi"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profile2_to_editTrombi"
+            android:id="@+id/action_profile_to_editTrombi"
             app:destination="@id/editTrombi" />
     </fragment>
     <fragment
