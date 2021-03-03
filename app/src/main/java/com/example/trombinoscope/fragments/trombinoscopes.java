@@ -2,6 +2,8 @@ package com.example.trombinoscope.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,7 +45,7 @@ public class trombinoscopes extends Fragment {
 
     private TrombinoscopesViewModel mViewModel;
     protected Button add;
-
+    private AlertDialog.Builder builder;
     //@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     private RecyclerView recyclerView;
 
@@ -60,7 +64,7 @@ public class trombinoscopes extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);
-
+        registerForContextMenu(recyclerView);
        /* trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2019-2020"));
         trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2020-2021"));*/
         this.configureOnClickRecyclerView();
@@ -76,8 +80,52 @@ public class trombinoscopes extends Fragment {
                 //finish();
             }
          });
+
+        createPopupShar();
+
         return view;
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int position = this.adapter.getPosition();
+
+        switch (item.getItemId()){
+            case 1:
+
+                builder.show();
+
+            case 2:
+
+            default:
+        }
+        Log.e("trombi:",trombis.get(position).getFormation());
+
+        return super.onContextItemSelected(item);
+    }
+
+
+    private void createPopupShar(){
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Partager");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
+        final EditText input = (EditText) viewInflated.findViewById(R.id.inputAddress);
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+    }
+
 
     //methode pour naviguer entre trombi a edit trombi c est celle qui va m interesser
     private void configureOnClickRecyclerView(){
@@ -115,6 +163,8 @@ public class trombinoscopes extends Fragment {
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
+
+
 
 
     private void RequestTrombis(View view) {

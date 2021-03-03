@@ -24,7 +24,9 @@ public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> {
         this.Trombis = Trombis;
     }
 
-    @Override
+    private int position;
+
+
     public TrombViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
@@ -36,9 +38,25 @@ public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> {
 
 
 
+
     @Override
     public void onBindViewHolder(TrombViewHolder viewHolder, int position) {
         viewHolder.updateWithTrombi(this.Trombis.get(position));
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(viewHolder.getPosition());
+                return false;
+            }
+        });
+
+    }
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     // RETURN THE TOTAL COUNT OF ITEMS IN THE LIST
