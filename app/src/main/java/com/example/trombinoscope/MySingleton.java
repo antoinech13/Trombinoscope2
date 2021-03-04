@@ -17,7 +17,7 @@ public class MySingleton {
     private static MySingleton instance;
     private RequestQueue requestQueue;
     private static Context ctx;
-    private String url = "https://192.168.1.17:5000/";
+    private String url = "https://86.211.99.209:5000/";
 
 
     private MySingleton(Context context) {
