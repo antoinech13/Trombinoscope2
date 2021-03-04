@@ -74,7 +74,6 @@ public class trombinoscopes extends Fragment {
         trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2020-2021"));*/
         this.configureOnClickRecyclerView();
         update(0, null);
-        RequestTrombis(view, 0);
         configureRecyclerView();
         Log.e("cpt", String.valueOf(mViewModel.getCpt()));
         if(mViewModel.getCpt()==0)
@@ -199,7 +198,7 @@ public class trombinoscopes extends Fragment {
                         JSONArray Tag = response.getJSONArray("Tag");
                         JSONArray Idpromo = response.getJSONArray("Idpromo");
                         for (int i = 0; i < Nom.length(); i++) {
-                            trombis.add(new Trombi(Nom.getString(i), Date.getString(i), Tag.getString(i), Idpromo.getString(i)));
+                            trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i)));
                             Log.e("trombis : ", String.valueOf(trombis));
                             mViewModel.setTrombinoscopesViewModel(trombis);
                             Log.e("trombisVM : ", String.valueOf(mViewModel.getTrombinoscopesViewModel()));
