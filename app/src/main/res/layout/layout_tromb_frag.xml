@@ -48,7 +48,7 @@
 
         <TextView
             android:layout_marginLeft="10dp"
-            android:id="@+id/fragment_main_item"
+            android:id="@+id/nompopup"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
 
         <TextView
             android:layout_marginLeft="10dp"
-            android:id="@+id/fragment_main_item_date"
+            android:id="@+id/emailpopup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

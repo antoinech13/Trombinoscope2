@@ -33,8 +33,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
+import com.example.trombinoscope.adapter.EtuAdapter;
+import com.example.trombinoscope.adapter.UserAdapter;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.adapter.TrombiAdapter;
+import com.example.trombinoscope.dataStructure.User;
 import com.example.trombinoscope.view.TrombinoscopesViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
@@ -61,7 +64,7 @@ public class trombinoscopes extends Fragment {
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
-
+    private List<User> users = new ArrayList<User>();
     private JSONObject js = new JSONObject();
 
 
@@ -85,7 +88,7 @@ public class trombinoscopes extends Fragment {
         configureRecyclerView();
         Log.e("cpt", String.valueOf(mViewModel.getCpt()));
         if(mViewModel.getCpt()==0)
-            RequestTrombis(view, 0, 0);
+            RequestTrombis(view, 0, 0, null);
         adapter.notifyDataSetChanged();
 
         //adapter.notifyDataSetChanged();
@@ -115,7 +118,14 @@ public class trombinoscopes extends Fragment {
 
             case 2:
                 update(1, trombis.get(position).getId());
-                RequestTrombis(getView(), 1, position);
+                RequestTrombis(getView(), 1, position, null);
+                break;
+
+             case 3:
+                update(3, trombis.get(position).getId());
+                createPopupRight();
+
+
                 break;
         }
         Log.e("trombi:",trombis.get(position).getFormation());
@@ -128,6 +138,7 @@ public class trombinoscopes extends Fragment {
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
         View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
+
         email = (EditText) viewInflated.findViewById(R.id.inputAddress);
         edit = (Switch) viewInflated.findViewById(R.id.switchEdit);
         builder.setView(viewInflated);
@@ -136,7 +147,7 @@ public class trombinoscopes extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 update(2, id);
-                RequestTrombis(getView(),2, -1);
+                RequestTrombis(getView(),2, -1, null);
                 dialog.dismiss();
             }
         });
@@ -144,6 +155,31 @@ public class trombinoscopes extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+            }
+        });
+    }
+
+    private void createPopupRight(){
+
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Partager");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_droits, (ViewGroup) getView(), false);
+        RecyclerView rV = viewInflated.findViewById(R.id.popupRV);
+        UserAdapter userAdapter;
+
+        userAdapter = new UserAdapter(users);
+        rV.setAdapter(userAdapter);
+        rV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RequestTrombis(getView(),3, -1, userAdapter);
+
+
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
             }
         });
     }
@@ -189,7 +225,7 @@ public class trombinoscopes extends Fragment {
 
 
 
-    private void RequestTrombis(View view, int flag, int position) {
+    private void RequestTrombis(View view, int flag, int position, UserAdapter u) {
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
         try {
@@ -249,14 +285,32 @@ public class trombinoscopes extends Fragment {
                             Snackbar.make(view, "action non autorisé", 1000).show();
                     }
 
-                    else if(flag == 2)
-                        if(response.getString("Flag").equals("invit"))
+                    else if(flag == 2) {
+                        if (response.getString("Flag").equals("invit"))
                             Snackbar.make(view, "invitation validé", 1000).show();
-                        else if(response.getString("Flag").equals("add"))
+                        else if (response.getString("Flag").equals("add"))
                             Snackbar.make(view, "utilisateur ajouté", 1000).show();
-                        else if(response.getString("Flag").equals("existe"))
+                        else if (response.getString("Flag").equals("existe"))
                             Snackbar.make(view, "déjà ajouté", 1000).show();
+                    }
 
+                    else if (flag == 3){
+                        JSONArray nomU = response.getJSONArray("Nom");
+                        JSONArray prenomU = response.getJSONArray("Prenom");
+                        JSONArray EmailU = response.getJSONArray("Email");
+                        JSONArray DroitU = response.getJSONArray("Droits");
+
+                        for(int j = 0; j < nomU.length(); j++){
+                            if(DroitU.getString(j).equals("1"))
+                                users.add(new User(nomU.getString(j), prenomU.getString(j), EmailU.getString(j), 1));
+                            else if(DroitU.getString(j).equals("2"))
+                                users.add(new User(nomU.getString(j), prenomU.getString(j), EmailU.getString(j), 2));
+                            else if(DroitU.getString(j).equals("3"))
+                                users.add(new User(nomU.getString(j), prenomU.getString(j), EmailU.getString(j), 3));
+                        }
+                        u.notifyDataSetChanged();
+                        builder.show();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -293,6 +347,11 @@ public class trombinoscopes extends Fragment {
                     js.put("edit", 1);
                 else
                     js.put("edit", 0);
+            }
+
+            else if(flag == 3){
+                js.put("request", "getDroits");
+                js.put("id", idTrombi);
             }
         } catch (JSONException e) {
             e.printStackTrace();

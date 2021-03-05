@@ -17,16 +17,18 @@ import com.example.trombinoscope.dataStructure.Trombi;
 public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
    // @BindView(R.id.fragment_main_item) TextView textView;
-    TextView textView, dateView;
-    TextView imgText;
-    ImageView img, adminStar, editStar;
+    private TextView textView, dateView;
+    private TextView imgText;
+    private ImageView img, adminStar, editStar;
+    private Trombi tab;
 
     public TrombViewHolder(View itemView) {
         super(itemView);
-        textView = itemView.findViewById(R.id.fragment_main_item);
+
+        textView = itemView.findViewById(R.id.nompopup);
         img = itemView.findViewById(R.id.fragment_main_item_image);
         imgText = itemView.findViewById(R.id.myImageViewText);
-        dateView = itemView.findViewById(R.id.fragment_main_item_date);
+        dateView = itemView.findViewById(R.id.emailpopup);
         adminStar = itemView.findViewById(R.id.adminStar);
         editStar = itemView.findViewById(R.id.editStar);
         itemView.setOnCreateContextMenuListener(this);
@@ -34,6 +36,7 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
     }
 
     public void updateWithTrombi(Trombi tab){
+        this.tab = tab;
         this.textView.setText(tab.getFormation());
         this.dateView.setText(tab.getDate());
         this.img.setBackgroundColor(Color.rgb(tab.getR(), tab.getG(), tab.getB()));
@@ -52,8 +55,10 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         //menuInfo is null
         menu.add(Menu.NONE, 1,
                 1, "Partager");
+        if(tab.getRight() == 3)
+            menu.add(Menu.NONE, 3, 2,"Gérer les droits");
         menu.add(Menu.NONE, 2,
-                2, "Supprimer");
+                3, "Supprimer");
     }
 
 
