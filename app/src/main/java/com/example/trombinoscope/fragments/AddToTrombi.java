@@ -139,7 +139,7 @@ public class AddToTrombi extends Fragment {
             if(getArguments().containsKey("BitmapImage")) {
                 img = getArguments().getParcelable("BitmapImage");
                 if (img != null) {
-                    Image = bitmapToBase64(img);
+                    //Image = bitmapToBase64(img);
                     image.setImageBitmap(img);
                 }
             }

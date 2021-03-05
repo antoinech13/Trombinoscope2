@@ -37,6 +37,8 @@ import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.adapter.TrombiAdapter;
 import com.example.trombinoscope.view.TrombinoscopesViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +60,7 @@ public class trombinoscopes extends Fragment {
 
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
 
     private JSONObject js = new JSONObject();
 
@@ -223,7 +226,20 @@ public class trombinoscopes extends Fragment {
                     }
                     else if(flag == 1){
                         if(response.getString("Flag").equals("true")) {
-                            Snackbar.make(view, "suppression réussie", 1000).show();
+                            JSONArray img = response.getJSONArray("Img");
+                            StorageReference ref;
+
+                            for(int j = 0; j < img.length(); j++) {
+                                ref = storage.getReference(img.getString(j));
+                                ref.delete();
+                            }
+
+                            Snackbar.make(view, "suppression total réussie", 1000).show();
+                            trombis.remove(position);
+                            adapter.notifyDataSetChanged();
+                        }
+                        else if(response.getString("Flag").equals("localDelete")){
+                            Snackbar.make(view, "vous n'avez plus accée a ce trombinoscope", 1000).show();
                             trombis.remove(position);
                             adapter.notifyDataSetChanged();
                         }
