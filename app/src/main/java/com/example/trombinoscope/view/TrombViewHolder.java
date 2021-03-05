@@ -19,7 +19,7 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
    // @BindView(R.id.fragment_main_item) TextView textView;
     TextView textView, dateView;
     TextView imgText;
-    ImageView img;
+    ImageView img, adminStar;
 
     public TrombViewHolder(View itemView) {
         super(itemView);
@@ -27,6 +27,7 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         img = itemView.findViewById(R.id.fragment_main_item_image);
         imgText = itemView.findViewById(R.id.myImageViewText);
         dateView = itemView.findViewById(R.id.fragment_main_item_date);
+        adminStar = itemView.findViewById(R.id.adminStar);
         itemView.setOnCreateContextMenuListener(this);
         //ButterKnife.bind(this, itemView);
     }
@@ -38,6 +39,8 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.imgText.setText(tab.getTag());
         this.imgText.setTextColor(Color.WHITE);
         this.imgText.setTypeface(null, Typeface.BOLD);
+        if(tab.getRight() == 2)
+            adminStar.setVisibility(View.VISIBLE);
     }
 
     @Override

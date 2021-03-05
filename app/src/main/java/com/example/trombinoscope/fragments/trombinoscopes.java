@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -51,6 +53,9 @@ public class trombinoscopes extends Fragment {
     //@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     private RecyclerView recyclerView;
 
+    private EditText email;
+    private Switch edit;
+
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
 
@@ -77,7 +82,7 @@ public class trombinoscopes extends Fragment {
         configureRecyclerView();
         Log.e("cpt", String.valueOf(mViewModel.getCpt()));
         if(mViewModel.getCpt()==0)
-            RequestTrombis(view, 0);
+            RequestTrombis(view, 0, 0);
         adapter.notifyDataSetChanged();
 
         //adapter.notifyDataSetChanged();
@@ -100,15 +105,14 @@ public class trombinoscopes extends Fragment {
 
         switch (item.getItemId()){
             case 1:
-                createPopupShar();
+                createPopupShar(trombis.get(position).getId());
                 builder.show();
+                break;
 
             case 2:
                 update(1, trombis.get(position).getId());
-                RequestTrombis(getView(), 1);
-
-
-            default:
+                RequestTrombis(getView(), 1, position);
+                break;
         }
         Log.e("trombi:",trombis.get(position).getFormation());
 
@@ -116,16 +120,19 @@ public class trombinoscopes extends Fragment {
     }
 
 
-    private void createPopupShar(){
+    private void createPopupShar(String id){
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
         View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
-        final EditText input = (EditText) viewInflated.findViewById(R.id.inputAddress);
+        email = (EditText) viewInflated.findViewById(R.id.inputAddress);
+        edit = (Switch) viewInflated.findViewById(R.id.switchEdit);
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                update(2, id);
+                RequestTrombis(getView(),2, -1);
                 dialog.dismiss();
             }
         });
@@ -178,7 +185,7 @@ public class trombinoscopes extends Fragment {
 
 
 
-    private void RequestTrombis(View view, int flag) {
+    private void RequestTrombis(View view, int flag, int position) {
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
         try {
@@ -197,8 +204,13 @@ public class trombinoscopes extends Fragment {
                         JSONArray Date = response.getJSONArray("Date");
                         JSONArray Tag = response.getJSONArray("Tag");
                         JSONArray Idpromo = response.getJSONArray("Idpromo");
+                        JSONArray Droit = response.getJSONArray("Droit");
                         for (int i = 0; i < Nom.length(); i++) {
-                            trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i)));
+                            if(Droit.getString(i).equals("2"))
+                                trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 2));
+                            else if(Droit.getString(i).equals("1"))
+                                trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 1));
+
                             Log.e("trombis : ", String.valueOf(trombis));
                             mViewModel.setTrombinoscopesViewModel(trombis);
                             Log.e("trombisVM : ", String.valueOf(mViewModel.getTrombinoscopesViewModel()));
@@ -206,14 +218,24 @@ public class trombinoscopes extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                     else if(flag == 1){
-                        if(response.getString("Flag") == "true"){
+                        if(response.getString("Flag").equals("true")) {
                             Snackbar.make(view, "suppression réussie", 1000).show();
+                            trombis.remove(position);
+                            adapter.notifyDataSetChanged();
                         }
-                        else if(response.getString("Flag") == "false")
+                        else if(response.getString("Flag").equals("false"))
                             Snackbar.make(view, "supression échoué", 1000).show();
-                        else if(response.getString("Flag") == "notAllow")
+                        else if(response.getString("Flag").equals("notAllow"))
                             Snackbar.make(view, "action non autorisé", 1000).show();
                     }
+
+                    else if(flag == 2)
+                        if(response.getString("Flag").equals("invit"))
+                            Snackbar.make(view, "invitation validé", 1000).show();
+                        else if(response.getString("Flag").equals("add"))
+                            Snackbar.make(view, "utilisateur ajouté", 1000).show();
+                        else if(response.getString("Flag").equals("existe"))
+                            Snackbar.make(view, "déjà ajouté", 1000).show();
 
 
                 } catch (JSONException e) {
@@ -234,7 +256,9 @@ public class trombinoscopes extends Fragment {
     }
 
     private void update(int flag, String idTrombi) {
+
         try{
+            js = new JSONObject();
             if(flag == 0)
                 js.put("request", "trombis");
             else if(flag == 1) {
@@ -243,6 +267,12 @@ public class trombinoscopes extends Fragment {
             }
             else if(flag == 2) {
                 js.put("request", "shareTrombi");
+                js.put("idTrombi", idTrombi);
+                js.put("email", email.getText().toString());
+                if(edit.isChecked())
+                    js.put("edit", 1);
+                else
+                    js.put("edit", 0);
             }
         } catch (JSONException e) {
             e.printStackTrace();

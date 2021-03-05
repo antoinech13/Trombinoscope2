@@ -274,8 +274,15 @@ public class AddToTrombi extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Snackbar.make(v, getResources().getString(R.string.student_add), Snackbar.LENGTH_LONG).show();
-                Log.i("snackbar", "etu ajout");
+                try {
+                    if(response.getString("res").equals("notAllow"))
+                        Snackbar.make(v, "non autorisé", Snackbar.LENGTH_LONG).show();
+                    else
+                        Snackbar.make(v, getResources().getString(R.string.student_add), Snackbar.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }, new Response.ErrorListener() {

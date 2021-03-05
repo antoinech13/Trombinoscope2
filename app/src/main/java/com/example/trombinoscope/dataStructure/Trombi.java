@@ -10,13 +10,15 @@ public class Trombi implements Parcelable {
     private String tag;
     private String date;
     private String idpromo;
+    private int right;
     private int r,g ,b;
 
-    public Trombi(String formation, String tag, String date, String idpromo){
+    public Trombi(String formation, String tag, String date, String idpromo, int right){
         this.formation = formation;
         this.tag = tag;
         this.date = date;
         this.idpromo = idpromo;
+        this.right = right;
         this.r = new Random().nextInt(256);
         this.g = new Random().nextInt(256);
         this.b = new Random().nextInt(256);
@@ -27,6 +29,7 @@ public class Trombi implements Parcelable {
         tag = in.readString();
         date = in.readString();
         idpromo = in.readString();
+        right = in.readInt();
         r = in.readInt();
         g = in.readInt();
         b = in.readInt();
@@ -60,6 +63,8 @@ public class Trombi implements Parcelable {
         return this.idpromo;
     }
 
+    public int getRight() {return this.right;}
+
     public int getR() {return this.r;}
 
     public int getG() { return this.g; }
@@ -77,6 +82,7 @@ public class Trombi implements Parcelable {
         dest.writeString(tag);
         dest.writeString(date);
         dest.writeString(idpromo);
+        dest.writeInt(right);
         dest.writeInt(r);
         dest.writeInt(g);
         dest.writeInt(b);
