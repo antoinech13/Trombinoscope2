@@ -88,6 +88,7 @@ public class trombinoscopes extends Fragment {
         //adapter.notifyDataSetChanged();
         add = view.findViewById(R.id.addTro);
 
+
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(
@@ -206,10 +207,13 @@ public class trombinoscopes extends Fragment {
                         JSONArray Idpromo = response.getJSONArray("Idpromo");
                         JSONArray Droit = response.getJSONArray("Droit");
                         for (int i = 0; i < Nom.length(); i++) {
+
                             if(Droit.getString(i).equals("2"))
                                 trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 2));
                             else if(Droit.getString(i).equals("1"))
                                 trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 1));
+                            else if(Droit.getString(i).equals("3"))
+                                trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 3));
 
                             Log.e("trombis : ", String.valueOf(trombis));
                             mViewModel.setTrombinoscopesViewModel(trombis);

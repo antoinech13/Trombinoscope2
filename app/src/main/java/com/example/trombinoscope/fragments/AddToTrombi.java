@@ -126,6 +126,13 @@ public class AddToTrombi extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
         image = view.findViewById(R.id.image);
+        photo = view.findViewById(R.id.photo);
+        gallerie = view.findViewById(R.id.galleryBtn);
+        suivant = view.findViewById(R.id.suivant);
+        ocr = view.findViewById(R.id.ocr);
+        nom = view.findViewById(R.id.nomEtu);
+        prenom = view.findViewById(R.id.prenomEtu);
+        email = view.findViewById(R.id.email);
 
         if(getArguments() != null){
             this.promo = getArguments().getParcelable("Trombi");
@@ -136,15 +143,16 @@ public class AddToTrombi extends Fragment {
                     image.setImageBitmap(img);
                 }
             }
+
+            if(getArguments().containsKey("email"))
+                email.setText(getArguments().getString("email"));
+            if(getArguments().containsKey("prenom"))
+                prenom.setText(getArguments().getString("prenom"));
+            if(getArguments().containsKey("nom"))
+                nom.setText(getArguments().getString("nom"));
         }
 
-        photo = view.findViewById(R.id.photo);
-        gallerie = view.findViewById(R.id.galleryBtn);
-        suivant = view.findViewById(R.id.suivant);
-        ocr = view.findViewById(R.id.ocr);
-        nom = view.findViewById(R.id.nomEtu);
-        prenom = view.findViewById(R.id.prenomEtu);
-        email = view.findViewById(R.id.email);
+
 
 
 
@@ -262,6 +270,13 @@ public class AddToTrombi extends Fragment {
     private void openCamera() {
         Bundle b = new Bundle();
         b.putParcelable("Trombi", this.promo);
+        if(email.getText().toString().length() > 0)
+            b.putString("email", email.getText().toString());
+        if(nom.getText().toString().length() > 0)
+            b.putString("nom", nom.getText().toString());
+        if(prenom.getText().toString().length() > 0)
+            b.putString("prenom", prenom.getText().toString());
+
         Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2, b);
     }
 

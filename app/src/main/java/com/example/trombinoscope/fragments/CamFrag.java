@@ -177,6 +177,12 @@ public class CamFrag extends Fragment {
                         b.putParcelable("BitmapImage", bitmap);
                         Trombi t = getArguments().getParcelable("Trombi");
                         b.putParcelable("Trombi", t);
+                        if(getArguments().containsKey("email"))
+                            b.putString("email", getArguments().getString("email"));
+                        if(getArguments().containsKey("nom"))
+                            b.putString("nom", getArguments().getString("nom"));
+                        if(getArguments().containsKey("prenom"))
+                            b.putString("prenom", getArguments().getString("prenom"));
 
                         Log.e("bitmap", bitmap.toString());
                         Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi, b);

@@ -127,6 +127,10 @@ public class EditTrombi extends Fragment {
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");
+        if(this.promo.getRight() < 2)
+            add.setVisibility(View.INVISIBLE);
+
+
         // Log.e("this.promo", String.valueOf(promo)); // afficher la valeur de promo
         //this.configureRecyclerView();
 
