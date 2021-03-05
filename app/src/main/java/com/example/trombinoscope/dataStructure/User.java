@@ -26,4 +26,8 @@ public class User {
     public int getDroit() {
         return droit;
     }
+
+    public void setDroit(int i){
+        droit = i;
+    }
 }

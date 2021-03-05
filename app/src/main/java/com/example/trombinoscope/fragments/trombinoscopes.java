@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,11 +63,14 @@ public class trombinoscopes extends Fragment {
     private EditText email;
     private Switch edit;
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
     private List<User> users;
     private JSONObject js = new JSONObject();
+    private JSONArray EmailU;
 
 
     public static trombinoscopes newInstance() {
@@ -92,6 +96,25 @@ public class trombinoscopes extends Fragment {
             RequestTrombis(view, 0, 0, null);
         adapter.notifyDataSetChanged();
 
+
+
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                                                     @Override
+                                                     public void onRefresh() {
+                                                         mViewModel.clear();
+                                                         mViewModel.initTrrombinoscopesViewModel();
+                                                         update(0, null);
+                                                         if(mViewModel.getCpt()==0)
+                                                             RequestTrombis(view, 0, 0, null);
+                                                         mSwipeRefreshLayout.setRefreshing(false);
+                                                     }
+                                                 }
+        );
+
+
+
         //adapter.notifyDataSetChanged();
         add = view.findViewById(R.id.addTro);
 
@@ -113,7 +136,7 @@ public class trombinoscopes extends Fragment {
 
         switch (item.getItemId()){
             case 1:
-                createPopupShar(trombis.get(position).getId());
+                createPopupShar(trombis.get(position));
                 builder.show();
                 break;
 
@@ -125,7 +148,7 @@ public class trombinoscopes extends Fragment {
              case 3:
                 update(3, trombis.get(position).getId());
                 users = new ArrayList<User>();
-                createPopupRight();
+                createPopupRight(trombis.get(position).getId());
                 break;
         }
         Log.e("trombi:",trombis.get(position).getFormation());
@@ -134,19 +157,21 @@ public class trombinoscopes extends Fragment {
     }
 
 
-    private void createPopupShar(String id){
+    private void createPopupShar(Trombi tr){
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
         View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
 
         email = (EditText) viewInflated.findViewById(R.id.inputAddress);
         edit = (Switch) viewInflated.findViewById(R.id.switchEdit);
+        if(tr.getRight() < 3)
+            edit.setVisibility(View.INVISIBLE);
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                update(2, id);
+                update(2, tr.getId());
                 RequestTrombis(getView(),2, -1, null);
                 dialog.dismiss();
             }
@@ -159,7 +184,7 @@ public class trombinoscopes extends Fragment {
         });
     }
 
-    private void createPopupRight(){
+    private void createPopupRight(String id){
 
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
@@ -179,7 +204,8 @@ public class trombinoscopes extends Fragment {
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                update(4, id);
+                RequestTrombis(getView(),4, -1, null);
                 dialog.dismiss();
             }
         });
@@ -298,7 +324,7 @@ public class trombinoscopes extends Fragment {
                     else if (flag == 3){
                         JSONArray nomU = response.getJSONArray("Nom");
                         JSONArray prenomU = response.getJSONArray("Prenom");
-                        JSONArray EmailU = response.getJSONArray("Email");
+                        EmailU = response.getJSONArray("Email");
                         JSONArray DroitU = response.getJSONArray("Droits");
 
                         for(int j = 0; j < nomU.length(); j++){
@@ -311,6 +337,15 @@ public class trombinoscopes extends Fragment {
                         }
                         u.notifyDataSetChanged();
                         builder.show();
+                    }
+
+                    else if(flag == 4){
+                       if(response.getString("Flag").equals("notAllow"))
+                           Snackbar.make(view, "action non autorisé", 1000).show();
+                       else if(response.getString("Flag").equals("true"))
+                           Snackbar.make(view, "changement de statue validé", 1000).show();
+                       else if(response.getString("Flag").equals("noAdmin"))
+                           Snackbar.make(view, "Action impossible: pas d'Admin", 1000).show();
                     }
 
                 } catch (JSONException e) {
@@ -353,6 +388,21 @@ public class trombinoscopes extends Fragment {
             else if(flag == 3){
                 js.put("request", "getDroits");
                 js.put("id", idTrombi);
+            }
+
+            else if(flag == 4){
+                js.put("request", "setDroits");
+                js.put("email", EmailU);
+                js.put("id", idTrombi);
+
+                JSONArray Droit = new JSONArray();
+                for (int i = 0; i < users.size(); i++){
+                    Droit.put(users.get(i).getDroit());
+                }
+
+                js.put("droit", Droit);
+
+
             }
         } catch (JSONException e) {
             e.printStackTrace();

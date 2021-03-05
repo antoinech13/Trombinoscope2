@@ -42,7 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     @Override
     public void onBindViewHolder(UserViewHolder viewHolder, int position) {
-        viewHolder.updateWithTrombi(this.Users.get(position));
+        viewHolder.updateWithUser(this.Users.get(position));
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
