@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -64,7 +65,7 @@ public class trombinoscopes extends Fragment {
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
-    private List<User> users = new ArrayList<User>();
+    private List<User> users;
     private JSONObject js = new JSONObject();
 
 
@@ -123,9 +124,8 @@ public class trombinoscopes extends Fragment {
 
              case 3:
                 update(3, trombis.get(position).getId());
+                users = new ArrayList<User>();
                 createPopupRight();
-
-
                 break;
         }
         Log.e("trombi:",trombis.get(position).getFormation());
@@ -165,6 +165,7 @@ public class trombinoscopes extends Fragment {
         builder.setTitle("Partager");
         View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_droits, (ViewGroup) getView(), false);
         RecyclerView rV = viewInflated.findViewById(R.id.popupRV);
+
         UserAdapter userAdapter;
 
         userAdapter = new UserAdapter(users);

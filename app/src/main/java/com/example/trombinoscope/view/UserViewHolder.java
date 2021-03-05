@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,6 +31,22 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         email = itemView.findViewById(R.id.emailpopup);
         edit = itemView.findViewById(R.id.editionpopup);
         admin = itemView.findViewById(R.id.adminpopup);
+
+        admin.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    edit.setChecked(true);
+            }
+        });
+
+        edit.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked)
+                    admin.setChecked(false);
+            }
+        });
 
     }
 
