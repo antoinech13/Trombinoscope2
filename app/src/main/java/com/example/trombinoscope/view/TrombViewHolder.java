@@ -39,7 +39,7 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.tab = tab;
         this.textView.setText(tab.getFormation());
         this.dateView.setText(tab.getDate());
-        this.img.setBackgroundColor(Color.rgb(tab.getR(), tab.getG(), tab.getB()));
+        this.imgText.setBackgroundColor(Color.rgb(tab.getR(), tab.getG(), tab.getB()));
         this.imgText.setText(tab.getTag());
         this.imgText.setTextColor(Color.WHITE);
         this.imgText.setTypeface(null, Typeface.BOLD);

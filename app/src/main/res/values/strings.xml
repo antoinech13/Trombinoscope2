@@ -1,4 +1,7 @@
 <resources>
+    <!-- String used for Manifest -->
+    <string name="app_trombi">Deep Link</string>
+
     <!-- Strings used for activity login -->
     <string name="app_name">Trombi</string>
     <string name="Title_Activity_Login">Connexion</string>
@@ -98,4 +101,7 @@
     <string name="Delete_member">\"Le membre a bien etait supprimé \"</string>
     <string name="Delete_member_invalid">Le membre n a pas pu etre supprime</string>
     <string name="title_trombi">Vos Trombinoscopes</string>
+    <string name="partager">Partager</string>
+    <string name="email">Email</string>
+    <string name="autoriser_edition">Autoriser édition</string>
 </resources>

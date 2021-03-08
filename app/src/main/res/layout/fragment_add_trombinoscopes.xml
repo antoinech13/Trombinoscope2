@@ -4,30 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:background="#FFFFFF"
     tools:context=".fragments.AddTrombinoscopes">
 
     <ImageView
-        android:id="@+id/woman_work_2"
-        android:layout_width="318dp"
-        android:layout_height="471dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/woman_work"
+        android:layout_width="198dp"
+        android:layout_height="289dp"
         android:contentDescription="@string/background_welcome"
         android:src="@drawable/woman"
         app:layout_constraintBottom_toTopOf="@+id/val"
-        app:layout_constraintTop_toBottomOf="@+id/tag"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
         android:id="@+id/title_add_trombi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,53 +27,73 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="150dp"
         android:fontFamily="@font/allan"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
         android:text="@string/title_add_trombi"
         android:textColor="@color/bleu_cobalt"
         android:textSize="30sp"
         tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/formation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/white_bg"
         android:hint="@string/formation"
+        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_add_trombi"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:autofillHints="" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="@string/tag"
-        app:layout_constraintTop_toBottomOf="@+id/formation"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/white_bg"
+        android:hint="@string/tag"
+        android:inputType="text"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:paddingTop="16dp"
+        android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formation"
+        android:autofillHints="" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="@string/date"
-        app:layout_constraintTop_toBottomOf="@+id/tag"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:background="@drawable/white_bg"
+        android:hint="@string/date"
+        android:inputType="text"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:paddingTop="16dp"
+        android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        tools:layout_editor_absoluteX="9dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tag" />
 
     <Spinner
         android:id="@+id/spinnerRegion"
@@ -108,10 +120,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_bg"
         android:text="@string/valid"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
