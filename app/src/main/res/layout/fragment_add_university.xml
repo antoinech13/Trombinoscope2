@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".fragments.AddUniversityFragment">
 
     <ImageView
@@ -18,8 +19,7 @@
         app:layout_constraintBottom_toTopOf="@+id/title_add_trombi"
         app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
         app:layout_constraintStart_toEndOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/subUniv"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/subUniv" />
 
     <TextView
         android:paddingLeft="16dp"
@@ -35,8 +35,7 @@
         android:fontFamily="@font/allan"
         android:text="@string/title_add_university"
         android:textColor="@color/bleu_cobalt"
-        android:textSize="30sp"
-        tools:ignore="MissingConstraints" />
+        android:textSize="30sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"

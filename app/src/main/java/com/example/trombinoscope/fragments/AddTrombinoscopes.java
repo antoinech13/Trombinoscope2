@@ -185,12 +185,14 @@ public class AddTrombinoscopes extends Fragment {
                         Collections.sort(categories);
                         categories.add("+ Ajouter une université");
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categories);
+
                         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(dataAdapter);
                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                         {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                             {
+                                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                                 if(categories.get(position).equals("+ Ajouter une université"))
                                     Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_addUniversityFragment);
                             } // to close the onItemSelected
