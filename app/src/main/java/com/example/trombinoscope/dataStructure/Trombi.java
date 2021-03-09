@@ -1,5 +1,6 @@
 package com.example.trombinoscope.dataStructure;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -86,5 +87,38 @@ public class Trombi implements Parcelable {
         dest.writeInt(r);
         dest.writeInt(g);
         dest.writeInt(b);
+    }
+
+    public static String[] mColors = {
+            "#02aab0", // beach1
+            "#314755", // nimvelo1
+            "#2b5876", // seablue1
+            "#2193b0", // sexyblue1
+            "#1488cc", // skyline1
+            "#2193b0", // coolblues1
+    };
+
+    public static String[] mColors2 = {
+            "#00cdac", //beach2
+            "#26a0da", // nimvelo2
+            "#4e4376", // seablue2
+            "#6dd5ed", // sexyblue2
+            "#2b32b2", //skyline2
+            "#6dd5ed",  // coolblues2
+    };
+
+    public static int[] getGcolors() {
+        String color = "";
+        String color2 = "";
+
+        Random randomGenerator = new Random();
+        int randomNumber = randomGenerator.nextInt(mColors.length);
+
+        color = mColors[randomNumber];
+        color2 = mColors2[randomNumber];
+        int colorAsInt = Color.parseColor(color);
+        int colorAsInt2 = Color.parseColor(color2);
+
+        return new int[]{colorAsInt, colorAsInt2};
     }
 }

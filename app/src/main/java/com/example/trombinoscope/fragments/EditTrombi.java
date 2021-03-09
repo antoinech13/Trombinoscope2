@@ -149,7 +149,7 @@ public class EditTrombi extends Fragment {
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                Log.e("djzio", getArguments().toString());
+                Log.e("onClick", getArguments().toString());
                 Navigation.findNavController(view).navigate(R.id.action_editTrombi_to_addToTrombi, getArguments());
                 //finish();
             }
@@ -188,7 +188,7 @@ public class EditTrombi extends Fragment {
                     Img = response.getJSONArray("Img");
                     Email = response.getJSONArray("Email");
                     //Link = response.getJSONArray("Link");
-                    Log.e("je me fais catche", "walla3");
+                    Log.e("EditTrombi", "onResponse");
                     /*for(int i = 0; i < Nom.length(); i++){
                         Log.e("i", String.valueOf(i));
                         requestImg(Link.getString(i), Img.optString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));

@@ -99,9 +99,32 @@
 
     <!-- Strings used for le fragment profile -->
     <string name="Delete_member">\"Le membre a bien etait supprimé \"</string>
-    <string name="Delete_member_invalid">Le membre n a pas pu etre supprime</string>
+    <string name="Delete_member_invalid">Le membre n\'a pas pu etre supprime</string>
     <string name="title_trombi">Vos Trombinoscopes</string>
     <string name="partager">Partager</string>
     <string name="email">Email</string>
     <string name="autoriser_edition">Autoriser édition</string>
+
+    <!-- Strings used for le fragment profile user-->
+    <string name="profil_user_comment">Feel free to contact me</string>
+    <string name="admin">Admin</string>
+    <string name="statut">professeure de design thinking</string>
+    <string name="user_num_tel">+62 853 3424 1984</string>
+    <string name="user_email">yogi.enjoyers22@gmail.com</string>
+    <string name="user_name">Yogi Prasetyawan</string>
+    <string name="nbr_member">12</string>
+    <string name="user_firstname">Like see the sky and interested in programming</string>
+    <string name="nbr_admin">2</string>
+    <string name="user_edit">Edit</string>
+    <string name="nbr_edit">5</string>
+    <string name="user_member">Membre</string>
+
+    <!-- Strings used for le fragment A propos-->
+    <string name="title_about_us">Qu\'est-ce que Trombi ?</string>
+    <string name="description_aboutus">Avec Trombi, le trombinoscope va plus loin qu\'un simple organigramme étudiant. Cette application propose un moyen organisationnel poussé.</string>
+    <string name="souplesse">Souple</string>
+    <string name="quick">Rapide</string>
+    <string name="innov">Innovant</string>
+    <string name="description_stars">Qu\'est-ce que les étoiles ?</string>
+    <string name="tuto_star">Les étoiles vous permettent de connaitre vos droits sur le trombinoscope. Il existe 3 types de droits : le droit administratif, le droit d\'édition et la participation en tant que membre.</string>
 </resources>

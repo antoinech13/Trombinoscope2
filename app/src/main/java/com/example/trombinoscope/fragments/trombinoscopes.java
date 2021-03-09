@@ -99,7 +99,7 @@ public class trombinoscopes extends Fragment {
 
 
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                                                      @Override
                                                      public void onRefresh() {

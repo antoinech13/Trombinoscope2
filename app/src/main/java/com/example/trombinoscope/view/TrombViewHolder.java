@@ -2,10 +2,13 @@ package com.example.trombinoscope.view;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +24,8 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private TextView imgText;
     private ImageView img, adminStar, editStar;
     private Trombi tab;
+    private LinearLayout LL;
+    private Drawable drawable;
 
     public TrombViewHolder(View itemView) {
         super(itemView);
@@ -39,7 +44,13 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.tab = tab;
         this.textView.setText(tab.getFormation());
         this.dateView.setText(tab.getDate());
-        this.imgText.setBackgroundColor(Color.rgb(tab.getR(), tab.getG(), tab.getB()));
+        //test couleur aléatoire
+        int [] color = Trombi.getGcolors();
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[] {color[0],color[1]});
+        gd.setCornerRadius(0f);
+        this.img.setBackgroundDrawable(gd);
         this.imgText.setText(tab.getTag());
         this.imgText.setTextColor(Color.WHITE);
         this.imgText.setTypeface(null, Typeface.BOLD);

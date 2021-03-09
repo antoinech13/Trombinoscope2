@@ -32,7 +32,19 @@
     <color name="pastel_blue">#B1DCD5</color>
     <color name="grey">#636e72</color>
 
-
+    <!-- play color -->
+    <color name="beach1">#02aab0</color>
+    <color name="beach2">#00cdac</color>
+    <color name="nimvelo1">#314755</color>
+    <color name="nimvelo2">#26a0da</color>
+    <color name="seablue1">#2b5876</color>
+    <color name="seablue2">#4e4376</color>
+    <color name="sexyblue1">#2193b0</color>
+    <color name="sexyblue2">#6dd5ed</color>
+    <color name="skyline1">#1488cc</color>
+    <color name="skyline2">#2b32b2</color>
+    <color name="coolblues1">#2193b0</color>
+    <color name="coolblues2">#6dd5ed</color>
 
 
 </resources>

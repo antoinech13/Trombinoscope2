@@ -12,6 +12,9 @@
         <item android:id="@+id/nav_contact"
             android:icon="@drawable/ic_help"
             android:title="Contacte support"/>
+        <item android:id="@+id/nav_conditionuser"
+            android:icon="@drawable/ic_condition"
+            android:title="Condition d'utilisation"/>
 
 
     </group>

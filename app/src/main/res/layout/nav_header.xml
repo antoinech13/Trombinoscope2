@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/blue_azur"
+    android:background="@drawable/background"
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -15,16 +15,20 @@
         android:src="@mipmap/ic_launcher_round" />
 
     <TextView
+        android:id="@+id/name_user"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nom"/>
 
     <TextView
+        android:id="@+id/firstname_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prenom" />
 
     <TextView
+        android:id="@+id/email_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Hint_Email"/>

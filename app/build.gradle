@@ -52,6 +52,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //test cercle
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 
 
     def camerax_version = "1.0.0-beta07"

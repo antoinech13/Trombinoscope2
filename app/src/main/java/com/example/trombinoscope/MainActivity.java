@@ -25,6 +25,7 @@ import com.example.trombinoscope.certificate.Certificate;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.Contact_support;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.Info;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.User_profil;
+import com.example.trombinoscope.fragments.UserCondition;
 import com.example.trombinoscope.view.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_contact :
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new Contact_support()).commit();
                 break;
+            case R.id.nav_conditionuser :
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_conditionuser, new UserCondition()).commit();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
