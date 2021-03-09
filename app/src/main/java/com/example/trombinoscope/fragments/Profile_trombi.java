@@ -126,6 +126,7 @@ public class Profile_trombi extends Fragment {
         edit_prenom = view.findViewById(R.id.edit_prenom);
         edit_mail = view.findViewById(R.id.edit_mail);
 
+      
 
         img.setImageBitmap(etu.getImg()); //on recuperer l image
 
@@ -219,8 +220,8 @@ public class Profile_trombi extends Fragment {
     public void update(){
         try {
             js.put("request", "deleteMember"); //il faudra que je mette un autre nom car la la requete s appelle adduser
-            js.put("email_m",this.email.getText());
-            js.put("id_trombi",idPromo); //il faudra qu il recuperer l id promo car on a besoin du mail et du promo pour delete la personne
+            js.put("email_m", this.email.getText());
+            js.put("id_trombi", idPromo); //il faudra qu il recuperer l id promo car on a besoin du mail et du promo pour delete la personne
         } catch (JSONException e) {
             e.printStackTrace();
             // Obligatoire avec jsonObject

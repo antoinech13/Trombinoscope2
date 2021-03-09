@@ -82,7 +82,7 @@ public class trombinoscopes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
-        mViewModel= ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
         mViewModel.initTrrombinoscopesViewModel();
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);
         registerForContextMenu(recyclerView);

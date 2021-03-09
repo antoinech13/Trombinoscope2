@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:background="#FFFFFF"
     tools:context=".fragments.AddUniversityFragment">
 
     <ScrollView
@@ -28,13 +25,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/universityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/university_name"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/bleu_cobalt"
                     android:paddingLeft="16dp"
                     android:paddingTop="16dp"
                     android:paddingRight="16dp"
@@ -54,7 +53,9 @@
                     android:background="@drawable/white_bg"
                     android:hint="@string/ville"
                     android:paddingLeft="16dp"
+                    android:textColorHint="@color/black"
                     android:paddingTop="16dp"
+                    android:textColor="@color/bleu_cobalt"
                     android:paddingRight="16dp"
                     android:paddingBottom="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +72,9 @@
                     android:background="@drawable/white_bg"
                     android:hint="@string/code_postale"
                     android:paddingLeft="16dp"
+                    android:textColor="@color/bleu_cobalt"
                     android:paddingTop="16dp"
+                    android:textColorHint="@color/black"
                     android:paddingRight="16dp"
                     android:paddingBottom="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -90,6 +93,8 @@
                     android:paddingLeft="16dp"
                     android:paddingTop="16dp"
                     android:paddingRight="16dp"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/bleu_cobalt"
                     android:paddingBottom="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -108,6 +113,7 @@
         android:paddingBottom="16dp"
         android:text="@string/title_add_university"
         android:textAlignment="center"
+
         android:textColor="@color/bleu_cobalt"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/subUniv"

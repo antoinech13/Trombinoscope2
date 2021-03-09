@@ -4,5 +4,6 @@
         <item name="colorPrimary">@color/ic_launcher_background</item>
         <item name="colorPrimaryDark">@color/ic_launcher_background</item>
         <item name="colorAccent">@color/blue_azur</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 </resources>

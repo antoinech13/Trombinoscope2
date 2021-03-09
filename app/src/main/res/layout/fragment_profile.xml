@@ -89,8 +89,8 @@
             android:id="@+id/edit_nom"
             android:layout_width="37dp"
             android:layout_height="35dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/ic_edit"
             android:color="@color/black"
             app:layout_constraintStart_toEndOf="@+id/nom"
@@ -117,6 +117,13 @@
             android:color="@color/black"
             app:layout_constraintStart_toEndOf="@+id/email"
             app:layout_constraintTop_toBottomOf="@+id/edit_prenom" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="147dp"
+            android:layout_height="45dp"
+            android:hint="hint"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="299dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
