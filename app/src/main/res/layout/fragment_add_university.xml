@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:theme="@style/AppTheme"
     tools:context=".fragments.AddUniversityFragment">
 
     <ImageView
@@ -32,7 +33,6 @@
         android:paddingBottom="16dp"
         android:text="@string/title_add_university"
         android:textColor="@color/bleu_cobalt"
-        android:textColorHighlight="#EA0909"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,13 +46,11 @@
 
         <EditText
             android:id="@+id/universityName"
-            android:theme="@style/AppTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:background="@drawable/white_bg"
             android:textColor="@color/bleu_cobalt"
-
             android:paddingLeft="16dp"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
@@ -70,16 +68,16 @@
 
         <EditText
             android:id="@+id/city"
-            android:theme="@style/AppTheme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/white_bg"
-            android:textColor="@color/bleu_cobalt"
+            android:hint="@string/ville"
             android:paddingLeft="16dp"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
-            android:hint="@string/ville" />
+            android:textColor="@color/bleu_cobalt"
+            android:theme="@style/AppTheme" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

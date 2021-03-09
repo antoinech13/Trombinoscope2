@@ -21,21 +21,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
+
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
+
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
-import com.example.trombinoscope.adapter.EtuAdapter;
+
 import com.example.trombinoscope.adapter.UserAdapter;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.adapter.TrombiAdapter;
@@ -60,8 +61,9 @@ public class trombinoscopes extends Fragment {
     //@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     private RecyclerView recyclerView;
 
-    private EditText email;
+    private EditText email, formation, tag, date;
     private Switch edit;
+    private Spinner s;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -145,11 +147,19 @@ public class trombinoscopes extends Fragment {
                 RequestTrombis(getView(), 1, position, null);
                 break;
 
-             case 3:
+            case 3:
                 update(3, trombis.get(position).getId());
                 users = new ArrayList<User>();
                 createPopupRight(trombis.get(position).getId());
                 break;
+
+            case 4:
+                createPopupDel(trombis.get(position), position);
+                builder.show();
+
+
+
+
         }
         Log.e("trombi:",trombis.get(position).getFormation());
 
@@ -157,15 +167,75 @@ public class trombinoscopes extends Fragment {
     }
 
 
-    private void createPopupShar(Trombi tr){
+    private void createPopupModify(Trombi tr){
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
-        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_modify_trombi, (ViewGroup) getView(), false);
+        formation = (EditText) viewInflated.findViewById(R.id.popup_form);
+        tag = (EditText) viewInflated.findViewById(R.id.popup_tag);
+        date = (EditText) viewInflated.findViewById(R.id.popup_date);
+        s = (Spinner) viewInflated.findViewById(R.id.spinnerPopup);
+
+
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                update(2, tr.getId());
+                RequestTrombis(getView(),2, -1, null);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+    }
+
+
+    private void createPopupDel(Trombi tr, int position){
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Supprimer");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_supprimer, (ViewGroup) getView(), false);
 
         email = (EditText) viewInflated.findViewById(R.id.inputAddress);
         edit = (Switch) viewInflated.findViewById(R.id.switchEdit);
         if(tr.getRight() < 3)
             edit.setVisibility(View.INVISIBLE);
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                update(5, tr.getId());
+                RequestTrombis(getView(),5, position, null);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+    }
+
+
+
+    private void createPopupShar(Trombi tr){
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Partager");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_share, (ViewGroup) getView(), false);
+        email = (EditText) viewInflated.findViewById(R.id.inputAddress);
+        edit = (Switch) viewInflated.findViewById(R.id.switchEdit);
+        if(tr.getRight() < 3)
+            edit.setVisibility(View.INVISIBLE);
+        builder.setView(viewInflated);
+
+
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -187,7 +257,7 @@ public class trombinoscopes extends Fragment {
     private void createPopupRight(String id){
 
         builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Partager");
+        builder.setTitle("Gestion des droits");
         View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.popup_droits, (ViewGroup) getView(), false);
         RecyclerView rV = viewInflated.findViewById(R.id.popupRV);
 
@@ -257,6 +327,7 @@ public class trombinoscopes extends Fragment {
         String url = s.getUrl();
         try {
             Log.e("request", js.getString("request"));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -282,34 +353,25 @@ public class trombinoscopes extends Fragment {
                                 trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 3));
 
                             Log.e("trombis : ", String.valueOf(trombis));
+
                             mViewModel.setTrombinoscopesViewModel(trombis);
                             Log.e("trombisVM : ", String.valueOf(mViewModel.getTrombinoscopesViewModel()));
                         }
                         adapter.notifyDataSetChanged();
                     }
                     else if(flag == 1){
-                        if(response.getString("Flag").equals("true")) {
-                            JSONArray img = response.getJSONArray("Img");
-                            StorageReference ref;
 
-                            for(int j = 0; j < img.length(); j++) {
-                                ref = storage.getReference(img.getString(j));
-                                ref.delete();
-                            }
-
-                            Snackbar.make(view, "suppression total réussie", 1000).show();
-                            trombis.remove(position);
-                            adapter.notifyDataSetChanged();
-                        }
-                        else if(response.getString("Flag").equals("localDelete")){
+                        if(response.getString("Flag").equals("localDelete")){
                             Snackbar.make(view, "vous n'avez plus accée a ce trombinoscope", 1000).show();
                             trombis.remove(position);
                             adapter.notifyDataSetChanged();
                         }
                         else if(response.getString("Flag").equals("false"))
-                            Snackbar.make(view, "supression échoué", 1000).show();
+                            Snackbar.make(view, "echec", 1000).show();
                         else if(response.getString("Flag").equals("notAllow"))
                             Snackbar.make(view, "action non autorisé", 1000).show();
+                        else if(response.getString("Flag").equals("LastAdmin"))
+                            Snackbar.make(view, "Action impossible: Vous êtes le dernier admin", 1000).show();
                     }
 
                     else if(flag == 2) {
@@ -345,7 +407,26 @@ public class trombinoscopes extends Fragment {
                        else if(response.getString("Flag").equals("true"))
                            Snackbar.make(view, "changement de statue validé", 1000).show();
                        else if(response.getString("Flag").equals("noAdmin"))
-                           Snackbar.make(view, "Action impossible: pas d'Admin", 1000).show();
+                           Snackbar.make(view, "Action impossible: pas d'admin", 1000).show();
+
+                    }
+
+                    else if(flag == 5){
+                        if(response.getString("Flag").equals("notAllow"))
+                            Snackbar.make(view, "action non autorisé", 1000).show();
+                        else if(response.getString("Flag").equals("true")){
+                            JSONArray img = response.getJSONArray("Img");
+                            StorageReference ref;
+
+                            for(int j = 0; j < img.length(); j++) {
+                                ref = storage.getReference(img.getString(j));
+                                ref.delete();
+                            }
+                        }
+                        trombis.remove(position);
+                        adapter.notifyDataSetChanged();
+                        Log.e("position",String.valueOf(position));
+                        Snackbar.make(view, "Suppression validé :(", 1000).show();
                     }
 
                 } catch (JSONException e) {
@@ -401,8 +482,11 @@ public class trombinoscopes extends Fragment {
                 }
 
                 js.put("droit", Droit);
+            }
 
-
+            else if(flag == 5) {
+                js.put("request", "delFor");
+                js.put("idTrombi", idTrombi);
             }
         } catch (JSONException e) {
             e.printStackTrace();
