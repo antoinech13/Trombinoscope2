@@ -3,21 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:layout_height="match_parent"
     tools:context=".fragments.AddTrombinoscopes">
 
+
     <ImageView
-        android:id="@+id/woman_work"
-        android:layout_width="198dp"
-        android:layout_height="289dp"
+        android:id="@+id/woman_work_2"
+        android:layout_width="266dp"
+        android:layout_height="343dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/background_welcome"
         android:src="@drawable/woman"
         app:layout_constraintBottom_toTopOf="@+id/val"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/tag"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/title_add_trombi"
@@ -40,69 +43,49 @@
         android:id="@+id/formation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/white_bg"
         android:hint="@string/formation"
-        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
+        android:textColor="@color/bleu_cobalt"
         android:paddingBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/tag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_add_trombi"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/white_bg"
         android:hint="@string/tag"
-        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/bleu_cobalt"
         app:layout_constraintTop_toBottomOf="@+id/formation"
-        android:autofillHints="" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
+        android:layout_marginTop="30dp"
         android:background="@drawable/white_bg"
         android:hint="@string/date"
-        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
+        android:textColor="@color/bleu_cobalt"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag" />
+        app:layout_constraintTop_toBottomOf="@+id/tag"
+        tools:layout_editor_absoluteX="9dp" />
 
-    <Spinner
-        android:id="@+id/spinnerRegion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+
 
     <TextView
         android:id="@+id/textView"
@@ -110,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
+        android:textColor="@color/bleu_cobalt"
         android:text="@string/universite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
@@ -120,7 +104,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_bg"
         android:text="@string/valid"
         android:textColor="@color/white"
@@ -128,5 +111,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerRegion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
