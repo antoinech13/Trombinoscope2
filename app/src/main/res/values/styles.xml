@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/ic_launcher_background</item>
-        <item name="colorPrimaryDark">@color/ic_launcher_background</item>
-        <item name="colorAccent">@color/blue_azur</item>
+        <item name="colorPrimary">@color/bleu_cobalt</item>
+        <item name="colorPrimaryDark">@color/bleu_cobalt</item>
+        <item name="colorAccent">@color/bleu_cobalt</item>
         <item name="android:textColorHint">@color/black</item>
     </style>
 </resources>
+
+<!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name = "windowNoTitle"> true </item> <item name = "windowActionBar"> false </item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name = "android:windowDrawsSystemBarBackgrounds"> false </item>
+</style>-->

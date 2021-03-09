@@ -9,12 +9,11 @@
 
 
     <ImageView
-        android:id="@+id/woman_work_2"
+        android:id="@+id/imageView2"
         android:layout_width="266dp"
         android:layout_height="343dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-
         android:contentDescription="@string/background_welcome"
         android:src="@drawable/woman"
         app:layout_constraintBottom_toTopOf="@+id/val"
@@ -42,52 +41,73 @@
 
     <EditText
         android:id="@+id/formation"
-        android:theme="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/white_bg"
         android:hint="@string/formation"
+        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
-        android:textColor="@color/bleu_cobalt"
         android:paddingBottom="16dp"
+        android:textColor="@color/bleu_cobalt"
+        android:theme="@style/AppTheme"
+        app:layout_constraintBottom_toTopOf="@+id/tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_add_trombi"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/tag"
-        android:theme="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/white_bg"
         android:hint="@string/tag"
+        android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
         android:textColor="@color/bleu_cobalt"
+        android:theme="@style/AppTheme"
+        app:layout_constraintBottom_toTopOf="@+id/date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formation"
-        tools:layout_editor_absoluteX="0dp" />
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/date"
-        android:theme="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
         android:background="@drawable/white_bg"
         android:hint="@string/date"
+        android:inputType="number|text"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
-        android:textColor="@color/bleu_cobalt"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/tag"
-        tools:layout_editor_absoluteX="9dp" />
+        android:textColor="@color/bleu_cobalt"
+        android:theme="@style/AppTheme"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tag" />
 
 
 

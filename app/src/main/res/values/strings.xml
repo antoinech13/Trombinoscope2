@@ -127,4 +127,7 @@
     <string name="innov">Innovant</string>
     <string name="description_stars">Qu\'est-ce que les étoiles ?</string>
     <string name="tuto_star">Les étoiles vous permettent de connaitre vos droits sur le trombinoscope. Il existe 3 types de droits : le droit administratif, le droit d\'édition et la participation en tant que membre.</string>
+    <string name="yellow_star">Ces étoiles signifient que vous êtes l\'administrateur/administratrice de ce trombinoscope.</string>
+    <string name="grey_star">Ces étoiles signifient que vous n\'êtes pas l\'administrateur/trice mais vous avez un pouvoir d\'édition.</string>
+    <string name="no_star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
 </resources>

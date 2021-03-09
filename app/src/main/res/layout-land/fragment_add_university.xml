@@ -19,125 +19,134 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/universityName"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/white_bg"
+                android:textColor="@color/bleu_cobalt"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="@string/university_name"
+                android:inputType="textCapWords"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColorHint="@color/grey"
+                android:textSize="16sp"
+                android:autofillHints="" />
 
-                <EditText
-                    android:id="@+id/universityName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/white_bg"
-                    android:hint="@string/university_name"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/bleu_cobalt"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="16dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
-                android:layout_width="190dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_bg"
-                    android:hint="@string/ville"
-                    android:paddingLeft="16dp"
-                    android:textColorHint="@color/black"
-                    android:paddingTop="16dp"
-                    android:textColor="@color/bleu_cobalt"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="16dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="190dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_bg"
-                    android:hint="@string/code_postale"
-                    android:paddingLeft="16dp"
-                    android:textColor="@color/bleu_cobalt"
-                    android:paddingTop="16dp"
-                    android:textColorHint="@color/black"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="16dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/white_bg"
+                android:textColor="@color/bleu_cobalt"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="@string/ville"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColorHint="@color/grey"
+                android:textSize="16sp"
+                android:autofillHints="" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/pays"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/white_bg"
-                    android:hint="@string/pays"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingRight="16dp"
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/bleu_cobalt"
-                    android:paddingBottom="16dp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/cp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/white_bg"
+                android:textColor="@color/bleu_cobalt"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="@string/code_postale"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColorHint="@color/grey"
+                android:textSize="16sp"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/pays"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/white_bg"
+                android:textColor="@color/bleu_cobalt"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:hint="@string/pays"
+                android:inputType="textCapWords"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColorHint="@color/grey"
+                android:textSize="16sp"
+                android:autofillHints="" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/subUniv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_bg"
+                android:text="@string/valid"
+                android:textStyle="bold"
+                />
         </LinearLayout>
     </ScrollView>
 
     <TextView
         android:id="@+id/title_add_trombi"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="325dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/allan"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/title_add_university"
+        android:textColor="@color/bleu_cobalt"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="198dp"
+        android:layout_height="244dp"
         android:layout_marginEnd="1dp"
+        android:contentDescription="@string/Label_Welcome"
         android:fontFamily="@font/allan"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
+        android:src="@drawable/woman2"
         android:text="@string/title_add_university"
         android:textAlignment="center"
-
         android:textColor="@color/bleu_cobalt"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/subUniv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toEndOf="@+id/scrollView4"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/subUniv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="44dp"
-        android:background="@drawable/btn_bg"
-        android:text="@string/valid"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_add_trombi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

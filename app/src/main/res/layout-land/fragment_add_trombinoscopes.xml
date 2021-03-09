@@ -60,47 +60,56 @@
 
             <EditText
                 android:id="@+id/formation"
-                android:theme="@style/AppTheme"
                 android:layout_width="335dp"
                 android:layout_height="54dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/white_bg"
                 android:hint="@string/formation"
+                android:inputType="text"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/bleu_cobalt"
-                tools:ignore="MissingConstraints" />
+                android:theme="@style/AppTheme"
+                tools:ignore="MissingConstraints"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/tag"
-                android:theme="@style/AppTheme"
                 android:layout_width="335dp"
                 android:layout_height="54dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:background="@drawable/white_bg"
                 android:hint="@string/tag"
+                android:inputType="text"
                 android:paddingLeft="16dp"
-                android:textColor="@color/bleu_cobalt"
                 android:paddingTop="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
+                android:textColor="@color/bleu_cobalt"
+                android:theme="@style/AppTheme"
                 tools:ignore="MissingConstraints" />
 
             <EditText
                 android:id="@+id/date"
-                android:theme="@style/AppTheme"
                 android:layout_width="333dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:autofillHints=""
                 android:background="@drawable/white_bg"
                 android:hint="@string/date"
+                android:inputType="number|text"
                 android:paddingLeft="16dp"
-                android:textColor="@color/bleu_cobalt"
                 android:paddingTop="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
+                android:textColor="@color/bleu_cobalt"
+                android:theme="@style/AppTheme"
                 tools:ignore="MissingConstraints" />
 
             <Spinner
