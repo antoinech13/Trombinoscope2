@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Etudiant;
@@ -100,7 +101,7 @@ public class Profile_trombi extends Fragment {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
-
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         // l objet etudiant
         etu = getArguments().getParcelable("Etu"); //etu a recuperer toutes les infos de l etudiant
 

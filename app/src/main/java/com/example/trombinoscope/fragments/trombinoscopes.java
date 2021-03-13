@@ -34,6 +34,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.trombinoscope.ItemClickSupport;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 
@@ -84,16 +85,14 @@ public class trombinoscopes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
         mViewModel.initTrrombinoscopesViewModel();
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);
         registerForContextMenu(recyclerView);
-       /* trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2019-2020"));
-        trombis.add(new Trombi("Compétences complémentaire en informatique", "CCI", "2020-2021"));*/
         this.configureOnClickRecyclerView();
         update(0, null);
         configureRecyclerView();
-        Log.e("cpt", String.valueOf(mViewModel.getCpt()));
         if(mViewModel.getCpt()==0)
             RequestTrombis(view, 0, 0, null);
         adapter.notifyDataSetChanged();

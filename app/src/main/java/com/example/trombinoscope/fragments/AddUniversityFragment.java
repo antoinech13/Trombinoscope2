@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 
@@ -81,7 +82,7 @@ public class AddUniversityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_university, container, false);
-
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         univ = view.findViewById(R.id.universityName);
         pays = view.findViewById(R.id.pays);
         cp = view.findViewById(R.id.cp);

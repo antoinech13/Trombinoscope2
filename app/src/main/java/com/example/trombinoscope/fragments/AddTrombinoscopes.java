@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -102,9 +103,8 @@ public class AddTrombinoscopes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_add_trombinoscopes, container, false);
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         categories.clear();
         formation = view.findViewById(R.id.formation);
         tag = view.findViewById(R.id.tag);

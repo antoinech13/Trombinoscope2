@@ -125,6 +125,7 @@ public class AddToTrombi extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         image = view.findViewById(R.id.image);
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);

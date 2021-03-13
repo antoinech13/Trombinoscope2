@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.HachageMDP;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -82,6 +83,7 @@ public class Reset_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reset__pw, container, false);
+        ((MainActivity)getActivity()).setDrawer_Locked();
         btn_Reset=view.findViewById(R.id.reset);
         pw= view.findViewById(R.id.reset_Pw);
         pwc= view.findViewById(R.id.reset_Pw_Confirm);

@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.volley.toolbox.ByteArrayPool;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -96,7 +97,7 @@ public class CamFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_cam, container, false);
-
+        ((MainActivity)getActivity()).setDrawer_Locked();
         previewView = view.findViewById(R.id.viewFinder);
         btn = view.findViewById(R.id.camera_capture_button);
         openCamera();

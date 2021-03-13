@@ -138,4 +138,16 @@
             android:id="@+id/action_reset_Pw_to_logginFragment"
             app:destination="@id/logginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/user_profil"
+        android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.User_profil"
+        android:label="User_profil" />
+    <fragment
+        android:id="@+id/info"
+        android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.Info"
+        android:label="Info" />
+    <fragment
+        android:id="@+id/contact_support"
+        android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.Contact_support"
+        android:label="Contact_support" />
 </navigation>

@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.HachageMDP;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -92,6 +93,7 @@ public class LogginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_loggin, container, false);
+        ((MainActivity)getActivity()).setDrawer_Locked();
 
         btn_register = view.findViewById(R.id.btn_register);
         btn_loggin = view.findViewById(R.id.login);

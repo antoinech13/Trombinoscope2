@@ -31,6 +31,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.FtpConnection;
 import com.example.trombinoscope.ItemClickSupport;
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.EtuAdapter;
@@ -124,6 +125,7 @@ public class EditTrombi extends Fragment {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.fragment_edit_trombi, container, false);
+        ((MainActivity)getActivity()).setDrawer_UnLocked();
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");

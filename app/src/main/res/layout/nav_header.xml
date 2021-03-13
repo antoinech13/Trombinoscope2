@@ -27,10 +27,4 @@
         android:layout_height="wrap_content"
         android:text="@string/prenom" />
 
-    <TextView
-        android:id="@+id/email_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Hint_Email"/>
-
 </LinearLayout>
