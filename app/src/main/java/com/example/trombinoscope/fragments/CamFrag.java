@@ -97,7 +97,8 @@ public class CamFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_cam, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();
+        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         previewView = view.findViewById(R.id.viewFinder);
         btn = view.findViewById(R.id.camera_capture_button);
         openCamera();

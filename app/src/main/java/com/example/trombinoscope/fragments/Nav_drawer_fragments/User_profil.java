@@ -25,6 +25,7 @@ public class User_profil extends Fragment {
     return inflater.inflate(R.layout.fragment_user_profil, container, false);
 
 
+
     }
 
 

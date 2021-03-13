@@ -85,7 +85,8 @@ public class Code_Recup_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_code__recup__pw, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();
+        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         btn_valid = view.findViewById(R.id.btn_validCode);
         case1 = view.findViewById(R.id.caseCode1);
         case2 = view.findViewById(R.id.caseCode2);

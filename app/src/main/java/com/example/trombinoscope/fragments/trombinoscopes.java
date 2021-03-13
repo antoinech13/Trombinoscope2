@@ -85,7 +85,9 @@ public class trombinoscopes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
-        ((MainActivity)getActivity()).setDrawer_UnLocked();
+
+        ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
         mViewModel.initTrrombinoscopesViewModel();
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);

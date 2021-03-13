@@ -83,7 +83,8 @@ public class Reset_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reset__pw, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();
+        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         btn_Reset=view.findViewById(R.id.reset);
         pw= view.findViewById(R.id.reset_Pw);
         pwc= view.findViewById(R.id.reset_Pw_Confirm);

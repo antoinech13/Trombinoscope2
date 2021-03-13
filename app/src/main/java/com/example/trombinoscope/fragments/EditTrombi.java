@@ -125,7 +125,8 @@ public class EditTrombi extends Fragment {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.fragment_edit_trombi, container, false);
-        ((MainActivity)getActivity()).setDrawer_UnLocked();
+        ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");

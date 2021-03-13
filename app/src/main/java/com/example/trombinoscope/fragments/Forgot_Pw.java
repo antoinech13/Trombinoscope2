@@ -79,7 +79,8 @@ public class Forgot_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_forgot__pw, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();
+        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         btn_sendCode = view.findViewById(R.id.SendCode);
         email = view.findViewById(R.id.emailToSend);
 

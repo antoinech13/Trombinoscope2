@@ -89,7 +89,8 @@ public class SignIn extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_sign_in, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();
+        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         register = view.findViewById(R.id.btnRegister);
         nom = view.findViewById(R.id.Name);
         prenom = view.findViewById(R.id.Prenom);

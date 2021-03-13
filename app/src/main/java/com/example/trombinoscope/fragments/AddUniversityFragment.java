@@ -82,7 +82,8 @@ public class AddUniversityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_university, container, false);
-        ((MainActivity)getActivity()).setDrawer_UnLocked();
+        ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
         univ = view.findViewById(R.id.universityName);
         pays = view.findViewById(R.id.pays);
         cp = view.findViewById(R.id.cp);
