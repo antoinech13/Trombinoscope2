@@ -19,7 +19,7 @@
         android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        android:text="@string/title_add_trombi"
+        android:text="@string/Title_Add_Trombi"
         android:textColor="@color/bleu_cobalt"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:layout_marginTop="41dp"
         android:layout_marginBottom="180dp"
         android:background="@drawable/btn_bg"
-        android:text="@string/valid"
+        android:text="@string/Action_Valider"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/white_bg"
-                android:hint="@string/formation"
+                android:hint="@string/Hint_formation"
                 android:inputType="text"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
@@ -84,7 +84,7 @@
                 android:layout_marginTop="10dp"
                 android:autofillHints=""
                 android:background="@drawable/white_bg"
-                android:hint="@string/tag"
+                android:hint="@string/Hint_Tag"
                 android:inputType="text"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="10dp"
                 android:autofillHints=""
                 android:background="@drawable/white_bg"
-                android:hint="@string/date"
+                android:hint="@string/Hint_Date"
                 android:inputType="number|text"
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
@@ -131,7 +131,7 @@
                 android:layout_marginEnd="21dp"
                 android:layout_marginBottom="111dp"
                 android:textColor="@color/black"
-                android:text="@string/universite" />
+                android:text="@string/Label_Organism" />
 
         </LinearLayout>
     </ScrollView>

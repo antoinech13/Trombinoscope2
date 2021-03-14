@@ -24,7 +24,7 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             app:shapeAppearance="@drawable/cercle_bg"
-            android:contentDescription="@string/tag"/>
+            android:contentDescription="@string/Hint_Tag"/>
 
         <TextView
             android:id="@+id/myImageViewText"
@@ -38,9 +38,8 @@
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="@string/hello"
             android:textSize="18sp"
-            android:contentDescription="@string/tag"/>
+            android:contentDescription="@string/Hint_Tag"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -79,7 +78,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="invisible"
             app:srcCompat="@android:drawable/btn_star_big_off"
-            android:contentDescription="@string/title_add_trombi" />
+            android:contentDescription="@string/Label_Illustration_2" />
 
         <ImageView
             android:id="@+id/adminStar"
@@ -90,7 +89,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/btn_star_big_on"
-            android:contentDescription="@string/hello"/>
+            android:contentDescription="@string/Label_Illustration_2"/>
 
         <ImageView
             android:id="@+id/option"
@@ -100,7 +99,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_indicator"
-            android:contentDescription="@string/hello"/>
+            android:contentDescription="@string/Label_Illustration_7"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

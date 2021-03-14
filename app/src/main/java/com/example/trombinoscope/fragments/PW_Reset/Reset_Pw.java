@@ -1,4 +1,4 @@
-package com.example.trombinoscope.fragments;
+package com.example.trombinoscope.fragments.PW_Reset;
 
 import android.os.Bundle;
 
@@ -40,6 +40,7 @@ public class Reset_Pw extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    //Instances
     private JSONObject js = new JSONObject();
     private Button btn_Reset;
     private EditText pw, pwc ;
@@ -83,8 +84,8 @@ public class Reset_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reset__pw, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
-        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
+       // ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+      //  ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         btn_Reset=view.findViewById(R.id.reset);
         pw= view.findViewById(R.id.reset_Pw);
         pwc= view.findViewById(R.id.reset_Pw_Confirm);
@@ -99,18 +100,15 @@ public class Reset_Pw extends Fragment {
 
                 //Verification que les champs sont remplis
                 if ( Pw.isEmpty() || Pwc.isEmpty())
-                    Snackbar.make(v, getResources().getString(R.string.Msg_err_saisie_SignIn), 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Err_Saisie_Chp_Vide), 1000).show();
                 else if (!Pw.equals(Pwc))
-                    Snackbar.make(v, getResources().getString(R.string.Msg_Err_MDP_diff), 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Err_Pw_Diff), 1000).show();
                 else {
                     pwHash = hash.hachageMDP(Pw);
                     resetPw(v);
                 }
-
-
             }
         });
-
         return  view;
     }
 
@@ -125,7 +123,7 @@ public class Reset_Pw extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
-                        Snackbar.make(v, getResources().getString(R.string.reset_Pw_valid), Snackbar.LENGTH_LONG).show(); // Trouver comment envoyer mail à l'utilisateur
+                        Snackbar.make(v, getResources().getString(R.string.Info_Msg_Reset_Pw_Valid), Snackbar.LENGTH_LONG).show(); // Trouver comment envoyer mail à l'utilisateur
                         Navigation.findNavController(v).navigate(R.id.action_reset_Pw_to_logginFragment);//Retour à la page d'acceuil
                     }
                     else
@@ -134,7 +132,6 @@ public class Reset_Pw extends Fragment {
                     e.printStackTrace();
                 }
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -155,8 +152,4 @@ public class Reset_Pw extends Fragment {
             // Obligatoire avec jsonObject
         }
     }
-
-
-
-
 }

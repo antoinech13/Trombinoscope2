@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -52,7 +51,6 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,7 +75,7 @@ public class AddToTrombi extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //Instances
     private Button photo, gallerie, suivant, ocr;
     private ImageView image;
     private TextInputEditText nom, prenom, email;
@@ -154,10 +152,6 @@ public class AddToTrombi extends Fragment {
                 nom.setText(getArguments().getString("nom"));
         }
 
-
-
-
-
         gallerie.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -173,11 +167,9 @@ public class AddToTrombi extends Fragment {
             }
         });
 
-
         ocr.setOnClickListener(new View.OnClickListener(){
            public void onClick(View view){
                runTextRecognition();
-
            }
         });
 
@@ -205,7 +197,6 @@ public class AddToTrombi extends Fragment {
                 uT.addOnCompleteListener( new OnCompleteListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                Log.e("ça marche ", "yolo");
                             }
                         });
                         // ftp.sendImage(img, imgName);
@@ -226,7 +217,6 @@ public class AddToTrombi extends Fragment {
             this.img = null;
         }
     }
-
     //Permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
@@ -246,12 +236,10 @@ public class AddToTrombi extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == IMAGE_PICK_CODE) {
             image.setImageURI(data.getData());
-
             BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
             img = drawable.getBitmap();
         }
     }
-
 
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -266,7 +254,7 @@ public class AddToTrombi extends Fragment {
         if(checkPermission())
             openCamera();
         else
-           Snackbar.make(getView(), getResources().getString(R.string.camera_acces), Snackbar.LENGTH_SHORT).show();
+           Snackbar.make(getView(), getResources().getString(R.string.Err_Camera_Acces), Snackbar.LENGTH_SHORT).show();
     }
 
     private void openCamera() {
@@ -279,7 +267,7 @@ public class AddToTrombi extends Fragment {
         if(prenom.getText().toString().length() > 0)
             b.putString("prenom", prenom.getText().toString());
 
-        Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag2, b);
+        Navigation.findNavController(view).navigate(R.id.action_addToTrombi_to_camFrag, b);
     }
 
 
@@ -287,25 +275,21 @@ public class AddToTrombi extends Fragment {
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
         update();
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getString("res").equals("notAllow"))
-                        Snackbar.make(v, "non autorisé", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Msg_Info_Invalid_Action), Snackbar.LENGTH_LONG).show();
                     else
-                        Snackbar.make(v, getResources().getString(R.string.student_add), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_Add), Snackbar.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("ca marche pas", "fuck");
                 error.printStackTrace();
             }
         });
@@ -369,7 +353,6 @@ public class AddToTrombi extends Fragment {
                 else{
                     setText(map);
                 }
-
             }
         }
     }

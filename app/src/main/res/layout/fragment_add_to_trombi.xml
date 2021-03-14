@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="25dp"
-        android:hint="Nom:"
+        android:hint="@string/Hint_LastName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
-        android:hint="Prénom"
+        android:hint="@string/Hint_FirstName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="108dp"
-        android:text="Photo"
+        android:text="@string/Action_Take_Picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="108dp"
-        android:text="gallerie"
+        android:text="@string/Action_Import_From_Gallery"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -65,7 +65,7 @@
         android:id="@+id/suivant"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:text="Suivant"
+        android:text="@string/Action_Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -83,7 +83,7 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="@string/Hint_Email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="108dp"
-        android:text="OCR"
+        android:text="@string/Action_OCR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -25,8 +25,8 @@
             android:id="@+id/action_addTrombinoscopes_to_trombinoscopes3"
             app:destination="@id/trombinoscopes3" />
         <action
-            android:id="@+id/action_addTrombinoscopes_to_addUniversityFragment"
-            app:destination="@id/addUniversityFragment" />
+            android:id="@+id/action_addTrombinoscopes_to_addOrganism"
+            app:destination="@id/addOrganism" />
     </fragment>
     <fragment
         android:id="@+id/addToTrombi"
@@ -37,8 +37,8 @@
             android:id="@+id/action_addToTrombi_to_editTrombi"
             app:destination="@id/editTrombi" />
         <action
-            android:id="@+id/action_addToTrombi_to_camFrag2"
-            app:destination="@id/camFrag2" />
+            android:id="@+id/action_addToTrombi_to_camFrag"
+            app:destination="@id/camFrag" />
     </fragment>
     <fragment
         android:id="@+id/editTrombi"
@@ -68,17 +68,17 @@
             app:destination="@id/forgot_Pw" />
     </fragment>
     <fragment
-        android:id="@+id/addUniversityFragment"
-        android:name="com.example.trombinoscope.fragments.AddUniversityFragment"
+        android:id="@+id/addOrganism"
+        android:name="com.example.trombinoscope.fragments.AddOrganism"
         android:label="fragment_add_university"
-        tools:layout="@layout/fragment_add_university" >
+        tools:layout="@layout/fragment_add_organism" >
         <action
             android:id="@+id/action_addUniversityFragment_to_addTrombinoscopes"
             app:destination="@id/addTrombinoscopes" />
     </fragment>
     <fragment
         android:id="@+id/signIn"
-        android:name="com.example.trombinoscope.fragments.SignIn"
+        android:name="com.example.trombinoscope.fragments.Sign_In_Fragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -94,26 +94,26 @@
         android:label="fragment_user_condition"
         tools:layout="@layout/fragment_user_condition" />
     <fragment
-        android:id="@+id/camFrag2"
+        android:id="@+id/camFrag"
         android:name="com.example.trombinoscope.fragments.CamFrag"
         android:label="fragment_cam"
         tools:layout="@layout/fragment_cam" >
         <action
-            android:id="@+id/action_camFrag2_to_addToTrombi"
+            android:id="@+id/action_camFrag_to_addToTrombi"
             app:destination="@id/addToTrombi" />
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.trombinoscope.fragments.Profile_trombi"
+        android:name="com.example.trombinoscope.fragments.Member_Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_member_profile" >
         <action
             android:id="@+id/action_profile_to_editTrombi"
             app:destination="@id/editTrombi" />
     </fragment>
     <fragment
         android:id="@+id/forgot_Pw"
-        android:name="com.example.trombinoscope.fragments.Forgot_Pw"
+        android:name="com.example.trombinoscope.fragments.PW_Reset.Forgot_Pw"
         android:label="fragment_forgot__pw"
         tools:layout="@layout/fragment_forgot__pw" >
         <action
@@ -122,7 +122,7 @@
     </fragment>
     <fragment
         android:id="@+id/code_Recup_Pw"
-        android:name="com.example.trombinoscope.fragments.Code_Recup_Pw"
+        android:name="com.example.trombinoscope.fragments.PW_Reset.Code_Recup_Pw"
         android:label="fragment_code__recup__pw"
         tools:layout="@layout/fragment_code__recup__pw" >
         <action
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/reset_Pw"
-        android:name="com.example.trombinoscope.fragments.Reset_Pw"
+        android:name="com.example.trombinoscope.fragments.PW_Reset.Reset_Pw"
         android:label="fragment_reset__pw"
         tools:layout="@layout/fragment_reset__pw" >
         <action

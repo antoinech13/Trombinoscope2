@@ -56,18 +56,16 @@ import java.util.List;
 
 public class trombinoscopes extends Fragment {
 
+    //Instances
     private TrombinoscopesViewModel mViewModel;
     protected Button add;
     private AlertDialog.Builder builder;
     //@BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     private RecyclerView recyclerView;
-
     private EditText email, formation, tag, date;
     private Switch edit;
     private Spinner s;
-
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
     private List<Trombi> trombis;
     private TrombiAdapter adapter;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
@@ -75,12 +73,10 @@ public class trombinoscopes extends Fragment {
     private JSONObject js = new JSONObject();
     private JSONArray EmailU;
 
-
     public static trombinoscopes newInstance() {
         return new trombinoscopes();
     }
 
-    // ca c est pour trombi a addtrombi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -99,29 +95,21 @@ public class trombinoscopes extends Fragment {
             RequestTrombis(view, 0, 0, null);
         adapter.notifyDataSetChanged();
 
-
-
-
         mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                                                     @Override
-                                                     public void onRefresh() {
-                                                         mViewModel.clear();
-                                                         mViewModel.initTrrombinoscopesViewModel();
-                                                         update(0, null);
-                                                         if(mViewModel.getCpt()==0)
-                                                             RequestTrombis(view, 0, 0, null);
-                                                         mSwipeRefreshLayout.setRefreshing(false);
-                                                     }
-                                                 }
-        );
-
-
+            @Override
+            public void onRefresh() {
+                mViewModel.clear();
+                mViewModel.initTrrombinoscopesViewModel();
+                update(0, null);
+                if(mViewModel.getCpt()==0)
+                    RequestTrombis(view, 0, 0, null);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         //adapter.notifyDataSetChanged();
         add = view.findViewById(R.id.addTro);
-
-
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(
@@ -129,41 +117,30 @@ public class trombinoscopes extends Fragment {
                 //finish();
             }
          });
-
         return view;
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int position = this.adapter.getPosition();
-
         switch (item.getItemId()){
             case 1:
                 createPopupShar(trombis.get(position));
                 builder.show();
                 break;
-
             case 2:
                 update(1, trombis.get(position).getId());
                 RequestTrombis(getView(), 1, position, null);
                 break;
-
             case 3:
                 update(3, trombis.get(position).getId());
                 users = new ArrayList<User>();
                 createPopupRight(trombis.get(position).getId());
                 break;
-
             case 4:
                 createPopupDel(trombis.get(position), position);
                 builder.show();
-
-
-
-
         }
-        Log.e("trombi:",trombis.get(position).getFormation());
-
         return super.onContextItemSelected(item);
     }
 
@@ -176,7 +153,6 @@ public class trombinoscopes extends Fragment {
         tag = (EditText) viewInflated.findViewById(R.id.popup_tag);
         date = (EditText) viewInflated.findViewById(R.id.popup_date);
         s = (Spinner) viewInflated.findViewById(R.id.spinnerPopup);
-
 
         builder.setView(viewInflated);
 
@@ -224,8 +200,6 @@ public class trombinoscopes extends Fragment {
         });
     }
 
-
-
     private void createPopupShar(Trombi tr){
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Partager");
@@ -235,7 +209,6 @@ public class trombinoscopes extends Fragment {
         if(tr.getRight() < 3)
             edit.setVisibility(View.INVISIBLE);
         builder.setView(viewInflated);
-
 
         builder.setView(viewInflated);
 
@@ -269,7 +242,6 @@ public class trombinoscopes extends Fragment {
         rV.setLayoutManager(new LinearLayoutManager(getActivity()));
         RequestTrombis(getView(),3, -1, userAdapter);
 
-
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -282,8 +254,6 @@ public class trombinoscopes extends Fragment {
         });
     }
 
-
-    //methode pour naviguer entre trombi a edit trombi c est celle qui va m interesser
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(recyclerView, R.layout.layout_tromb_frag)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -291,7 +261,6 @@ public class trombinoscopes extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // 1 - Get user from adapter
                         Trombi trombi = adapter.getTrombi(position);
-                        // 2 - Show result in a Toast
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Trombi", trombi);
                         Navigation.findNavController(v).navigate(R.id.action_trombinoscopes3_to_editTrombi, bundle);
@@ -303,14 +272,12 @@ public class trombinoscopes extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TrombinoscopesViewModel.class);
-
         // TODO: Use the ViewModel
     }
 
     private void configureRecyclerView(){
         // 3.1 - Reset list
         this.trombis = mViewModel.getTrombinoscopesViewModel();
-        Log.e("configureRecyclerView", String.valueOf(trombis));
         // 3.2 - Create adapter passing the list of users
         this.adapter = new TrombiAdapter(this.trombis);
         // 3.3 - Attach the adapter to the recyclerview to populate items
@@ -320,12 +287,11 @@ public class trombinoscopes extends Fragment {
 
     }
 
-
-
-
     private void RequestTrombis(View view, int flag, int position, UserAdapter u) {
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
+
+        //A QUOI SERT CE TRY ??!!!
         try {
             Log.e("request", js.getString("request"));
 
@@ -335,7 +301,6 @@ public class trombinoscopes extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try {
                     if(flag == 0) {
                         configureRecyclerView();
@@ -352,36 +317,32 @@ public class trombinoscopes extends Fragment {
                                 trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 1));
                             else if(Droit.getString(i).equals("3"))
                                 trombis.add(new Trombi(Nom.getString(i), Tag.getString(i), Date.getString(i), Idpromo.getString(i), 3));
-
-                            Log.e("trombis : ", String.valueOf(trombis));
-
                             mViewModel.setTrombinoscopesViewModel(trombis);
-                            Log.e("trombisVM : ", String.valueOf(mViewModel.getTrombinoscopesViewModel()));
                         }
                         adapter.notifyDataSetChanged();
                     }
                     else if(flag == 1){
 
                         if(response.getString("Flag").equals("localDelete")){
-                            Snackbar.make(view, "vous n'avez plus accée a ce trombinoscope", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Trombi_Acces_Denied), 1000).show();
                             trombis.remove(position);
                             adapter.notifyDataSetChanged();
                         }
                         else if(response.getString("Flag").equals("false"))
-                            Snackbar.make(view, "echec", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Echec), 1000).show();
                         else if(response.getString("Flag").equals("notAllow"))
-                            Snackbar.make(view, "action non autorisé", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Invalid_Action), 1000).show();
                         else if(response.getString("Flag").equals("LastAdmin"))
-                            Snackbar.make(view, "Action impossible: Vous êtes le dernier admin", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Invalid_Action_Last_Admin), 1000).show();
                     }
 
                     else if(flag == 2) {
                         if (response.getString("Flag").equals("invit"))
-                            Snackbar.make(view, "invitation validé", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Valid_Invit), 1000).show();
                         else if (response.getString("Flag").equals("add"))
-                            Snackbar.make(view, "utilisateur ajouté", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_User_Add), 1000).show();
                         else if (response.getString("Flag").equals("existe"))
-                            Snackbar.make(view, "déjà ajouté", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_User_Already_Add), 1000).show();
                     }
 
                     else if (flag == 3){
@@ -404,17 +365,17 @@ public class trombinoscopes extends Fragment {
 
                     else if(flag == 4){
                        if(response.getString("Flag").equals("notAllow"))
-                           Snackbar.make(view, "action non autorisé", 1000).show();
+                           Snackbar.make(view, getResources().getString(R.string.Msg_Info_Invalid_Action), 1000).show();
                        else if(response.getString("Flag").equals("true"))
-                           Snackbar.make(view, "changement de statue validé", 1000).show();
+                           Snackbar.make(view, getResources().getString(R.string.Msg_Info_Status_Changed_Valid), 1000).show();
                        else if(response.getString("Flag").equals("noAdmin"))
-                           Snackbar.make(view, "Action impossible: pas d'admin", 1000).show();
+                           Snackbar.make(view, getResources().getString(R.string.Msg_Info_No_Admin), 1000).show();
 
                     }
 
                     else if(flag == 5){
                         if(response.getString("Flag").equals("notAllow"))
-                            Snackbar.make(view, "action non autorisé", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Invalid_Action), 1000).show();
                         else if(response.getString("Flag").equals("true")){
                             JSONArray img = response.getJSONArray("Img");
                             StorageReference ref;
@@ -427,9 +388,8 @@ public class trombinoscopes extends Fragment {
                         trombis.remove(position);
                         adapter.notifyDataSetChanged();
                         Log.e("position",String.valueOf(position));
-                        Snackbar.make(view, "Suppression validé :(", 1000).show();
+                        Snackbar.make(view, getResources().getString(R.string.Msg_Info_Deleted), 1000).show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -442,8 +402,6 @@ public class trombinoscopes extends Fragment {
                 error.printStackTrace();
             }
         });
-
-
         s.addToRequestQueue(jsonObjectRequest);
     }
 
@@ -493,5 +451,4 @@ public class trombinoscopes extends Fragment {
             e.printStackTrace();
         }
     }
-
 }

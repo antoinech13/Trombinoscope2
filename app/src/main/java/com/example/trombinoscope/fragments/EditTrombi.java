@@ -70,7 +70,7 @@ public class EditTrombi extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //Instances
     private List<Etudiant> etudiants;
     private EtuAdapter adapter;
     private RecyclerView recyclerView;
@@ -79,9 +79,6 @@ public class EditTrombi extends Fragment {
     private JSONArray Link, Email, Img, Prenom, Nom;
     private int cpt;
     //public FtpConnection co;
-
-
-
     private Button add;
     // Get a non-default Storage bucket
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
@@ -114,16 +111,13 @@ public class EditTrombi extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view =  inflater.inflate(R.layout.fragment_edit_trombi, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
@@ -133,11 +127,7 @@ public class EditTrombi extends Fragment {
         if(this.promo.getRight() < 2)
             add.setVisibility(View.INVISIBLE);
 
-
-        // Log.e("this.promo", String.valueOf(promo)); // afficher la valeur de promo
-        //this.configureRecyclerView();
-
-        this.configureOnClickRecyclerView(); //methode pour passer dans la fiche profile
+        this.configureOnClickRecyclerView(); //methode pour passer dans la fiche profil
         update();
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -145,10 +135,8 @@ public class EditTrombi extends Fragment {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            //your codes here
             requestEtu();
         }
-
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -157,28 +145,23 @@ public class EditTrombi extends Fragment {
                 //finish();
             }
         });
-
         return view;
     }
-
 
     private void configureRecyclerView(){
         // 3.1 - Reset list
         this.etudiants = new ArrayList<>();
-
         // 3.2 - Create adapter passing the list of users
         this.adapter = new EtuAdapter(this.etudiants);
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-
     }
 
     private void requestEtu(){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -198,7 +181,6 @@ public class EditTrombi extends Fragment {
                     }*/
                     StorageReference ref;
                     StreamDownloadTask Task;
-
                     for (int i = 0; i < Nom.length(); i++) {
                         ref = storage.getReference(Img.getString(i));
                         Task = ref.getStream();
@@ -214,7 +196,6 @@ public class EditTrombi extends Fragment {
                                     e.printStackTrace();
                                 }
                                 adapter.notifyDataSetChanged();
-
                             }
                         });
                     }
@@ -227,23 +208,16 @@ public class EditTrombi extends Fragment {
                     }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e("je me fais catche", "walla2");
                 }
                 //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
-
-
-
             }
-
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.e("link", "volley marche pas");
             }
         });
-
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy( DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(jsonObjectRequest);
     }
@@ -275,11 +249,9 @@ public class EditTrombi extends Fragment {
     private void requestImg(String mImageURLString, String img, String nom, String prenom, String email){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
-
         ImageRequest imageRequest = new ImageRequest(mImageURLString, new Response.Listener<Bitmap>() { // Bitmap listener
             @Override
             public void onResponse(Bitmap response) {
-                Log.e("on", "good");
                 etudiants.add(new Etudiant(nom, prenom, img, response, email));
                 adapter.notifyDataSetChanged();
             }
@@ -289,12 +261,10 @@ public class EditTrombi extends Fragment {
                 // Do something with error response
                 error.printStackTrace();
                 //requestImg(mImageURLString, img, nom, prenom, email);
-                Log.e("err", "pas good");
             }
         });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(imageRequest);
-
     }
 
     private void update(){
@@ -303,17 +273,10 @@ public class EditTrombi extends Fragment {
         try {
             js.put("request", "etu");
             js.put("idpromo", id);
-            Log.e("[id.promo]",id);
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-
-//Log.e("promo : ", String.valueOf(promo)); chercher le promo
-        //test flo pour la navigation entre les 2 fragments
 
     //methode pour naviguer entre trombi a edit trombi c est celle qui va m interesser
     private void configureOnClickRecyclerView(){
@@ -321,14 +284,11 @@ public class EditTrombi extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
                         // 1 - Get user from adapter
                         Etudiant etu = adapter.getEtu(position);
-                        // 2 - Show result in a Toast
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Etu",etu);
                         bundle.putParcelable("idTrombi",promo); //testons
-                        //Log.e("Id Trombi","[id.promo]");
                         Navigation.findNavController(v).navigate(R.id.action_editTrombi_to_profile,bundle);
                     }
                 });

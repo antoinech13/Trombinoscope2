@@ -1,4 +1,4 @@
-package com.example.trombinoscope.fragments;
+package com.example.trombinoscope.fragments.PW_Reset;
 
 import android.os.Bundle;
 
@@ -37,6 +37,8 @@ public class Code_Recup_Pw extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    //Instances
     private Button btn_valid;
     private Vector<String> vectorCode =new Vector<String>(5);
     private String code;
@@ -85,8 +87,8 @@ public class Code_Recup_Pw extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_code__recup__pw, container, false);
-        ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
-        ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
+       // ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+        //((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
         btn_valid = view.findViewById(R.id.btn_validCode);
         case1 = view.findViewById(R.id.caseCode1);
         case2 = view.findViewById(R.id.caseCode2);
@@ -103,7 +105,6 @@ public class Code_Recup_Pw extends Fragment {
         case3.addTextChangedListener(new GenericTextWatcher(case3, view));
         case4.addTextChangedListener(new GenericTextWatcher(case4, view));
         case5.addTextChangedListener(new GenericTextWatcher(case5, view));
-
 
         btn_valid.setOnClickListener(new View.OnClickListener() {
 

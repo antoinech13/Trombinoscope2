@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/user_name"
+                    android:text="@string/User_Name"
                     android:textColor="#FFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/user_firstname"
+                    android:text="@string/User_Description"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                             android:id="@+id/user_admin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/admin"
+                            android:text="@string/Admin_Field"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             />
@@ -81,7 +81,7 @@
                             android:id="@+id/user_admin_ndr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/nbr_admin"
+                            android:text="@string/Admin_Field_Number"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
@@ -98,7 +98,7 @@
                             android:id="@+id/user_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/user_edit"
+                            android:text="@string/Edit_Field"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             />
@@ -106,7 +106,7 @@
                             android:id="@+id/user_edit_ndr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/nbr_edit"
+                            android:text="@string/Edit_Field_Number"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
@@ -124,14 +124,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="@string/user_member"
+                            android:text="@string/Member_Field"
                             android:textSize="20sp"
                             />
                         <TextView
                             android:id="@+id/user_member_ndr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/nbr_member"
+                            android:text="@string/Member_Field_Number"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
@@ -156,7 +156,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/email_grey"
-                    android:contentDescription="@string/user_email"/>
+                    android:contentDescription="@string/Label_Illustration_4"/>
                 <TextView
                     android:id="@+id/user_email"
                     android:textStyle="bold"
@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/user_email"/>
+                    android:text="@string/User_Email"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -175,7 +175,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_phone"
-                    android:contentDescription="@string/user_num_tel"/>
+                    android:contentDescription="@string/Label_Illustration_5"/>
                 <TextView
                     android:id="@+id/user_phone"
                     android:textStyle="bold"
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/user_num_tel"/>
+                    android:text="@string/User_Phone_Number"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -193,7 +193,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:contentDescription="@string/statut"
+                    android:contentDescription="@string/Label_Illustration_3"
                     android:src="@drawable/ic_statut_prof"/>
                 <TextView
                     android:id="@+id/user_statut"
@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/statut"/>
+                    android:text="@string/User_Profession"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -212,9 +212,9 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:text="@string/profil_user_comment"
+                    android:text="@string/User_Comment"
                     android:src="@drawable/ic_coment"
-                    android:contentDescription="@string/profil_user_comment" />
+                    android:contentDescription="@string/Label_Illustration_6" />
                 <TextView
                     android:id="@+id/user_comment"
                     android:textStyle="bold"
@@ -222,7 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/profil_user_comment"/>
+                    android:text="@string/User_Comment"/>
             </LinearLayout>
 
         </LinearLayout>

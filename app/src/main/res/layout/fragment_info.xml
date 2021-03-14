@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/title_about_us"
+                    android:text="@string/Title_About_Us"
                     android:textColor="#FFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/description_aboutus"
+                    android:text="@string/Description_About_Us"
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     android:textStyle="bold" />
@@ -75,7 +75,7 @@
                             android:id="@+id/souplesse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/souplesse"
+                            android:text="@string/Attribut_1"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             />
@@ -86,7 +86,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@android:drawable/btn_star_big_on"
-                            android:contentDescription="@string/hello"/>
+                            android:contentDescription="@string/Label_Illustration_2"/>
                     </LinearLayout>
                     <LinearLayout
                         android:gravity="center"
@@ -98,7 +98,7 @@
                             android:id="@+id/quick"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/quick"
+                            android:text="@string/Attribut_2"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             />
@@ -109,7 +109,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@android:drawable/btn_star_big_on"
-                            android:contentDescription="@string/hello"/>
+                            android:contentDescription="@string/Label_Illustration_2"/>
                     </LinearLayout>
                     <LinearLayout
                         android:gravity="center"
@@ -122,7 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:text="@string/innov"
+                            android:text="@string/Attribut_3"
                             android:textSize="20sp"
                             />
 
@@ -130,7 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
-                            android:contentDescription="@string/hello"
+                            android:contentDescription="@string/Label_Illustration_2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@android:drawable/btn_star_big_on" />
@@ -154,7 +154,7 @@
                 android:paddingStart="20dp"
                 android:padding="16dp"
                 android:textSize="20dp"
-                android:text="@string/description_stars"/>
+                android:text="@string/About_Stars"/>
             <TextView
                 android:id="@+id/descriptions_stars"
                 android:textStyle="bold"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
                 android:padding="16dp"
-                android:text="@string/tuto_star"/>
+                android:text="@string/Description_Stars"/>
             <LinearLayout
                 android:paddingStart="35dp"
                 android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@android:drawable/btn_star_big_on"
-                    android:contentDescription="@string/yellow_star"/>
+                    android:contentDescription="@string/Label_Illustration_2"/>
                 <TextView
                     android:id="@+id/user_email"
                     android:textStyle="bold"
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/yellow_star"/>
+                    android:text="@string/Yellow_Star"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -191,7 +191,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@android:drawable/btn_star_big_off"
-                    android:contentDescription="@string/grey_star"/>
+                    android:contentDescription="@string/Label_Illustration_2"/>
                 <TextView
                     android:id="@+id/user_phone"
                     android:textStyle="bold"
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/grey_star"/>
+                    android:text="@string/Grey_Star"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -209,7 +209,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:contentDescription="@string/statut" />
+                    android:contentDescription="@string/Label_Illustration_2" />
                 <TextView
                     android:id="@+id/user_statut"
                     android:textStyle="bold"
@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/no_star"/>
+                    android:text="@string/No_Star"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="25dp"
@@ -227,9 +227,9 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:text="@string/profil_user_comment"
+                    android:text="@string/User_Comment"
                     android:src="@drawable/ic_coment"
-                    android:contentDescription="@string/profil_user_comment" />
+                    android:contentDescription="@string/User_Comment" />
                 <TextView
                     android:id="@+id/user_comment"
                     android:textStyle="bold"
@@ -237,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:text="@string/profil_user_comment"/>
+                    android:text="@string/User_Comment"/>
             </LinearLayout>
 
         </LinearLayout>

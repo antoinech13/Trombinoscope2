@@ -2,132 +2,149 @@
     <!-- String used for Manifest -->
     <string name="app_trombi">Deep Link</string>
 
-    <!-- Strings used for activity login -->
+    <!-- General -->
     <string name="app_name">Trombi</string>
-    <string name="Title_Activity_Login">Connexion</string>
+
+    <!--Fragment Loggin-->
+    <string name="Action_Remember_Me">Se souvenir de moi</string>
+    <string name="Action_No_Account">Vous ne possédez pas de compte ?</string>
+    <string name="Action_No_Account_landscape">Pas de compte ?</string>
+    <string name="Action_Forgot_Pw">Mot de passe oublié ?</string>
+    <string name="action_sign_in_short">Action label mdp</string>
     <string name="Hint_Email">Email</string>
     <string name="Hint_Pw">Mot de passe</string>
     <string name="Action_Valider">Valider</string>
     <string name="Action_Sign_In">Inscription</string>
-    <string name="Label_Welcome">"Bienvenue !"</string>
-    <string name= "action_sign_in_short">N\'importe quoi</string>
+    <string name="Action_RememberMe_Checked">Saved</string>
+    <string name="Title_Trombi">Trombi</string>
 
-    <string name="Title_Activity_Add_Trombi">AddTrombiActivity</string>
-    <string name="Action_Remember_Me">Se souvenir de moi</string>
-    <string name="Action_No_Account">Vous ne possédez pas de compte ?</string>
+    <!-- Fragment Trombinoscope List -->
+    <string name="Title_Trombinoscope">Vos Trombinoscopes</string>
+    <string name="Action_Add">Ajouter</string>
+    <string name="Label_Illustration_7">Menu</string>
+    <string name="Action_Share">Partager</string>
+    <string name="Msg_Info_Trombi_Acces_Denied">Vous n\'avez plus accès à ce trombinoscope</string>
+    <string name="Msg_Info_Echec">Echec</string>
+    <string name="Msg_Info_Invalid_Action">Action non autorisée</string>
+    <string name="Msg_Info_Invalid_Action_Last_Admin">Action impossible : Vous êtes le dernier administrateur de ce trombinoscope</string>
+    <string name="Msg_Info_Valid_Invit">Invitation validée</string>
+    <string name="Msg_Info_User_Add">Utilisateur ajouté</string>
+    <string name="Msg_Info_User_Already_Add">>Utilisateur déjà ajouté</string>
+    <string name="Msg_Info_Status_Changed_Valid">Changement de statut validé</string>
+    <string name="Msg_Info_No_Admin">Action impossible: Aucun administrateur</string>
+    <string name="Msg_Info_Deleted">Suppression validée</string>
+    <string name="Action_Allow_Edition">Autoriser l\'édition</string>
 
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Suivant</string>
-    <string name="previous">Retour</string>
+    <!-- Fragment Add Trombi-->
+    <string name="Title_Add_Trombi">Ajouter un trombinoscope</string>
+    <string name="Hint_formation">Formation - Section</string>
+    <string name="Label_Organism">Organisme:</string>
+    <string name="Hint_Date">date</string>
+    <string name="Hint_Tag">Tag</string>
+    <string name="Msg_Info_Trombi_Add">Trombinoscope ajouté</string>
+    <string name="Err_Trombi_Already_Exist">Trombinoscope déjà existant, contactez l\'administrateur du trombinoscope</string>
+    <string name="Action_Add_Organism">+ Ajouter un organisme</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="student_add">Etudiant ajouté</string>
-    <!--Fragment connexion-->
-    <string name="mot_de_passe">Mot de passe</string>
-    <string name="confirmez_mot_de_passe">Confirmez votre mot de passe</string>
-    <string name="nom">Nom</string>
-    <string name="pseudonyme">Pseudonyme</string>
+    <!-- Fragment Add Organisme-->
+    <string name="Title_Add_Organism">Ajouter un organisme</string>
+    <string name="Hint_Organism_Name">Nom de l\'organisme</string>
+    <string name="Hiny_City">Ville</string>
+    <string name="Hint_Postal_Code">Code postal</string>
+    <string name="Hint_Country">Pays</string>
+
+    <!-- Fragment Add members to trombi-->
+    <string name="Action_Take_Picture">Photo</string>
+    <string name="Action_Import_From_Gallery">Gallerie</string>
+    <string name="Action_OCR">OCR</string>
+    <string name="Action_Next">Suivant</string>
+    <string name="Msg_Info_Member_Add">Le membre a été ajouté</string>
+
+    <!-- Fragment Member profile -->
+    <string name="Title_Member_Profile">Profil du membre</string>
+    <string name="Action_Delete">Supprimer</string>
+    <string name="Msg_Info_Member_Deleted">\"Le membre a bien été supprimé \"</string>
+    <string name="Err_Member_Deleted">Le membre n\'a pas pu être supprimé</string>
+
     <!--Fragment inscription-->
-    <string name="Msg_err_saisie_SignIn">Saisie invalide, Veuillez compléter tous les champs</string>
-    <string name="Msg_Err_MDP_diff">Les mots de passe saisis sont diférents</string>
-    <string name="Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
-    <string name="SignIn_pseudo_email_invalid">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
-    <string name="action_create_acount">Pas de compte ?</string>
-    <string name="protect_data">J\'accepte les conditions d\'utilisation</string>
+    <string name="Hint_LastName">Nom</string>
+    <string name="Hint_FirstName">Prénom</string>
+    <string name="Hint_Pseudo">Pseudonyme</string>
+    <string name="Hint_Confirm_Pw">Confirmez votre mot de passe</string>
+    <string name="Action_Valid_Inscription">S\'inscrire</string>
+    <string name="Info_Msg_Inscription_valid">\"Votre inscription a été prise en compte, vous allez recevoir un email de confirmation \"</string>
+    <string name="Title_SignIn">Inscription</string>
 
-    <!--condition utilisateurs-->
-    <string name="ConditionUser">En savoir plus sur les conditions d\'utilisation!</string>
-    <string name="condition_header">Confidentialité et sécurité</string>
-    <string name="condition_subtitle">Conditions d’utilisation</string>
-    <string name="description_condition_user">Les présentes Conditions d\’utilisation (ou « Conditions ») régissent votre utilisation de Trombi, sauf lorsque nous indiquons expressément que des conditions distinctes (et non les présentes) s\’appliquent. En créant un compte Trombi ou en utilisant notre Trombinoscope, vous acceptez les présentes Conditions.
+    <!--conditions utilisateurs-->
+    <string name="Action_Terms_Use">J\'accepte les conditions d\'utilisation</string>
+    <string name="Action_Show_Terms_Use">En savoir plus sur les conditions d\'utilisation!</string>
+    <string name="Terms_Use_Header">Confidentialité et sécurité</string>
+    <string name="Terms_Use_Subtitle">Conditions d’utilisation</string>
+    <string name="Terms_Use_Description">Les présentes Conditions d\’utilisation (ou « Conditions ») régissent votre utilisation de Trombi, sauf lorsque nous indiquons expressément que des conditions distinctes (et non les présentes) s\’appliquent. En créant un compte Trombi ou en utilisant notre Trombinoscope, vous acceptez les présentes Conditions.
         Le Service Trombi est l\’un des projets réalisés par des étudiants du MCCI (Master Compétences Complémentaires en Informatique) 2021. Ces projets ont été proposés par les professeurs de ce master faisant partis de l\’université d’Aix-Marseille. Par conséquent, les présentes Conditions d\’utilisation constituent un accord entre vous et l\'université d\’Aix-Marseille.  </string>
-    <string name="welcome_condition">Bienvenue sur Trombi</string>
-    <string name="service_subtitle_condition">"Le Service Trombi "</string>
-    <string name="service_condition_text">"Nous acceptons de vous fournir le Service Trombi. Le Service comprend l\’ensemble des produits, des fonctionnalités, des applications, des services, des technologies et des logiciels Trombi que nous vous fournissons afin d\’accomplir la vocation du Trombi : vous permettre de réaliser un trombinoscope rapidement et facilement. Le Service inclut les aspects suivants : Offrir des opportunités pour créer et communiquer les trombinoscopes. Nous souhaitons renforcer votre environnement de travail et/ou d’études. Nous utilisons ces informations afin de vous aider à créer, à trouver, et à partager vos trombinoscopes. Cela consiste notamment à vous offrir divers moyens d\’utiliser Trombi en fonction de ce que vous et d\’autres personnes faites sur Trombi et en dehors. Créer un environnement positif, inclusif et sûr Nous développons et utilisons des outils, et offrons des ressources aux membres de notre communauté afin de contribuer à rendre leurs expériences positives et inclusives, y compris lorsque nous pensons qu\’ils pourraient avoir besoin de notre aide.    Nous utilisons toutes les informations à notre disposition, y compris les vôtres, pour tenter de maintenir la sécurité de notre plateforme. Il se peut également que nous partagions des informations concernant une utilisation abusive ou du contenu préjudiciable avec d\’autres Entités de l\’université d’Aix-Marseille ou avec les autorités. Développer et utiliser des technologies nous permettant d’offrir constamment des services à notre communauté grandissante La gestion et l\’analyse des informations pour notre communauté grandissante sont essentielles à notre Service. Les technologies automatisées nous permettent également d\’assurer le fonctionnement et l\’intégrité de notre Service. Fournir des expériences homogènes et fluides sur les autres Produits de l\’université d’Aix-Marseille, qui partagent des technologies, des systèmes, des statistiques et des informations, y compris des informations vous concernant dont nous disposons, afin de fournir des services de meilleure qualité, plus sûrs et plus sécurisés. Afin de faire fonctionner notre Service, nous devons stocker et transférer des données à travers nos systèmes. "</string>
-    <!--Fragment editer la page de l'étudiant-->
-    <string name="profile">Profile</string>
-    <string name="editer">Editer</string>
-    <string name="supprimer">Supprimer</string>
-    <string name="emial_non_val">Email non valide</string>
-    <string name="send_Code">Envoyer le code</string>
-    <string name="consigne_Recupération_mdp">Veuillez renseigner votre email pour vous envoyer le code de récupération de votre mot de passe</string>
-    <string name="chp_email_vide">Veuillez renseigner votre email</string>
-    <string name="code_Send">Un code vient de vous être envoyé par email</string>
+    <string name="Terms_Use_Welcome">Bienvenue sur Trombi</string>
+    <string name="Term_Use_Trombi_Service">"Le Service Trombi "</string>
+    <string name="Terms_Use_Service_Text">"Nous acceptons de vous fournir le Service Trombi. Le Service comprend l\’ensemble des produits, des fonctionnalités, des applications, des services, des technologies et des logiciels Trombi que nous vous fournissons afin d\’accomplir la vocation du Trombi : vous permettre de réaliser un trombinoscope rapidement et facilement. Le Service inclut les aspects suivants : Offrir des opportunités pour créer et communiquer les trombinoscopes. Nous souhaitons renforcer votre environnement de travail et/ou d’études. Nous utilisons ces informations afin de vous aider à créer, à trouver, et à partager vos trombinoscopes. Cela consiste notamment à vous offrir divers moyens d\’utiliser Trombi en fonction de ce que vous et d\’autres personnes faites sur Trombi et en dehors. Créer un environnement positif, inclusif et sûr Nous développons et utilisons des outils, et offrons des ressources aux membres de notre communauté afin de contribuer à rendre leurs expériences positives et inclusives, y compris lorsque nous pensons qu\’ils pourraient avoir besoin de notre aide.    Nous utilisons toutes les informations à notre disposition, y compris les vôtres, pour tenter de maintenir la sécurité de notre plateforme. Il se peut également que nous partagions des informations concernant une utilisation abusive ou du contenu préjudiciable avec d\’autres Entités de l\’université d’Aix-Marseille ou avec les autorités. Développer et utiliser des technologies nous permettant d’offrir constamment des services à notre communauté grandissante La gestion et l\’analyse des informations pour notre communauté grandissante sont essentielles à notre Service. Les technologies automatisées nous permettent également d\’assurer le fonctionnement et l\’intégrité de notre Service. Fournir des expériences homogènes et fluides sur les autres Produits de l\’université d’Aix-Marseille, qui partagent des technologies, des systèmes, des statistiques et des informations, y compris des informations vous concernant dont nous disposons, afin de fournir des services de meilleure qualité, plus sûrs et plus sécurisés. Afin de faire fonctionner notre Service, nous devons stocker et transférer des données à travers nos systèmes. "</string>
 
-    <string name="enter_code">Entrez le code reçu par Email</string>
-    <string name="valid">Valider</string>
-
-    <string name="forgot_Pw">Mot de passe oublié ?</string>
+    <!--Fragments Recup MDP-->
+    <string name="Instructions_Reset_Pw">Veuillez renseigner votre email pour vous envoyer le code de récupération de votre mot de passe</string>
+    <string name="Info_Msg_Code_Sent">Un code vient de vous être envoyé par email</string>
+    <string name="Action_Send_Code">Envoyer le code</string>
+    <string name="Instructions_Reset_Pw_2">Entrez le code reçu par Email</string>
     <string name="rest_Pw">Réinitialiser votre mot de passe</string>
     <string name="new_Pw">Nouveau mot de passe</string>
     <string name="confirm_Reset_Pw">Corfirmez nouveau mot de passe</string>
     <string name="reset">Réinitialiser</string>
-    <string name="reset_Pw_valid">Le changement du mot de passe a été pris en compte</string>
+    <string name="Info_Msg_Reset_Pw_Valid">Le changement du mot de passe a été pris en compte</string>
 
-    <string name="inscription">Inscription</string>
-    <string name="prenom">Prénom</string>
-    <string name="inscrire">S\'inscrire</string>
-    <string name="background_welcome">Bienvenue sur Trombi</string>
-    <string name="trombi">Trombi</string>
-    //je crois que c'est à partir de là que tu peux copié le string
-    <string name="formation">Formation</string>
-    <string name="universite">Université:</string>
-    <string name="date">date</string>
-    <string name="tag">Tag</string>
-    <string name="title_add_trombi">Ajouter un trombinoscope</string>
-    <string name="title_add_university">Ajouter une université</string>
-    <string name="university_name">Nom de l\'université</string>
-    <string name="ville">Ville</string>
-    <string name="code_postale">Code postale</string>
-    <string name="pays">pays</string>
-    <string name="ajouter">AJOUTER</string>
-    <string name="hello">Hello</string>
+    <!-- Fragment User Profile-->
+    <string name="Label_Illustration_1">"Illustration personnage"</string>
+    <string name="User_Name">Yogi Prasetyawan</string>
+    <string name="User_Description">Like see the sky and interested in programming</string> // Est ce qu'on met vraiment ça ? Stockage ++ dans la BD
+    <string name="Admin_Field">Admin</string>
+    <string name="Admin_Field_Number">2</string>
+    <string name="Edit_Field">Edit</string>
+    <string name="Edit_Field_Number">5</string>
+    <string name="Member_Field">Membre</string>
+    <string name="Member_Field_Number">12</string>
+    <string name="Label_Illustration_4">"Envellope"</string>
+    <string name="User_Email">yogi.enjoyers22@gmail.com</string>
+    <string name="Label_Illustration_5">"Telephone"</string>
+    <string name="User_Phone_Number">+62 853 3424 1984</string> // A gerer dans la BD
+    <string name="Label_Illustration_3">Carte personnage</string>
+    <string name="User_Profession">professeure de design thinking</string>
+    <string name="Label_Illustration_6">Notes</string>
+    <string name="User_Comment">Feel free to contact me</string>
+
+    <!-- Fragment A propos-->
+    <string name="Title_About_Us">Qu\'est-ce que Trombi ?</string>
+    <string name="Description_About_Us">Avec Trombi, le trombinoscope va plus loin qu\'un simple organigramme. Cette application propose un moyen organisationnel poussé.</string>
+    <string name="Attribut_1">Souple</string>
+    <string name="Attribut_2">Rapide</string>
+    <string name="Attribut_3">Innovant</string>
+    <string name="About_Stars">Qu\'est-ce que les étoiles ?</string>
+    <string name="Description_Stars">Les étoiles vous permettent de connaitre vos droits sur le trombinoscope. Il existe 3 types de droits : le droit administratif, le droit d\'édition et la participation en tant que membre.</string>
+    <string name="Yellow_Star">Ces étoiles signifient que vous êtes l\'administrateur/administratrice de ce trombinoscope.</string>
+    <string name="Grey_Star">Ces étoiles signifient que vous n\'êtes pas l\'administrateur/trice mais vous avez un pouvoir d\'édition.</string>
+    <string name="No_Star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
+    <string name="Label_Illustration_2">Etoile</string>
 
     <!-- Strings used for error message -->
-    <string name="Err_Reset_Pw">Une erreur est survenue</string>
     <string name="Err_Saisie_Chp_Vide">Saisie invalide, veuillez compléter tous les champs</string>
+    <string name="Err_Pw_Diff">Les mots de passe saisis sont diférents</string>
+    <string name="Err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
+    <string name="Err_Duplicated_Pw_Email">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
+    <string name="Err_Reset_Pw">Une erreur est survenue</string>
     <string name="Err_code">Le code est faux</string>
     <string name="Err_Account_Doesnt_Exist">Le compte n\'existe pas</string>
-    <string name="Err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
-    <string name="Err_Invalid_Username">Prenom invalide</string>
     <string name="Err_Invalid_Pw">Le mot de passe doit etre doit contenir plus de caractères</string>
-    <string name="Err_Login_Failed">"Echec connexion"</string>
-    <string name="camera_acces">Vous devez autoriser l\'utilisation de la camera</string>
+    <string name="Err_Login_Failed">Echec connexion</string>
+    <string name="Err_Camera_Acces">Vous devez autoriser l\'utilisation de la camera</string>
+    <string name="Err_Champ_Email_Vide">Veuillez renseigner votre email</string>
+    <string name="Err_Invalid_Email">Email non valide</string>
 
-    <!-- Strings used for le fragment profile -->
-    <string name="Delete_member">\"Le membre a bien etait supprimé \"</string>
-    <string name="Delete_member_invalid">Le membre n\'a pas pu etre supprime</string>
-    <string name="title_trombi">Vos Trombinoscopes</string>
-    <string name="partager">Partager</string>
-    <string name="email">Email</string>
-    <string name="autoriser_edition">Autoriser édition</string>
 
-    <!-- Strings used for le fragment profile user-->
-    <string name="profil_user_comment">Feel free to contact me</string>
-    <string name="admin">Admin</string>
-    <string name="statut">professeure de design thinking</string>
-    <string name="user_num_tel">+62 853 3424 1984</string>
-    <string name="user_email">yogi.enjoyers22@gmail.com</string>
-    <string name="user_name">Yogi Prasetyawan</string>
-    <string name="nbr_member">12</string>
-    <string name="user_firstname">Like see the sky and interested in programming</string>
-    <string name="nbr_admin">2</string>
-    <string name="user_edit">Edit</string>
-    <string name="nbr_edit">5</string>
-    <string name="user_member">Membre</string>
 
-    <!-- Strings used for le fragment A propos-->
-    <string name="title_about_us">Qu\'est-ce que Trombi ?</string>
-    <string name="description_aboutus">Avec Trombi, le trombinoscope va plus loin qu\'un simple organigramme étudiant. Cette application propose un moyen organisationnel poussé.</string>
-    <string name="souplesse">Souple</string>
-    <string name="quick">Rapide</string>
-    <string name="innov">Innovant</string>
-    <string name="description_stars">Qu\'est-ce que les étoiles ?</string>
-    <string name="tuto_star">Les étoiles vous permettent de connaitre vos droits sur le trombinoscope. Il existe 3 types de droits : le droit administratif, le droit d\'édition et la participation en tant que membre.</string>
-    <string name="yellow_star">Ces étoiles signifient que vous êtes l\'administrateur/administratrice de ce trombinoscope.</string>
-    <string name="grey_star">Ces étoiles signifient que vous n\'êtes pas l\'administrateur/trice mais vous avez un pouvoir d\'édition.</string>
-    <string name="no_star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
+
+    <!-- New String Ressources-->
+
 </resources>

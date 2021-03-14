@@ -187,7 +187,12 @@ public class CamFrag extends Fragment {
                             b.putString("prenom", getArguments().getString("prenom"));
 
                         Log.e("bitmap", bitmap.toString());
-                        Navigation.findNavController(v).navigate(R.id.action_camFrag2_to_addToTrombi, b);
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Navigation.findNavController(v).navigate(R.id.action_camFrag_to_addToTrombi, b);
+                            }
+                        });
                     }
 
                     @Override

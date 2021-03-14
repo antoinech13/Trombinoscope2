@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         {
             String path = uri.toString();
             Toast.makeText(MainActivity.this,"Path ="+path,Toast.LENGTH_LONG).show();
-            //redirection vers le fragment SignIn
+            //redirection vers le fragment Sign_In_Fragment
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);  // Hostfragment
             NavInflater inflater = navHostFragment.getNavController().getNavInflater();
             NavGraph graph = inflater.inflate(R.navigation.nav_file);
@@ -99,12 +99,9 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     }
 
     public void setDrawer_Locked() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+       // drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
     public void setDrawer_UnLocked() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
-
-
-
 }

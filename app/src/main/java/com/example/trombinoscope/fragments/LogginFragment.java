@@ -44,8 +44,9 @@ public class LogginFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    //Instances
     private Button btn_loggin;
-    private Button btn_register; //register
+    private Button btn_register;
     private EditText pseudo, password;
     private JSONObject js = new JSONObject();
     private CheckBox rememberCheckbox;
@@ -139,7 +140,7 @@ public class LogginFragment extends Fragment {
                     editor.putBoolean("CheckBox", true);
 
                     editor.commit();
-                    Snackbar.make(btn_loggin, "Saved", 1000).show();
+                    Snackbar.make(btn_loggin, getResources().getString(R.string.Action_RememberMe_Checked), 1000).show();
                 }
                 else {
                     editor.clear();
@@ -149,12 +150,10 @@ public class LogginFragment extends Fragment {
                     pwHash=hash.hachageMDP(Password);
                     Login(view, Pseudo, Password);
                 } else {
-                    Snackbar.make(v, "Entrez des données valides", 1000).show();
+                    Snackbar.make(v, getResources().getString(R.string.Err_Saisie_Chp_Vide), 1000).show();
                 }
             }
         });
-
-
         return view;
     }
 
@@ -167,7 +166,6 @@ public class LogginFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try {
                     if (response.getString("res").equals("true")) {
                         Navigation.findNavController(view).navigate(
@@ -176,17 +174,13 @@ public class LogginFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
         });
-
-
         s.addToRequestQueue(jsonObjectRequest);
     }
 
@@ -199,6 +193,4 @@ public class LogginFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 }

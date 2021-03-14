@@ -1,4 +1,4 @@
-package com.example.trombinoscope.fragments;
+package com.example.trombinoscope.fragments.PW_Reset;
 
 import android.os.Bundle;
 
@@ -8,45 +8,43 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
+import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddUniversityFragment#newInstance} factory method to
+ * Use the {@link Forgot_Pw#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddUniversityFragment extends Fragment {
+public class Forgot_Pw extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    //Instances
+    private Button btn_sendCode;
+    private EditText email;
+    private JSONObject js = new JSONObject();
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private TextView ville, univ, cp, pays;
-    private Button val;
-    private JSONObject js = new JSONObject();
 
-    public AddUniversityFragment() {
+    public Forgot_Pw() {
         // Required empty public constructor
     }
 
@@ -56,11 +54,11 @@ public class AddUniversityFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddUniversityFragment.
+     * @return A new instance of fragment ForgotPw.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddUniversityFragment newInstance(String param1, String param2) {
-        AddUniversityFragment fragment = new AddUniversityFragment();
+    public static Forgot_Pw newInstance(String param1, String param2) {
+        Forgot_Pw fragment = new Forgot_Pw();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,6 +69,7 @@ public class AddUniversityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Verification args pas nuls
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -81,59 +80,70 @@ public class AddUniversityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_university, container, false);
-        ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
-        ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
-        univ = view.findViewById(R.id.universityName);
-        pays = view.findViewById(R.id.pays);
-        cp = view.findViewById(R.id.cp);
-        ville = view.findViewById(R.id.city);
-        val = view.findViewById(R.id.subUniv);
+        View view= inflater.inflate(R.layout.fragment_forgot__pw, container, false);
+       // ((MainActivity)getActivity()).setDrawer_Locked();//Gestion du nav drawer
+       // ((MainActivity)getActivity()).getSupportActionBar().hide();//Gestion de la Toolbar
+        btn_sendCode = view.findViewById(R.id.SendCode);
+        email = view.findViewById(R.id.emailToSend);
 
-        val.setOnClickListener(new View.OnClickListener() {
+        btn_sendCode.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                request(v);
+                String Email = email.getText().toString().trim();
+                //Verification que les champs sont remplis
+                if (Email.isEmpty())
+                    Snackbar.make(v, getResources().getString(R.string.Err_Champ_Email_Vide), 1000).show();
+                else {
+                    checkValidEmail(v, Email);
+                }
             }
         });
-
         return view;
     }
 
-    public void request(View view){
+
+    //Verification du mail
+    private void checkValidEmail(View v, String Email){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
-        update();
-
+        update(Email);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Navigation.findNavController(view).navigate(R.id.action_addUniversityFragment_to_addTrombinoscopes);
-
+                try {
+                    if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
+                        Snackbar.make(v, getResources().getString(R.string.Info_Msg_Code_Sent), Snackbar.LENGTH_LONG).show();
+                        //Création bundle
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email", Email); // Recupération email dans le bundle
+                        Navigation.findNavController(v).navigate(R.id.action_forgot_Pw_to_code_Recup_Pw, bundle);//Nav vers page code verification + transfert via bundle de l'eamil
+                    }
+                    else
+                        Snackbar.make(v, getResources().getString(R.string.Err_Account_Doesnt_Exist), Snackbar.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
         });
-
-
         s.addToRequestQueue(jsonObjectRequest);
     }
 
-
-    public void update(){
+    //Envoi les variables a flask
+    public void update(String Email){
         try {
-            js.put("request", "addUniv");
-            js.put("univ", univ.getText());
-            js.put("ville", ville.getText());
-            js.put("pays", pays.getText());
-            js.put("cp", cp.getText());
-
+            js.put("request", "CheckValidMail");
+            js.put("email",this.email.getText());
         } catch (JSONException e) {
             e.printStackTrace();
+            // Obligatoire avec jsonObject
         }
     }
+
+
 }

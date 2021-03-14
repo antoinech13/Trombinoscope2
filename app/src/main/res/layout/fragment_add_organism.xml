@@ -12,7 +12,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:fontFamily="@font/allan"
-        android:text="@string/title_add_university"
+        android:text="@string/Title_Add_Organism"
         android:textColor="@color/bleu_cobalt"
         android:textSize="30sp"/>
 
@@ -25,7 +25,7 @@
         android:textColor="@color/bleu_cobalt"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/university_name"
+        android:hint="@string/Hint_Organism_Name"
         android:inputType="textCapWords"
         android:padding="16dp"
         android:singleLine="true"
@@ -42,7 +42,7 @@
         android:textColor="@color/bleu_cobalt"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/ville"
+        android:hint="@string/Hiny_City"
         android:inputType="textEmailAddress"
         android:padding="16dp"
         android:singleLine="true"
@@ -59,7 +59,7 @@
         android:textColor="@color/bleu_cobalt"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/code_postale"
+        android:hint="@string/Hint_Postal_Code"
         android:inputType="phone"
         android:padding="16dp"
         android:singleLine="true"
@@ -76,7 +76,7 @@
         android:textColor="@color/bleu_cobalt"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/pays"
+        android:hint="@string/Hint_Country"
         android:inputType="textCapWords"
         android:padding="16dp"
         android:singleLine="true"
@@ -90,7 +90,7 @@
         android:layout_height="244dp"
         android:src="@drawable/woman2"
         android:layout_gravity="center"
-        android:contentDescription="@string/hello">
+        android:contentDescription="@string/Label_Illustration_2">
     </ImageView>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -101,7 +101,7 @@
         android:textSize="15sp"
         android:textColor="@color/white"
         android:background="@drawable/btn_bg"
-        android:text="@string/valid"
+        android:text="@string/Action_Valider"
         android:textStyle="bold"
         />
 

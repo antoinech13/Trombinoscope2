@@ -6,8 +6,8 @@
 
 <item
         android:id="@+id/trombi_add_admin"
-        android:title="@string/partager" />
+        android:title="@string/Action_Share" />
     <item
         android:id="@+id/trombi_supression"
-        android:title="@string/supprimer" />
+        android:title="@string/Action_Delete" />
 </menu>

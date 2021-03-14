@@ -19,12 +19,12 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nom"/>
+        android:text="@string/Hint_LastName"/>
 
     <TextView
         android:id="@+id/firstname_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/prenom" />
+        android:text="@string/Hint_FirstName" />
 
 </LinearLayout>

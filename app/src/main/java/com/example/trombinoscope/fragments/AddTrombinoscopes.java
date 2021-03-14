@@ -53,7 +53,7 @@ public class AddTrombinoscopes extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    //Instances
     private TextView formation, tag, date;
     private Button validate;
     private Spinner spinner;
@@ -91,12 +91,10 @@ public class AddTrombinoscopes extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -155,21 +153,16 @@ public class AddTrombinoscopes extends Fragment {
         };
         final Rect bounds = new Rect();
         textPaint.getTextBounds(text, 0, text.length(), bounds);
-
         final Bitmap bmp = Bitmap.createBitmap(bounds.width(), bounds.height(), Bitmap.Config.RGB_565); //use ARGB_8888 for better quality
         final Canvas canvas = new Canvas(bmp);
         canvas.drawText(text, 0, 20f, textPaint);
-
         return bmp;
     }
-
-
 
     private void request (View view, boolean flag){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
         update(flag);
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -184,7 +177,7 @@ public class AddTrombinoscopes extends Fragment {
                             categories.add(univ.getString(i) + ", " + cp.getString(i) + ", " + ville.getString(i) + ", " + pays.getString(i));
                         }
                         Collections.sort(categories);
-                        categories.add("+ Ajouter une université");
+                        categories.add(getString(R.string.Action_Add_Organism));
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categories);
 
                         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -194,8 +187,8 @@ public class AddTrombinoscopes extends Fragment {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                             {
                                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                                if(categories.get(position).equals("+ Ajouter une université"))
-                                    Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_addUniversityFragment);
+                                if(categories.get(position).equals("+ Ajouter un organisme"))
+                                    Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_addOrganism);
                             } // to close the onItemSelected
                             public void onNothingSelected(AdapterView<?> parent) {}
                         });
@@ -207,44 +200,33 @@ public class AddTrombinoscopes extends Fragment {
 
                     try {
                         if(response.getString("res").equals("true")){
-                            Snackbar.make(view, "Promotion ajouté", 1000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Msg_Info_Trombi_Add), 1000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);}
                         else if(response.getString("res").equals("none")) {
-                            Snackbar.make(view, "Promotion déjà existante. Contactez l'administrateur de la promotion.", 2000).show();
+                            Snackbar.make(view, getResources().getString(R.string.Err_Trombi_Already_Exist), 2000).show();
                             Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);
                         }
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
         });
-
-
         s.addToRequestQueue(jsonObjectRequest);
     }
 
-
     public void update(boolean flag){
-
         if(flag){
             try {
                 js.put("request", "infoUnives");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         else{
             try {
@@ -260,10 +242,5 @@ public class AddTrombinoscopes extends Fragment {
                 e.printStackTrace();
             }
         }
-
-
-
     }
-
-
 }

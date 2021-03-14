@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_white_bg"
     android:id="@+id/signFrag"
-    tools:context=".fragments.SignIn">
+    tools:context=".fragments.Sign_In_Fragment">
 
     <TextView
         android:paddingLeft="16dp"
@@ -21,7 +21,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="150dp"
         android:fontFamily="@font/allan"
-        android:text="@string/inscrire"
+        android:text="@string/Action_Valid_Inscription"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/et_bg"
-        android:hint="@string/nom"
+        android:hint="@string/Hint_LastName"
         android:inputType="text"
         android:padding="16dp"
         android:textColor="@color/white"
@@ -55,7 +55,7 @@
         android:layout_marginTop="130dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/et_bg"
-        android:hint="@string/prenom"
+        android:hint="@string/Hint_FirstName"
         android:inputType="text"
         android:padding="16dp"
         android:textColor="@color/white"
@@ -93,7 +93,7 @@
         android:layout_marginTop="250dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/et_bg"
-        android:hint="@string/pseudonyme"
+        android:hint="@string/Hint_Pseudo"
         android:inputType="text"
         android:padding="16dp"
         android:textColor="@color/white"
@@ -112,7 +112,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="310dp"
-        android:hint="@string/mot_de_passe"
+        android:hint="@string/Hint_Pw"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -133,7 +133,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="370dp"
-        android:hint="@string/confirmez_mot_de_passe"
+        android:hint="@string/Hint_Confirm_Pw"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -152,7 +152,7 @@
         android:layout_marginTop="350dp"
         android:layout_marginBottom="150dp"
         android:background="@drawable/btn_bg"
-        android:text="@string/inscrire"
+        android:text="@string/Action_Valid_Inscription"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -168,14 +168,14 @@
         android:layout_marginBottom="80dp"
         android:textColor="@color/bleu_cobalt"
         android:buttonTint="@color/bleu_cobalt"
-        android:text="@string/protect_data"
+        android:text="@string/Action_Terms_Use"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/ConditionUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ConditionUser"
+        android:text="@string/Action_Show_Terms_Use"
         android:layout_centerInParent="true"
         android:textSize="15sp"
         android:textStyle="italic"

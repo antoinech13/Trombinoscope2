@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,16 +24,15 @@ import com.example.trombinoscope.dataStructure.Etudiant;
 import com.example.trombinoscope.dataStructure.Trombi;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Profile_trombi#newInstance} factory method to
+ * Use the {@link Member_Profile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Profile_trombi extends Fragment {
+public class Member_Profile extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,7 +59,7 @@ public class Profile_trombi extends Fragment {
     private String idPromo;
 
 
-    public Profile_trombi() {
+    public Member_Profile() {
         // Required empty public constructor
     }
 
@@ -74,8 +72,8 @@ public class Profile_trombi extends Fragment {
      * @return A new instance of fragment profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static Profile_trombi newInstance(String param1, String param2) {
-        Profile_trombi fragment = new Profile_trombi();
+    public static Member_Profile newInstance(String param1, String param2) {
+        Member_Profile fragment = new Member_Profile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -99,7 +97,7 @@ public class Profile_trombi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        View view =  inflater.inflate(R.layout.fragment_member_profile, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
         // l objet etudiant
@@ -198,11 +196,11 @@ public class Profile_trombi extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
-                        Snackbar.make(v, getResources().getString(R.string.Delete_member), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_Deleted), Snackbar.LENGTH_LONG).show();
                         Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi);//Retour à la page des membres
                     }
                     else
-                        Snackbar.make(v, getResources().getString(R.string.Delete_member_invalid), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(v, getResources().getString(R.string.Err_Member_Deleted), Snackbar.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

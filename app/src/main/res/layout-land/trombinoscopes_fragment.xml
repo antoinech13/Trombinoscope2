@@ -45,7 +45,7 @@
             android:layout_marginEnd="141dp"
             android:layout_marginBottom="48dp"
             android:background="@drawable/btn_bg"
-            android:text="@string/ajouter"
+            android:text="@string/Action_Add"
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
