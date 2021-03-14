@@ -174,44 +174,6 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_phone"
-                    android:contentDescription="@string/Label_Illustration_5"/>
-                <TextView
-                    android:id="@+id/user_phone"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:text="@string/User_Phone_Number"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="25dp"
-                android:paddingStart="35dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:contentDescription="@string/Label_Illustration_3"
-                    android:src="@drawable/ic_statut_prof"/>
-                <TextView
-                    android:id="@+id/user_statut"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:text="@string/User_Profession"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="25dp"
-                android:paddingStart="35dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
                     android:text="@string/User_Comment"
                     android:src="@drawable/ic_coment"
                     android:contentDescription="@string/Label_Illustration_6" />
@@ -226,18 +188,5 @@
             </LinearLayout>
 
         </LinearLayout>
-<!--
-        <Button
-            android:background="@drawable/button"
-            android:textColor="#FFF"
-            android:layout_marginTop="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Follow Baby"
-            android:padding="20dp"
-            android:layout_marginBottom="20dp"
-            />
--->
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dip"
+    android:layout_margin="15dp"
     android:background="@drawable/customborder">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,28 +18,42 @@
             android:id="@+id/profilePictureEtu"
             android:layout_width="177dp"
             android:layout_height="102dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="23dp"
             android:layout_weight="1"
-            tools:layout_editor_absoluteX="-28dp"
-            tools:layout_editor_absoluteY="16dp"
+            android:contentDescription="@string/student_picture"
+            app:layout_constraintBottom_toTopOf="@+id/nomEtu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/nomEtu"
             android:layout_width="149dp"
             android:layout_height="30dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
-            android:text="TextView"
-            app:layout_constraintTop_toBottomOf="@+id/profilePictureEtu"
-            tools:layout_editor_absoluteX="16dp" />
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="7dp"
+            android:text="@string/student_name"
+            app:layout_constraintBottom_toTopOf="@+id/prenomEtu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePictureEtu" />
 
         <TextView
             android:id="@+id/prenomEtu"
             android:layout_width="144dp"
             android:layout_height="29dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintTop_toBottomOf="@+id/nomEtu"
-            tools:layout_editor_absoluteX="16dp" />
+            android:layout_marginEnd="49dp"
+            android:text="@string/student_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomEtu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

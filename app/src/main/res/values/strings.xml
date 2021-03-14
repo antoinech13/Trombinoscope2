@@ -142,7 +142,9 @@
     <string name="Err_Champ_Email_Vide">Veuillez renseigner votre email</string>
     <string name="Err_Invalid_Email">Email non valide</string>
 
-
+    <!-- layout etu frag-->
+    <string name="student_picture">Photo de l\'étudiant(e)</string>
+    <string name="student_name">Nom de l\'étudiant(e)</string>
 
 
     <!-- New String Ressources-->

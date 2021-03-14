@@ -36,6 +36,7 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         dateView = itemView.findViewById(R.id.emailpopup);
         adminStar = itemView.findViewById(R.id.adminStar);
         editStar = itemView.findViewById(R.id.editStar);
+        LL = itemView.findViewById(R.id.linearlayoutInfo);
         itemView.setOnCreateContextMenuListener(this);
         //ButterKnife.bind(this, itemView);
     }
@@ -44,15 +45,16 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.tab = tab;
         this.textView.setText(tab.getFormation());
         this.dateView.setText(tab.getDate());
-        //test couleur aléatoire
         int [] color = Trombi.getGcolors();
         GradientDrawable gd = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[] {color[0],color[1]});
         gd.setCornerRadius(0f);
-        this.img.setBackgroundDrawable(gd);
+        this.LL.setBackgroundDrawable(gd);
         this.imgText.setText(tab.getTag());
-        this.imgText.setTextColor(Color.WHITE);
+        this.imgText.setTextColor(color[0]);
+        this.dateView.setTextColor(Color.WHITE);
+        this.textView.setTextColor(Color.WHITE);
         this.imgText.setTypeface(null, Typeface.BOLD);
         if(tab.getRight() == 3)
             adminStar.setVisibility(View.VISIBLE);
