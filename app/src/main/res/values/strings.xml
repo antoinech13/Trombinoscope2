@@ -15,7 +15,7 @@
     <string name="Hint_Pw">Mot de passe</string>
     <string name="Action_Valider">Valider</string>
     <string name="Action_Sign_In">Inscription</string>
-    <string name="Action_RememberMe_Checked">Saved</string>
+    <string name="Action_RememberMe_Checked">Bienvenue</string>
     <string name="Title_Trombi">Trombi</string>
 
     <!-- Fragment Trombinoscope List -->
@@ -143,8 +143,8 @@
     <string name="Err_Invalid_Email">Email non valide</string>
 
     <!-- layout etu frag-->
-    <string name="student_picture">Photo de l\'étudiant(e)</string>
-    <string name="student_name">Nom de l\'étudiant(e)</string>
+    <string name="student_picture">Photo du membre</string>
+    <string name="student_name">Nom du membre</string>
 
 
     <!-- New String Ressources-->
