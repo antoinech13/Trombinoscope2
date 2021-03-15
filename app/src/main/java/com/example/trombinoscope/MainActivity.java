@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Gravity;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.trombinoscope.certificate.Certificate;
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
             }
         });
 
+        //Paramètrage de la recherche dans la toolbar
+        SearchView search = toolbar.findViewById(R.id.toolbarSearch);
+        search.setVisibility(View.INVISIBLE);
+        search.setImeOptions(EditorInfo.IME_ACTION_DONE);
         //deep link
         Uri uri = getIntent().getData();
         if(uri!=null)

@@ -192,6 +192,8 @@
     <string name="no_star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Hint_Trombi">Trombinoscope</string>
+    <string name="Hint_member">Membre</string>
 
 
 </resources>

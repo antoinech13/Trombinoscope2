@@ -80,6 +80,8 @@ public class AddOrganism extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_organism, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch).setVisibility(View.INVISIBLE);//Gestion de la fonction search de la toolbar
+
         univ = view.findViewById(R.id.universityName);
         pays = view.findViewById(R.id.pays);
         cp = view.findViewById(R.id.cp);
