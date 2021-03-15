@@ -1,5 +1,6 @@
 package com.example.trombinoscope.fragments;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
@@ -81,7 +82,6 @@ public class trombinoscopes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
-
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);

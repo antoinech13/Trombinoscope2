@@ -4,7 +4,7 @@
         <item name="colorPrimary">@color/bleu_cobalt</item>
         <item name="colorPrimaryDark">@color/bleu_cobalt</item>
         <item name="colorAccent">@color/bleu_cobalt</item>
-        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
     <style name="headerText" >

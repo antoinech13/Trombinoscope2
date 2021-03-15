@@ -23,7 +23,7 @@
         android:fontFamily="@font/allan"
         android:text="@string/Action_Valid_Inscription"
         android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:textSize="30sp"/>
 
     <EditText
         android:id="@+id/Name"

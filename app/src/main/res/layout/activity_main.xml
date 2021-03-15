@@ -6,22 +6,18 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:context=".MainActivity">
+    <!-- ?>tools:openDrawer="start"-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="#232E33"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme= "@style/ThemeOverlay.AppCompat.Light"
-            android:elevation="4dp"/>
+            layout="@layout/toolbar"/>
+
 
         <fragment
             android:id="@+id/nav_host_fragment"

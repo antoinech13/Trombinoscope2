@@ -12,12 +12,14 @@ import androidx.navigation.NavGraph;
 import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -48,15 +50,24 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic__menu);
+
 
         //Nav Controller
-        navController=Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationView navigationView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navigationView, navController);
-        drawer=findViewById(R.id.drawer_layout);
-        NavigationUI.setupActionBarWithNavController(this, navController, drawer);
+        drawer = findViewById(R.id.drawer_layout);
+        //NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, drawer);
 
-
+        //Parametrage ouverture drawer sur click
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
 
         //deep link
         Uri uri = getIntent().getData();
@@ -103,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
     public void setDrawer_UnLocked() {
-
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 
