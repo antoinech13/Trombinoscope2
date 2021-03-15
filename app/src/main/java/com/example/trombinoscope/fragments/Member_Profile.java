@@ -106,6 +106,8 @@ public class Member_Profile extends Fragment {
 
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch).setVisibility(View.INVISIBLE);//Gestion de la fonction search de la toolbar
+
 
         // l objet etudiant
         etu = getArguments().getParcelable("Etu"); //etu a recuperer toutes les infos de l etudiant

@@ -104,6 +104,8 @@ public class AddTrombinoscopes extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_trombinoscopes, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch).setVisibility(View.INVISIBLE);//Gestion de la fonction search de la toolbar
+
         categories.clear();
         formation = view.findViewById(R.id.formation);
         tag = view.findViewById(R.id.tag);

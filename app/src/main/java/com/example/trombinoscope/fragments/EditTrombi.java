@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -124,6 +125,11 @@ public class EditTrombi extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_edit_trombi, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        //Gestion de la recherche de membres
+        SearchView search = (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch);
+        search.setQueryHint(getString(R.string.Hint_member));
+        search.setVisibility(View.VISIBLE);
+
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");

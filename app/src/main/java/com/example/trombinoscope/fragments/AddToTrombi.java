@@ -130,6 +130,7 @@ public class AddToTrombi extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_to_trombi, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch).setVisibility(View.INVISIBLE);//Gestion de la fonction search de la toolbar
         image = view.findViewById(R.id.image);
         photo = view.findViewById(R.id.photo);
         gallerie = view.findViewById(R.id.galleryBtn);

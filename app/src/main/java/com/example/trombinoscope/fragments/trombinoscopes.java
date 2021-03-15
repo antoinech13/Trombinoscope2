@@ -1,6 +1,5 @@
 package com.example.trombinoscope.fragments;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
@@ -24,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -73,6 +73,7 @@ public class trombinoscopes extends Fragment {
     private List<User> users;
     private JSONObject js = new JSONObject();
     private JSONArray EmailU;
+    private  SearchView search;
 
     public static trombinoscopes newInstance() {
         return new trombinoscopes();
@@ -84,6 +85,11 @@ public class trombinoscopes extends Fragment {
         View view = inflater.inflate(R.layout.trombinoscopes_fragment, container, false);
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        //Gestion de la recherche de trombi
+        search = (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch);
+        search.setQueryHint(getString(R.string.Hint_Trombi));
+        search.setVisibility(View.VISIBLE);
+
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
         mViewModel.initTrrombinoscopesViewModel();
         this.recyclerView = view.findViewById(R.id.fragment_main_recycler_view);
@@ -107,6 +113,7 @@ public class trombinoscopes extends Fragment {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+        searchTrombi();
 
         //adapter.notifyDataSetChanged();
         add = view.findViewById(R.id.addTro);
@@ -118,6 +125,24 @@ public class trombinoscopes extends Fragment {
             }
          });
         return view;
+    }
+
+    public boolean searchTrombi() {
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                configureRecyclerView();
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override
@@ -284,7 +309,6 @@ public class trombinoscopes extends Fragment {
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
     }
 
     private void RequestTrombis(View view, int flag, int position, UserAdapter u) {
