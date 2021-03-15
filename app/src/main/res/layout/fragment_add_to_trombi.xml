@@ -136,7 +136,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nomEtu"
                     android:layout_width="200dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/Hint_LastName"
                     app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +161,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/prenomEtu"
                     android:layout_width="200dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/Hint_FirstName"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +185,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="200dp"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/Hint_Email" />
             </LinearLayout>

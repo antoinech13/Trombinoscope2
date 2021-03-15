@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
                 android:padding="16dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/About_Stars"/>
             <TextView
                 android:id="@+id/descriptions_stars"
@@ -239,20 +239,120 @@
                     android:paddingStart="20dp"
                     android:text="@string/User_Comment"/>
             </LinearLayout>
-
-        </LinearLayout>
-        <!--
-                <Button
-                    android:background="@drawable/button"
-                    android:textColor="#FFF"
-                    android:layout_marginTop="40dp"
+            <!-- Seconde categorie -->
+            <TextView
+                android:id="@+id/title_droit"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:padding="16dp"
+                android:textSize="20sp"
+                android:text="@string/Description_Droit"/>
+            <TextView
+                android:id="@+id/subtitle_droit"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:padding="16dp"
+                android:text="@string/Tuto_Droit"/>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp" android:layout_gravity="center"
+                android:src="@drawable/tuto_intro"
+                android:contentDescription="@string/Label_Illustration_8"/>
+            <LinearLayout
+                android:paddingStart="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/droit1"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Follow Baby"
-                    android:padding="20dp"
-                    android:layout_marginBottom="20dp"
-                    />
-        -->
+                    android:paddingStart="20dp"
+                    android:text="@string/Tuto_Droit1"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tuto_popup"
+                android:contentDescription="@string/Label_Illustration_8"/>
+            <LinearLayout
+                android:paddingStart="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/droit2"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:text="@string/Tuto_Droit2"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tuto_partager"
+                android:contentDescription="@string/Label_Illustration_8"/>
+            <LinearLayout
+                android:paddingStart="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/droit3"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:text="@string/Tuto_Droit3"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tuto_gestion_droit"
+                android:contentDescription="@string/Label_Illustration_8"/>
+            <LinearLayout
+                android:paddingStart="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/droit4"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:text="@string/Tuto_Droit4"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tuto_popup"
+                android:contentDescription="@string/Label_Illustration_8"/>
+            <LinearLayout
+                android:paddingStart="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/droit5"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:text="@string/Tuto_Droit5"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

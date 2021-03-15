@@ -17,7 +17,7 @@
     <string name="Action_Sign_In">Inscription</string>
     <string name="Action_RememberMe_Checked">Bienvenue</string>
     <string name="Title_Trombi">Trombi</string>
-    [16:47] BEGNIS Marilyn
+
 
 
     <!-- Fragment Trombinoscope List -->
@@ -94,7 +94,7 @@
     <string name="Instructions_Reset_Pw_2">Entrez le code reçu par Email</string>
     <string name="rest_Pw">Réinitialiser votre mot de passe</string>
     <string name="new_Pw">Nouveau mot de passe</string>
-    <string name="confirm_Reset_Pw">Corfirmez nouveau mot de passe</string>
+    <string name="confirm_Reset_Pw">Corfirmez votre nouveau mot de passe</string>
     <string name="reset">Réinitialiser</string>
     <string name="Info_Msg_Reset_Pw_Valid">Le changement du mot de passe a été pris en compte</string>
 
@@ -109,7 +109,7 @@
     <string name="Edit_Field_Number">5</string>
     <string name="Member_Field">Membre</string>
     <string name="Member_Field_Number">12</string>
-    <string name="Label_Illustration_4">"Envellope"</string>
+    <string name="Label_Illustration_4">"Enveloppe"</string>
     <string name="User_Email">yogi.enjoyers22@gmail.com</string>
     <string name="Label_Illustration_5">"Telephone"</string>
     <string name="User_Phone_Number">+62 853 3424 1984</string>
@@ -131,6 +131,19 @@
     <string name="Grey_Star">Ces étoiles signifient que vous n\'êtes pas l\'administrateur/trice mais vous avez un pouvoir d\'édition.</string>
     <string name="No_Star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
     <string name="Label_Illustration_2">Etoile</string>
+    <string name="Label_Illustration_8">Tutoriel</string>
+    <string name="Description_Droit">Comment gérer vos droits ?</string>
+    <string name="Tuto_Droit">Vous pouvez gérer vos trombinoscopes mais cela dépend de vos droits. Pour pouvoir gérer vos trombinoscopes il suffit de cliquer 3 secondes sur votre trombinoscope. Ensuite, une popup va apparaitre vous permettant plusieurs actions : Partager, Modifier, Gérer les droits, Ne plus suivre et Supprimer.</string>
+    <string name="Tuto_Droit1">Pour pouvoir accéder aux différentes fonctionnalités : cliquez 3 secondes ici.</string>
+    <string name="Tuto_Droit2">Voici le popup qui apparait. Vous avez les différentes fonctionnalités en fonction de vos droits liés à ce trombinoscope. Ici, nous avons l\'ensemble des droits des trombinoscopes créés par vous.</string>
+    <string name="Tuto_Droit3">Le droit de partager : si vous êtes administrateur de ce trombinoscope, ou si l\'on vous a donné les droits de partager ce trombinoscope. Il vous est possible de le partager à une autre personne. Pour cela, ajouter le l\'email de la personne en question, cette personne recevra par la suite un accès à ce trombinoscope.</string>
+    <string name="Tuto_Droit4">Cette fonctionnalité ne s\'adresse qu\'aux administrateurs. Ici, il est possible de connaitre l\'ensemble des membres qui ont accès à ce trombinoscope.</string>
+    <string name="Tuto_Droit5">La fonctionnalité \"supprimer\" est définitive. Il vous sera impossible de récupérer par la suite le trombinoscope. Faites donc très attention.</string>
+
+    <!-- contact support -->
+    <string name="Contact_Support">Contacter le support</string>
+    <string name="Description_Contact_Support">Vous rencontrez un problème ? Contactez le  en envoyant un email et ils reviendront vers vous très rapidement.</string>
+    <string name="Support_Email">no.reply.trombinoscope@gmail.com</string>
 
     <!-- Strings used for error message -->
     <string name="Err_Saisie_Chp_Vide">Saisie invalide, veuillez compléter tous les champs</string>
@@ -179,5 +192,6 @@
     <string name="no_star">Si vous n\'avez pas d\'étoiles mais que vous avez un/des trombinoscope(s) dans notre liste, c\'est que vous êtes membre d\'un trombinoscope. Vous n\'avez pas de droit d\'édition.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
