@@ -82,7 +82,7 @@ public class AddToTrombi extends Fragment {
     private Bitmap img;
     private JSONObject js = new JSONObject();
     private Trombi promo;
-   // private FtpConnection ftp = new FtpConnection();
+    // private FtpConnection ftp = new FtpConnection();
     private String imgName, Image = "null";
     private View view;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
@@ -168,9 +168,9 @@ public class AddToTrombi extends Fragment {
         });
 
         ocr.setOnClickListener(new View.OnClickListener(){
-           public void onClick(View view){
-               runTextRecognition();
-           }
+            public void onClick(View view){
+                runTextRecognition();
+            }
         });
 
         photo.setOnClickListener(new View.OnClickListener(){
@@ -195,11 +195,11 @@ public class AddToTrombi extends Fragment {
                 byte[] imgByte = outputStream.toByteArray();
                 UploadTask uT = ref.putBytes(imgByte);
                 uT.addOnCompleteListener( new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            }
-                        });
-                        // ftp.sendImage(img, imgName);
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    }
+                });
+                // ftp.sendImage(img, imgName);
                 addStudent(view);
                 clear();
             }
@@ -232,7 +232,7 @@ public class AddToTrombi extends Fragment {
                 break;
         }
     }
-    
+
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == IMAGE_PICK_CODE) {
             image.setImageURI(data.getData());
@@ -254,7 +254,7 @@ public class AddToTrombi extends Fragment {
         if(checkPermission())
             openCamera();
         else
-           Snackbar.make(getView(), getResources().getString(R.string.Err_Camera_Acces), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getResources().getString(R.string.Err_Camera_Acces), Snackbar.LENGTH_SHORT).show();
     }
 
     private void openCamera() {
@@ -308,7 +308,7 @@ public class AddToTrombi extends Fragment {
             js.put("nom",this.nom.getText());
             js.put("promo",this.promo.getId());
             js.put("img",this.imgName);
-           // js.put("image", this.Image);
+            // js.put("image", this.Image);
             js.put("email", this.email.getText());
 
         } catch (JSONException e) {

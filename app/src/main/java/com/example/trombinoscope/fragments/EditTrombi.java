@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
@@ -78,6 +80,7 @@ public class EditTrombi extends Fragment {
     private Trombi promo;
     private JSONArray Link, Email, Img, Prenom, Nom;
     private int cpt;
+
     //public FtpConnection co;
     private Button add;
     // Get a non-default Storage bucket
@@ -137,6 +140,7 @@ public class EditTrombi extends Fragment {
             StrictMode.setThreadPolicy(policy);
             requestEtu();
         }
+
 
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -289,6 +293,7 @@ public class EditTrombi extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Etu",etu);
                         bundle.putParcelable("idTrombi",promo); //testons
+                        bundle.putParcelable("Trombi",getArguments().getParcelable("Trombi"));
                         Navigation.findNavController(v).navigate(R.id.action_editTrombi_to_profile,bundle);
                     }
                 });

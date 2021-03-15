@@ -110,6 +110,9 @@
         <action
             android:id="@+id/action_profile_to_editTrombi"
             app:destination="@id/editTrombi" />
+        <action
+            android:id="@+id/action_profile_to_edit_profil"
+            app:destination="@id/edit_profil" />
     </fragment>
     <fragment
         android:id="@+id/forgot_Pw"
@@ -150,4 +153,13 @@
         android:id="@+id/contact_support"
         android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.Contact_support"
         android:label="Contact_support" />
+    <fragment
+        android:id="@+id/edit_profil"
+        android:name="com.example.trombinoscope.fragments.edit_profil"
+        android:label="fragment_edit_profil"
+        tools:layout="@layout/fragment_edit_profil" >
+        <action
+            android:id="@+id/action_edit_profil_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
 </navigation>

@@ -49,13 +49,18 @@ public class Member_Profile extends Fragment {
     // private EditText pseudo, password; pour plus tard pour la mise en propre
     private JSONObject js = new JSONObject();
 
-    private Button delete, edit_image,edit_nom,edit_prenom,edit_mail; //les buttons
+    //les images view qui serviront de bouton
+    private ImageView delete, edit_image,edit_profile;
+
+    //les identifiants
     private ImageView img;
     private TextView nom,prenom,email;
 
-    private Etudiant etu; //mon objet etudiant qu il faut assigner
 
-    private Trombi promo; //test
+    //les objets
+    private Etudiant etu;
+
+    private Trombi promo;
     private String idPromo;
 
 
@@ -98,16 +103,20 @@ public class Member_Profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_member_profile, container, false);
+
         ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
         ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+
         // l objet etudiant
         etu = getArguments().getParcelable("Etu"); //etu a recuperer toutes les infos de l etudiant
 
-        promo = getArguments().getParcelable("idTrombi"); // test
+        promo = getArguments().getParcelable("idTrombi"); // on a recuperer toutes les infos de promo
+
         Log.e("etu", String.valueOf(etu)); // test
         Log.e("promo", String.valueOf(promo)); //test
 
-        idPromo = promo.getId();
+        idPromo = promo.getId(); //on assigne une variable idpromo
+
         Log.e("idpromo",idPromo);
 
 
@@ -116,22 +125,21 @@ public class Member_Profile extends Fragment {
         img = view.findViewById(R.id.img);
 
         nom = view.findViewById(R.id.nom);
-        prenom = view.findViewById(R.id.prenom); //on definit l image par rapport au layout
+        prenom = view.findViewById(R.id.prenom);
         email = view.findViewById(R.id.email);
 
         delete = view.findViewById(R.id.delete);
         edit_image = view.findViewById(R.id.edit_image);
-        edit_nom = view.findViewById(R.id.edit_nom);
-        edit_prenom = view.findViewById(R.id.edit_prenom);
-        edit_mail = view.findViewById(R.id.edit_mail);
+        edit_profile = view.findViewById(R.id.edit_profile);
 
-      
+        //on recupere le valeurs
+        img.setImageBitmap(etu.getImg());
 
-        img.setImageBitmap(etu.getImg()); //on recuperer l image
-
-        nom.setText(etu.getNom()); //on recuperer le nom, get nom est une methode ds le fragment etudiant
+        nom.setText(etu.getNom());
         prenom.setText(etu.getPrenom());
         email.setText(etu.getEMail());
+
+        //methode delete pour supprimer un membre du trombi
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,51 +149,21 @@ public class Member_Profile extends Fragment {
             }
         });
 
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_profile_to_edit_profil);
+            }
+
+        });
+
 
 
         return view;
     }
 
 
-
-
-
-
-    /*
-        //Ajouter un membre
-    private void addUser(View v){
-        MySingleton s = MySingleton.getInstance(getContext());
-        String url = s.getUrl();
-        update();
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
-                        Snackbar.make(v, "membre_supprimer", Snackbar.LENGTH_LONG).show(); // Trouver comment envoyer mail à l'utilisateur
-                        Navigation.findNavController(v).navigate(R.id.action_signIn_to_logginFragment);//Retour à la page d'acceuil
-                    }
-                    else
-                        Snackbar.make(v, getResources().getString(R.string.SignIn_pseudo_email_invalid), Snackbar.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        s.addToRequestQueue(jsonObjectRequest);
-    }
-     */
-    // extract string ressources pour le snackbar
-    // le snackbar sert a mettre un popup exemple l etudiant a etait delete
-
-    //supprimer un membre
+    //Fonction supprimer un membre/ pk ca marche sur les anciens et pas sur les nouveaux membres ajouter
     private void deleteMember(View v){
         MySingleton s = MySingleton.getInstance(getContext());
         String url = s.getUrl();
@@ -197,7 +175,8 @@ public class Member_Profile extends Fragment {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
                         Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_Deleted), Snackbar.LENGTH_LONG).show();
-                        Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi);//Retour à la page des membres
+                        Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi,getArguments());//Retour à la page des membres
+
                     }
                     else
                         Snackbar.make(v, getResources().getString(R.string.Err_Member_Deleted), Snackbar.LENGTH_LONG).show();
@@ -216,6 +195,7 @@ public class Member_Profile extends Fragment {
     }
 
 
+    //fonction updade la base de donnee
     public void update(){
         try {
             js.put("request", "deleteMember"); //il faudra que je mette un autre nom car la la requete s appelle adduser
@@ -228,15 +208,17 @@ public class Member_Profile extends Fragment {
     }
 }
 
-   /* def deleteMember(request, content): #fonctio sous flask
+/*
+
+def deleteMember(request, content):
         con = mysql.connection
         cur = con.cursor()
         #Modif BD
         cur.execute("SELECT idM FROM Membres WHERE EmailM = %s AND idTrombi = %s",(content["email_m"],content["id_trombi"])) #requete pour selectionner l id membre
-        idMembre = cur.fetchall()[0][0] # id membre est dans la dedans
-        print(idMembre)
+        idMembre=str(cur.fetchall()[0][0])
+        print("idMembre"+idMembre)
         cur.execute("DELETE FROM Images WHERE idM = %s",(idMembre)) #requete pour supprimer l image
         cur.execute("DELETE FROM Membres WHERE EmailM = %s AND idTrombi = %s",(content["email_m"],content["id_trombi"])) #REQUETE pour supprimer le membre
         con.commit()
         return 'true'
-*/
+ */

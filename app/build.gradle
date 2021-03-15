@@ -91,4 +91,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-ml-vision'
 
+    //import pour la navigation
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+
+
+
 }
