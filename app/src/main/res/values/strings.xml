@@ -130,7 +130,7 @@
 
     <!-- Strings used for error message -->
     <string name="Err_Saisie_Chp_Vide">Saisie invalide, veuillez compléter tous les champs</string>
-    <string name="Err_Pw_Diff">Les mots de passe saisis sont diférents</string>
+    <string name="Err_Pw_Diff">Les mots de passe saisis sont différents</string>
     <string name="Err_Accept_Give_Data">Pour pouvoir vous inscrire, vous acceptez que vos données soient sauvegardées</string>
     <string name="Err_Duplicated_Pw_Email">Pseudo et/ou email déja utilisé(s), Veuillez le/les modifier</string>
     <string name="Err_Reset_Pw">Une erreur est survenue</string>

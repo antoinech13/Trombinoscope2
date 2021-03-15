@@ -1,33 +1,22 @@
 package com.example.trombinoscope.fragments.Nav_drawer_fragments;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.trombinoscope.MainActivity;
+
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
-import com.example.trombinoscope.adapter.UserAdapter;
-import com.example.trombinoscope.dataStructure.Trombi;
-import com.example.trombinoscope.dataStructure.User;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.storage.StorageReference;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +27,6 @@ public class User_profil extends Fragment {
     private TextView lastname;
     private TextView firstname;
     private TextView email;
-    private List<User> users;
     private JSONObject js = new JSONObject();
 
 
