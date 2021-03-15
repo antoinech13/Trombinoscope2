@@ -21,6 +21,7 @@
             android:id="@+id/dateMsg"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
+            android:visibility="invisible"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message_text" />
@@ -36,6 +37,17 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pseudoUser" />
+
+        <ImageView
+            android:id="@+id/dots"
+            android:layout_width="22dp"
+            android:layout_height="25dp"
+            android:rotation="90"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/message_text"
+            app:layout_constraintEnd_toStartOf="@+id/message_text"
+            app:layout_constraintTop_toTopOf="@+id/message_text"
+            app:srcCompat="@drawable/ic_spinner" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

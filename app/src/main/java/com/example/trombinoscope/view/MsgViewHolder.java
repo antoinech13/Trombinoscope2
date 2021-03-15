@@ -14,7 +14,7 @@ public class MsgViewHolder extends RecyclerView.ViewHolder {
 
     // @BindView(R.id.fragment_main_item) TextView textView;
     TextView msg, date, pseudo;
-
+    ImageView dots;
 
 
     public MsgViewHolder(View itemView) {
@@ -22,6 +22,7 @@ public class MsgViewHolder extends RecyclerView.ViewHolder {
         msg = itemView.findViewById(R.id.message_text);
         date = itemView.findViewById(R.id.dateMsg);
         pseudo = itemView.findViewById(R.id.pseudoUser);
+        dots = itemView.findViewById(R.id.dots);
         //ButterKnife.bind(this, itemView);
     }
 
@@ -30,6 +31,17 @@ public class MsgViewHolder extends RecyclerView.ViewHolder {
         this.date.setText(msg.getDate());
         this.pseudo.setText(msg.getUser());
 
+    }
+
+    public void setVisible(boolean flag){
+        if (flag){
+            date.setVisibility(View.VISIBLE);
+            dots.setVisibility(View.VISIBLE);
+        }
+        else{
+            date.setVisibility(View.INVISIBLE);
+            dots.setVisibility(View.INVISIBLE);
+        }
     }
 }
     /*public interface OnClickEtu{

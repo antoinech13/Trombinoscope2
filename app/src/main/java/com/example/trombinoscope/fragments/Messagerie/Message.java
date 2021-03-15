@@ -3,6 +3,7 @@ package com.example.trombinoscope.fragments.Messagerie;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,16 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.trombinoscope.ItemClickSupport;
 import com.example.trombinoscope.MySingleton;
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.adapter.MsgAdapter;
 import com.example.trombinoscope.dataStructure.Msg;
 import com.example.trombinoscope.dataStructure.Trombi;
+import com.example.trombinoscope.view.MsgViewHolder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,12 +58,14 @@ public class Message extends Fragment {
     private Msg msg;
     private MsgAdapter adapter;
     private RecyclerView recyclerView;
-    private EditText input;
+    private EditText input, date;
     private Button btn;
     private String idTrombi;
     private Thread t;
     private JSONObject js = new JSONObject();
     private boolean running;
+    private boolean show = false;
+    private ImageView dots;
 
     public Message() {
         // Required empty public constructor
@@ -103,6 +109,7 @@ public class Message extends Fragment {
         Trombi trombi = getArguments().getParcelable("Trombi");
         idTrombi = trombi.getId();
         configureRecyclerView();
+        this.configureOnClickRecyclerView();
 
         btn.setOnClickListener(new View.OnClickListener(){
 
@@ -180,6 +187,24 @@ public class Message extends Fragment {
     public void onDestroyView () {
         super.onDestroyView();
         running = false;
+    }
+
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(recyclerView, R.layout.layout_tromb_frag)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        // 1 - Get user from adapter
+                        Msg message = adapter.getMsg(position);
+                        MsgViewHolder vh = (MsgViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
+                        vh.setVisible(!show);
+                        if(show)
+                            show = false;
+                        else
+                            show = true;
+
+                    }
+                });
     }
 
     private void configureRecyclerView(){
