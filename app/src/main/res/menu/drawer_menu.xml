@@ -7,6 +7,9 @@
         <item android:id="@+id/user_profil"
             android:icon="@drawable/ic_profil"
             android:title="Profil"/>
+        <item android:id="@+id/trombiMsg"
+            android:icon="@drawable/ic_baseline_message_24"
+            android:title="Messagerie"/>
         <item android:id="@+id/info"
             android:icon="@drawable/ic_info"
             android:title="A propos"/>

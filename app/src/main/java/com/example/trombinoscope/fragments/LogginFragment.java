@@ -168,8 +168,7 @@ public class LogginFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getString("res").equals("true")) {
-                        Navigation.findNavController(view).navigate(
-                                R.id.action_logginFragment_to_trombinoscopes3);
+                        Navigation.findNavController(view).navigate(R.id.action_logginFragment_to_trombinoscopes3);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -193,6 +193,7 @@ public class CamFrag extends Fragment {
                                 Navigation.findNavController(v).navigate(R.id.action_camFrag_to_addToTrombi, b);
                             }
                         });
+
                     }
 
                     @Override

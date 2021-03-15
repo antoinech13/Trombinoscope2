@@ -162,4 +162,19 @@
             android:id="@+id/action_edit_profil_to_profile"
             app:destination="@id/profile" />
     </fragment>
+
+    <fragment
+        android:id="@+id/message2"
+        android:name="com.example.trombinoscope.fragments.Messagerie.Message"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/trombiMsg"
+        android:name="com.example.trombinoscope.fragments.Messagerie.trombiMsg"
+        android:label="fragment_trombi_msg"
+        tools:layout="@layout/fragment_trombi_msg" >
+        <action
+            android:id="@+id/action_trombiMsg_to_message2"
+            app:destination="@id/message2" />
+    </fragment>
 </navigation>
