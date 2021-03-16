@@ -1,12 +1,19 @@
 package com.example.trombinoscope.fragments;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -14,7 +21,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.DocumentsContract;
 import android.transition.Transition;
 import android.util.Base64;
 import android.util.Log;
@@ -23,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -52,8 +62,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +95,7 @@ public class EditTrombi extends Fragment {
     private Trombi promo;
     private JSONArray Link, Email, Img, Prenom, Nom;
     private int cpt;
+    private ImageView save;
 
     //public FtpConnection co;
     private Button add;
@@ -129,6 +144,19 @@ public class EditTrombi extends Fragment {
         SearchView search = (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch);
         search.setQueryHint(getString(R.string.Hint_member));
         search.setVisibility(View.VISIBLE);
+        save = view.findViewById(R.id.save);
+
+
+        save.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 23);
+                export();
+
+            }
+        });
+
 
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
@@ -156,6 +184,52 @@ public class EditTrombi extends Fragment {
             }
         });
         return view;
+    }
+
+    private void export(){
+        PdfDocument objDocument  = new PdfDocument();
+        Paint myPaint = new Paint();
+        int width = 842, height = 595, margingTextTop = 13, imageDim = 80;
+        String nom, prenom;
+
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(width, height, 1).create();
+        PdfDocument.Page firstPage = objDocument.startPage(myPageInfo);
+        Canvas canvas = firstPage.getCanvas();
+        Bitmap scaleBitmap;
+        int j = 0, k = 1;
+        scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(0).getImg(), imageDim,imageDim,false);
+        canvas.drawBitmap(scaleBitmap, 28,28, myPaint);
+        canvas.drawText("Nom: " + etudiants.get(0).getNom(),28, 28+margingTextTop + imageDim, myPaint);
+        canvas.drawText("Prénom: " + etudiants.get(0).getPrenom(), 28, 28 + 2*margingTextTop + imageDim, myPaint);
+        for(int i = 1; i < etudiants.size(); i++){
+
+            scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(i).getImg(), imageDim,imageDim,false);
+            nom = etudiants.get(i).getNom();
+            prenom = etudiants.get(i).getPrenom();
+
+            if(i == 6) {
+                j++;
+                k = 0;
+            }
+            Log.e("j", String.valueOf(j));
+            canvas.drawBitmap(scaleBitmap, 137*k + 28 ,120*j + 28, myPaint);
+            canvas.drawText("Nom: " + nom,28 + 137*k, 28+margingTextTop + 120*j + imageDim, myPaint);
+            canvas.drawText("Prénom: " + prenom, 28 + 137*k, 28 + 2*margingTextTop + imageDim + 120*j, myPaint);
+            k++;
+        }
+
+        objDocument.finishPage(firstPage);
+        ContextWrapper cw = new ContextWrapper(getContext());
+        File directory = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS);
+        File file = new File(directory, "/test.pdf");
+        try {
+            objDocument.writeTo(new FileOutputStream(file));
+            Snackbar.make(getView(), getResources().getString(R.string.dir_pdf) + directory.toString(), 1000).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        objDocument.close();
     }
 
     private void configureRecyclerView(){

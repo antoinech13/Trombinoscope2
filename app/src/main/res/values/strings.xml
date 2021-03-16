@@ -200,5 +200,7 @@
     <string name="action_impossible">action impossible</string>
     <string name="action_not_allow">action pas autorisé</string>
 
+    <string name="dir_pdf">chemin: </string>
+
 
 </resources>
