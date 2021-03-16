@@ -201,5 +201,11 @@
     <string name="Msg_Info_Member_edit">\"Le membre a bien été éditer \"</string>
     <string name="Err_Member_edit">Le membre n\'a pas pu être éditer</string>
 
+    <string name="delet_msg">Message supprimer</string>
+    <string name="action_impossible">action impossible</string>
+    <string name="action_not_allow">action pas autorisé</string>
+
+    <string name="dir_pdf">chemin: </string>
+
 
 </resources>

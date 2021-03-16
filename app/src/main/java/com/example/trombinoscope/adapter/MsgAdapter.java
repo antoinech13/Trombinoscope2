@@ -1,6 +1,7 @@
 package com.example.trombinoscope.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,14 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
 
     // FOR DATA
     private List<Msg> msgs;
+    private Context context;
+    private Resources resources;
 
     // CONSTRUCTOR
-    public MsgAdapter(List<Msg> msgs) {
+    public MsgAdapter(List<Msg> msgs, Context context, Resources resources) {
         this.msgs = msgs;
+        this.context = context;
+        this.resources = resources;
     }
 
     @Override
@@ -46,7 +51,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
         }
 
 
-        return new MsgViewHolder(view);
+        return new MsgViewHolder(view, context, resources);
     }
 
 

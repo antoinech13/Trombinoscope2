@@ -165,8 +165,14 @@ public class trombinoscopes extends Fragment {
             case 4:
                 createPopupDel(trombis.get(position), position);
                 builder.show();
+
+
         }
         return super.onContextItemSelected(item);
+    }
+
+    public void pdf(){
+
     }
 
 

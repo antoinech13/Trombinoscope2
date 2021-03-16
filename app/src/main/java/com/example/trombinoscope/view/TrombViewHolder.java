@@ -70,13 +70,13 @@ public class TrombViewHolder extends RecyclerView.ViewHolder implements View.OnC
                 1, "Partager");
 
         if(tab.getRight() == 3) {
-            menu.add(Menu.NONE, 3, 3, "Gérer les droits");
-            menu.add(Menu.NONE, 4, 5, "Supprimer (action définitive)");
+            menu.add(Menu.NONE, 3, 4, "Gérer les droits");
+            menu.add(Menu.NONE, 4, 6, "Supprimer (action définitive)");
         }
         menu.add(Menu.NONE, 2,
-                4, "Ne plus suivre");
+                5, "Ne plus suivre");
         menu.add(Menu.NONE, 5,
-                2, "Modifier");
+                3, "Modifier");
     }
 
 

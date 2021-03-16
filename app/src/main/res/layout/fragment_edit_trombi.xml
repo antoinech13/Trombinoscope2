@@ -19,12 +19,12 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
+            android:background="@color/gris"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.462"
-            android:background="@color/gris"/>
+            app:layout_constraintVertical_bias="0.462" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ajouter"
@@ -60,5 +60,15 @@
             app:layout_constraintBottom_toTopOf="@+id/EtuRecyclerView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_baseline_save_24"
+            app:layout_constraintBottom_toTopOf="@+id/EtuRecyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/EtuRecyclerView"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
