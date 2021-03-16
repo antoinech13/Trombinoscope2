@@ -20,18 +20,30 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.certificate.Certificate;
 import com.example.trombinoscope.dataStructure.User;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.HideNavDrawer;
+import com.example.trombinoscope.fragments.Nav_drawer_fragments.User_profil;
 import com.example.trombinoscope.view.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -44,12 +56,8 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     private CookieStore cookieStore;
     private CookieManager manager;
     private NavController navController;
-    private int color;
-
-    private TextView userName,userEmail; //test
-
-
-
+    private JSONObject js = new JSONObject();
+    private TextView userName, userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic__menu);
 
-
         //Nav Controller
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -72,31 +79,40 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         //NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //NavigationUI.setupActionBarWithNavController(this, navController, drawer);
 
-        //Nav header code test
+        //Nav header
         View headerView = navigationView.getHeaderView(0);
-        // get user name and email textViews
-        userName = headerView.findViewById(R.id.name_user);
-        userEmail = headerView.findViewById(R.id.firstname_user);
-        // set user name and email
-        userName.setText("username");
+            // get user name and email textViews
+            userName = headerView.findViewById(R.id.name_user);
+            userEmail = headerView.findViewById(R.id.email_user);
 
-        userEmail.setText("email.user@domain.com");
-        Log.e("RequestUser","avant");
+        //Home
+        ImageView home = headerView.findViewById(R.id.home_user);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);  // Hostfragment
+                NavInflater inflater = navHostFragment.getNavController().getNavInflater();
+                NavGraph graph = inflater.inflate(R.navigation.nav_file);
+                graph.setStartDestination(R.id.trombinoscopes3);
 
-
-
+                navHostFragment.getNavController().setGraph(graph);
+            }
+        });
 
         //Parametrage ouverture drawer sur click
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawer.openDrawer(GravityCompat.START);
+                Log.e("RequestUser","avant");
+                RequestUser();
             }
         });
 
         //Paramètrage de la recherche dans la toolbar
         SearchView search = toolbar.findViewById(R.id.toolbarSearch);
         search.setVisibility(View.INVISIBLE);
+        search.setQueryHint("Recherche..");
         search.setImeOptions(EditorInfo.IME_ACTION_DONE);
         //deep link
         Uri uri = getIntent().getData();
@@ -118,8 +134,6 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         cookieStore=model.getCookie();
         manager=model.getManager();
         CookieHandler.setDefault(manager);
-
-
     }
 
     @Override
@@ -147,4 +161,41 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     }
 
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        View view =  inflater.inflate(R.layout.nav_header, container, false);
+        return view;
+    }
+
+    private void RequestUser() {
+        MySingleton s = MySingleton.getInstance(getApplicationContext());
+        String url = s.getUrl();
+        Log.e("RequestUser","passé");
+        //demander la requete
+        try {
+            js.put("request","UserProfil");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //dans le js mettre le type de requete que je veux
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //clé de mon last name
+                    userName.setText(response.getString("Nom"));
+                    userEmail.setText(response.getString("Email"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        s.addToRequestQueue(jsonObjectRequest);
+    }
 }
