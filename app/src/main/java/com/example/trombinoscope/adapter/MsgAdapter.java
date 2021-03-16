@@ -25,11 +25,26 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position){
+        if(msgs.get(position).getPerso().equals(msgs.get(position).getUser()))
+            return 0;
+        return 1;
+    }
+
+    @Override
     public MsgViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.message, parent, false);
+        View view;
+        switch (viewType) {
+            case 0:
+                view = inflater.inflate(R.layout.message_perso, parent, false);
+                break;
+            default:
+                view = inflater.inflate(R.layout.message, parent, false);
+        }
+
 
         return new MsgViewHolder(view);
     }

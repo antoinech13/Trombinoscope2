@@ -13,9 +13,9 @@
         -->
         <shape android:shape="rectangle">
             <corners android:radius="5dp" />
-            <solid android:color="@color/bleu_cobalt"/>
+            <solid android:color="@color/beach2"/>
             <!-- Set the same value for both width and height to get a circular shape -->
-            <size android:width="200dp" />
+            <size android:width="200dp"/>
         </shape>
     </item>
 </selector>

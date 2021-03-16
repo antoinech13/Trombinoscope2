@@ -92,6 +92,7 @@ public class trombiMsg extends Fragment {
         View view = inflater.inflate(R.layout.fragment_trombi_msg, container, false);
 
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
+        mViewModel.clear();
         mViewModel.initTrrombinoscopesViewModel();
         recyclerView = view.findViewById(R.id.rvTrMsg);
         this.configureOnClickRecyclerView();

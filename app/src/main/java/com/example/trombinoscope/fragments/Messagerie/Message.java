@@ -60,10 +60,10 @@ public class Message extends Fragment {
     private RecyclerView recyclerView;
     private EditText input, date;
     private Button btn;
-    private String idTrombi;
+    private String idTrombi, perso = "nothing";
     private Thread t;
     private JSONObject js = new JSONObject();
-    private boolean running;
+    private boolean running, first;
     private boolean show = false;
     private ImageView dots;
 
@@ -127,19 +127,14 @@ public class Message extends Fragment {
         t = new Thread() {
             public void run() {
                 running = true;
-                boolean firsttime = true;
+                first = true;
                 MySingleton s = MySingleton.getInstance(getContext());
                 String url = s.getUrl();
                 try {
-                    if(true) {
+
                         js.put("request", "getMsg");
                         js.put("idTrombi", idTrombi);
 
-                    }
-                    else{
-                        js.put("request", "getMsgBis");
-
-                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -150,9 +145,15 @@ public class Message extends Fragment {
                             JSONArray msg = response.getJSONArray("Msg");
                             JSONArray pseudo = response.getJSONArray("Pseudo");
                             JSONArray date = response.getJSONArray("Date");
+                            if(first) {
+                                perso = response.getString("Perso");
+                                Log.e("persoT", perso);
+                                Log.e("resp", response.getString("Perso"));
+                                first = false;
+                            }
                             msgs.clear();
                             for(int i = 0; i < msg.length(); i++)
-                                msgs.add(new Msg(msg.getString(i), date.getString(i), idTrombi, pseudo.getString(i)));
+                                msgs.add(new Msg(msg.getString(i), date.getString(i), idTrombi, pseudo.getString(i), perso));
                             adapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
@@ -166,6 +167,14 @@ public class Message extends Fragment {
                         error.printStackTrace();
                     }
                 });
+
+
+                /*try {
+                    js.put("request", "getMsgBis");
+                    js.put("idTrombi", idTrombi);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }*/
 
                 while (running) {
                     try {
@@ -197,7 +206,8 @@ public class Message extends Fragment {
                         // 1 - Get user from adapter
                         Msg message = adapter.getMsg(position);
                         MsgViewHolder vh = (MsgViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
-                        vh.setVisible(!show);
+                        Log.e("perso",perso);
+                        vh.setVisible(!show, perso);
                         if(show)
                             show = false;
                         else

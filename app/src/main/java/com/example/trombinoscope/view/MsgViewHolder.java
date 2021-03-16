@@ -1,7 +1,10 @@
 package com.example.trombinoscope.view;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +26,8 @@ public class MsgViewHolder extends RecyclerView.ViewHolder {
         date = itemView.findViewById(R.id.dateMsg);
         pseudo = itemView.findViewById(R.id.pseudoUser);
         dots = itemView.findViewById(R.id.dots);
-        //ButterKnife.bind(this, itemView);
+
+
     }
 
     public void updateWithMsg(Msg msg) {
@@ -33,16 +37,24 @@ public class MsgViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setVisible(boolean flag){
-        if (flag){
+    public void setVisible(boolean flag, String perso){
+        if (flag && pseudo.getText().toString().equals(perso)){
             date.setVisibility(View.VISIBLE);
             dots.setVisibility(View.VISIBLE);
         }
+        else if (flag)
+            date.setVisibility(View.VISIBLE);
         else{
             date.setVisibility(View.INVISIBLE);
             dots.setVisibility(View.INVISIBLE);
+
         }
     }
+
+    public String getPseudo(){
+        return pseudo.getText().toString();
+    }
+
 }
     /*public interface OnClickEtu{
         void onTrombiClick(Trombi tab);
