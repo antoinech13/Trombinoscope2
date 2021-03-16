@@ -2,6 +2,7 @@ package com.example.trombinoscope.fragments.Nav_drawer_fragments;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,36 +45,35 @@ public class User_profil extends Fragment {
         return view;
     }
 
-        private void RequestUser() {
-            MySingleton s = MySingleton.getInstance(getContext());
-            String url = s.getUrl();
+    private void RequestUser() {
+        MySingleton s = MySingleton.getInstance(getContext());
+        String url = s.getUrl();
+        //demander la requete
+        try {
+            js.put("request","UserProfil");
 
-            //demander la requete
-            try {
-               js.put("request","UserProfil");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //dans le js mettre le type de requete que je veux
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        //clé de mon last name
-                        lastname.setText(response.getString("Nom"));
-                        firstname.setText(response.getString("Prenom"));
-                        email.setText(response.getString("Email"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                }
-            });
-            s.addToRequestQueue(jsonObjectRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        //dans le js mettre le type de requete que je veux
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //clé de mon last name
+                    lastname.setText(response.getString("Nom"));
+                    firstname.setText(response.getString("Prenom"));
+                    email.setText(response.getString("Email"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        s.addToRequestQueue(jsonObjectRequest);
+    }
 }

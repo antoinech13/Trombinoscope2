@@ -195,6 +195,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Hint_Trombi">Trombinoscope</string>
     <string name="Hint_member">Membre</string>
+    <string name="Messagerie">Messagerie</string>
+
+    <!-- Fragment edit profile -->
+    <string name="Msg_Info_Member_edit">\"Le membre a bien été éditer \"</string>
+    <string name="Err_Member_edit">Le membre n\'a pas pu être éditer</string>
 
     <string name="delet_msg">Message supprimer</string>
     <string name="action_impossible">action impossible</string>

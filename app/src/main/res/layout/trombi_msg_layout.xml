@@ -15,6 +15,7 @@
             android:id="@+id/imgTag"
             android:layout_width="93dp"
             android:layout_height="78dp"
+            android:contentDescription="@string/Hint_Tag"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="TextView"
+            android:text="@string/Messagerie"
             app:layout_constraintStart_toEndOf="@+id/imgTag"
             app:layout_constraintTop_toTopOf="@+id/imgTag" />
 
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="TextView"
+            android:text="@string/Messagerie"
             app:layout_constraintStart_toEndOf="@+id/imgTag"
             app:layout_constraintTop_toBottomOf="@+id/Formation" />
 
@@ -43,7 +44,7 @@
             android:id="@+id/Tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/Messagerie"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgTag"

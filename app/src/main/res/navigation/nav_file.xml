@@ -159,8 +159,8 @@
         android:label="fragment_edit_profil"
         tools:layout="@layout/fragment_edit_profil" >
         <action
-            android:id="@+id/action_edit_profil_to_profile"
-            app:destination="@id/profile" />
+            android:id="@+id/action_edit_profil_to_editTrombi"
+            app:destination="@id/editTrombi" />
     </fragment>
 
     <fragment
