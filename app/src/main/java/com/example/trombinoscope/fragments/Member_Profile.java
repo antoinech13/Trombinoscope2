@@ -168,6 +168,14 @@ public class Member_Profile extends Fragment {
         });
 
 
+        if(this.promo.getRight() < 2) {
+            delete.setVisibility(View.INVISIBLE);
+            edit_image.setVisibility(View.INVISIBLE);
+            edit_profile.setVisibility(View.INVISIBLE);
+        }
+
+
+
 
         return view;
     }
