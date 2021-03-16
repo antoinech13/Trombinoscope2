@@ -18,6 +18,7 @@
             android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:hint="Taper votre message"
+            android:textColor="@color/black"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button"
