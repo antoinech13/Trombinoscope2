@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     private CookieStore cookieStore;
     private CookieManager manager;
     private NavController navController;
+    private int color;
 
 
     @Override
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         NavigationView navigationView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navigationView, navController);
         drawer = findViewById(R.id.drawer_layout);
+        navigationView.setItemIconTintList(null);
         //NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //NavigationUI.setupActionBarWithNavController(this, navController, drawer);
 

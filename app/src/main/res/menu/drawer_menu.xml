@@ -6,9 +6,9 @@
         android:menuCategory = "secondary">
         <item android:id="@+id/user_profil"
             android:icon="@drawable/ic_profil"
-            android:title="Profil"/>
+            android:title="Profil" />
         <item android:id="@+id/trombiMsg"
-            android:icon="@drawable/ic_baseline_message_24"
+            android:icon="@drawable/ic_message"
             android:title="Messagerie"/>
         <item android:id="@+id/info"
             android:icon="@drawable/ic_info"
@@ -21,9 +21,7 @@
             android:title="Conditions d'utilisation"/>
         <item android:id="@+id/logout"
             android:icon="@drawable/ic_logout"
-            android:title="Deconnexion"/>
-
-
+            android:title="Déconnexion"/>
 
     </group>
 </menu>
