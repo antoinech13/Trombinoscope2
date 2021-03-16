@@ -221,7 +221,7 @@ public class Message extends Fragment {
         // 3.1 - Reset list
         this.msgs = new ArrayList<>();
         // 3.2 - Create adapter passing the list of users
-        this.adapter = new MsgAdapter(this.msgs);
+        this.adapter = new MsgAdapter(this.msgs, getContext(), getResources());
         // 3.3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 3.4 - Set layout manager to position the items

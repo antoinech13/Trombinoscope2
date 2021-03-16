@@ -195,5 +195,9 @@
     <string name="Hint_Trombi">Trombinoscope</string>
     <string name="Hint_member">Membre</string>
 
+    <string name="delet_msg">Message supprimer</string>
+    <string name="action_impossible">action impossible</string>
+    <string name="action_not_allow">action pas autorisé</string>
+
 
 </resources>
