@@ -50,11 +50,13 @@ public class Member_Profile extends Fragment {
     private JSONObject js = new JSONObject();
 
     //les images view qui serviront de bouton
-    private ImageView delete, edit_image,edit_profile;
+    private ImageView delete, edit_image,edit_profile,valider;
 
     //les identifiants
     private ImageView img;
     private TextView nom,prenom,email,formation;
+
+
 
 
     //les objets
@@ -62,6 +64,10 @@ public class Member_Profile extends Fragment {
 
     private Trombi promo;
     private String idPromo;
+
+    private String ancienEmail;
+
+
 
 
     public Member_Profile() {
@@ -119,7 +125,14 @@ public class Member_Profile extends Fragment {
 
         idPromo = promo.getId(); //on assigne une variable idpromo
 
+
+
         Log.e("idpromo",idPromo);
+
+
+
+
+
 
 
 
@@ -134,6 +147,7 @@ public class Member_Profile extends Fragment {
         delete = view.findViewById(R.id.delete);
         edit_image = view.findViewById(R.id.edit_image);
         edit_profile = view.findViewById(R.id.edit_profile);
+        valider = view.findViewById(R.id.valider);
 
         //on recupere le valeurs
         img.setImageBitmap(etu.getImg());
@@ -154,7 +168,7 @@ public class Member_Profile extends Fragment {
             }
         });
 
-        //il va falloir mettre un bundle pour transferer les valeurs
+        /*
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,8 +179,54 @@ public class Member_Profile extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_profile_to_edit_profil,bundle);
             }
 
+        });*/
+
+        //il va falloir mettre un bundle pour transferer les valeurs
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                valider.setVisibility(view.getVisibility());//on clique sur le uton et on rend les choses visibles
+                edit_image.setVisibility(view.getVisibility());
+                nom.setFocusableInTouchMode(true);
+                prenom.setFocusableInTouchMode(true);
+                email.setFocusableInTouchMode(true);
+
+            }
+
         });
 
+        valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editMember(v); //fonction pour editer
+                valider.setVisibility(view.INVISIBLE);
+                edit_image.setVisibility(view.INVISIBLE);
+                nom.setFocusableInTouchMode(false);
+                prenom.setFocusableInTouchMode(false);
+                email.setFocusableInTouchMode(false);
+
+            }
+
+        });
+
+        /*
+        //navigation vers le fragment edit_image
+        edit_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("Etu",etu);
+                bundle.putParcelable("idTrombi",promo); //testons
+                bundle.putParcelable("Trombi",getArguments().getParcelable("Trombi"));
+                Navigation.findNavController(v).navigate(R.id.action_profile_to_editPicture,bundle);
+            }
+
+        });
+
+
+         */
 
         if(this.promo.getRight() < 2) {
             delete.setVisibility(View.INVISIBLE);
@@ -219,6 +279,55 @@ public class Member_Profile extends Fragment {
             js.put("request", "deleteMember"); //il faudra que je mette un autre nom car la la requete s appelle adduser
             js.put("email_m", this.email.getText());
             js.put("id_trombi", idPromo); //il faudra qu il recuperer l id promo car on a besoin du mail et du promo pour delete la personne
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Obligatoire avec jsonObject
+        }
+    }
+
+
+    //Fonction supprimer un membre/ pk ca marche sur les anciens et pas sur les nouveaux membres ajouter
+    private void editMember(View v){
+        MySingleton s = MySingleton.getInstance(getContext());
+        String url = s.getUrl();
+        ancienEmail = etu.getEMail();
+        update2();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, js, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
+                        Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_edit), Snackbar.LENGTH_LONG).show();
+                        Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi,getArguments());//Retour à la page des membres
+                    }
+                    else
+                        Snackbar.make(v, getResources().getString(R.string.Err_Member_edit), Snackbar.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        s.addToRequestQueue(jsonObjectRequest);
+    }
+
+
+    //fonction updade la base de donnee
+    public void update2(){
+        try {
+            js.put("request", "editMember"); //il faudra que je mette un autre nom car la la requete s appelle adduser
+            //js.put("email_m", this.email.getText());
+            js.put("email_m", ancienEmail);
+            js.put("id_trombi", idPromo); //il faudra qu il recuperer l id promo car on a besoin du mail et du promo pour delete la personne
+            js.put("newName", nom.getText());
+            js.put("newPrenom", prenom.getText());
+            js.put("newEmail", email.getText());
         } catch (JSONException e) {
             e.printStackTrace();
             // Obligatoire avec jsonObject

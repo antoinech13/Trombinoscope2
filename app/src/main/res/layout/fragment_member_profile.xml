@@ -46,45 +46,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/nom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/Hint_LastName"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/prenom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="17dp"
-            android:text="@string/Hint_FirstName"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/nom" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="45dp"
-            android:text="@string/Hint_Email"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/prenom" />
-
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="60dp"
@@ -122,6 +83,7 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="60dp"
             android:src="@drawable/ic_camera"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/img"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -157,6 +119,67 @@
             android:src="@drawable/ic_folder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="35dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="hint"
+            android:text="@string/Hint_LastName"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/prenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="hint"
+            android:text="@string/Hint_FirstName"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/nom" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="49dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="hint"
+            android:text="@string/Hint_Email"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/prenom" />
+
+        <ImageView
+            android:id="@+id/valider"
+            android:layout_width="63dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/ic_check"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edit_profile"
+            app:layout_constraintStart_toEndOf="@+id/delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
