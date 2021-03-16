@@ -24,9 +24,11 @@ import android.view.View;
 import android.view.Gravity;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trombinoscope.certificate.Certificate;
+import com.example.trombinoscope.dataStructure.User;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.HideNavDrawer;
 import com.example.trombinoscope.view.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     private CookieManager manager;
     private NavController navController;
     private int color;
+
+    private TextView userName,userEmail; //test
+
+
 
 
     @Override
@@ -65,6 +71,20 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         navigationView.setItemIconTintList(null);
         //NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         //NavigationUI.setupActionBarWithNavController(this, navController, drawer);
+
+        //Nav header code test
+        View headerView = navigationView.getHeaderView(0);
+        // get user name and email textViews
+        userName = headerView.findViewById(R.id.name_user);
+        userEmail = headerView.findViewById(R.id.firstname_user);
+        // set user name and email
+        userName.setText("username");
+
+        userEmail.setText("email.user@domain.com");
+        Log.e("RequestUser","avant");
+
+
+
 
         //Parametrage ouverture drawer sur click
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

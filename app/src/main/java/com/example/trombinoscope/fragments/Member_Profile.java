@@ -154,10 +154,15 @@ public class Member_Profile extends Fragment {
             }
         });
 
+        //il va falloir mettre un bundle pour transferer les valeurs
         edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_profile_to_edit_profil);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("Etu",etu);
+                bundle.putParcelable("idTrombi",promo); //testons
+                bundle.putParcelable("Trombi",getArguments().getParcelable("Trombi"));
+                Navigation.findNavController(v).navigate(R.id.action_profile_to_edit_profil,bundle);
             }
 
         });
@@ -211,19 +216,6 @@ public class Member_Profile extends Fragment {
             // Obligatoire avec jsonObject
         }
     }
+
+
 }
-
-/*
-
-def deleteMember(request, content):
-        con = mysql.connection
-        cur = con.cursor()
-        #Modif BD
-        cur.execute("SELECT idM FROM Membres WHERE EmailM = %s AND idTrombi = %s",(content["email_m"],content["id_trombi"])) #requete pour selectionner l id membre
-        idMembre=str(cur.fetchall()[0][0])
-        print("idMembre"+idMembre)
-        cur.execute("DELETE FROM Images WHERE idM = %s",(idMembre)) #requete pour supprimer l image
-        cur.execute("DELETE FROM Membres WHERE EmailM = %s AND idTrombi = %s",(content["email_m"],content["id_trombi"])) #REQUETE pour supprimer le membre
-        con.commit()
-        return 'true'
- */

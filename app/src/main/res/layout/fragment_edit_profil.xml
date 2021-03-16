@@ -1,10 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.edit_profil">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <TextView
+        android:id="@+id/edit_profil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:fontFamily="@font/allan"
+        android:text="Edition profil"
+        android:textColor="@color/bleu_cobalt"
+        android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/new_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_bg"
+        android:textColor="@color/bleu_cobalt"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Entrez un nouveau nom"
+        android:inputType="textCapWords"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textColorHint="@color/grey"
+        android:textSize="16sp"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/new_prenom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_bg"
+        android:textColor="@color/bleu_cobalt"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Entrez un nouveau prenom"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textColorHint="@color/grey"
+        android:textSize="16sp"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/new_mail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_bg"
+        android:textColor="@color/bleu_cobalt"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="Entrez un nouveau e_mail"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textColorHint="@color/grey"
+        android:textSize="16sp"
+        android:autofillHints="" />
 
 
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/subprofile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg"
+        android:text="@string/Action_Valider"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/prenom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+
+</LinearLayout>
