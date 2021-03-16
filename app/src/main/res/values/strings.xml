@@ -177,7 +177,8 @@
 
     <!-- Strings used for le fragment member_profil ET pour souligner -->
     <string name="Label_Profil_Details"><u>Details du profil</u></string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="promotion">Nom du trombi</string>
+
 
     <!-- Strings used for le fragment A propos-->
     <string name="title_about_us">Qu\'est-ce que Trombi ?</string>

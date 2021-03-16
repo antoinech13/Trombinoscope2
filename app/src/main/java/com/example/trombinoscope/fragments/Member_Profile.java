@@ -54,7 +54,7 @@ public class Member_Profile extends Fragment {
 
     //les identifiants
     private ImageView img;
-    private TextView nom,prenom,email;
+    private TextView nom,prenom,email,formation;
 
 
     //les objets
@@ -129,6 +129,7 @@ public class Member_Profile extends Fragment {
         nom = view.findViewById(R.id.nom);
         prenom = view.findViewById(R.id.prenom);
         email = view.findViewById(R.id.email);
+        formation = view.findViewById(R.id.tag);
 
         delete = view.findViewById(R.id.delete);
         edit_image = view.findViewById(R.id.edit_image);
@@ -140,6 +141,8 @@ public class Member_Profile extends Fragment {
         nom.setText(etu.getNom());
         prenom.setText(etu.getPrenom());
         email.setText(etu.getEMail());
+
+        formation.setText(promo.getFormation());
 
         //methode delete pour supprimer un membre du trombi
 
