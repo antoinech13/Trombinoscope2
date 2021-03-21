@@ -130,12 +130,6 @@ public class Member_Profile extends Fragment {
         Log.e("idpromo",idPromo);
 
 
-
-
-
-
-
-
         // Les variables par rapport au layout
         img = view.findViewById(R.id.img);
 
@@ -253,7 +247,7 @@ public class Member_Profile extends Fragment {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
                         Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_Deleted), Snackbar.LENGTH_LONG).show();
-                        Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi,getArguments());//Retour à la page des membres
+                        Navigation.findNavController(v).navigate(R.id.action_Member_Profil_to_editTrombi,getArguments());//Retour à la page des membres
 
                     }
                     else
@@ -299,7 +293,7 @@ public class Member_Profile extends Fragment {
                 try {
                     if (response.getString("res").equals("true")) {// res= nom de la clé de la reponse fournie par flask !!! JsonObject doit etre converti en String
                         Snackbar.make(v, getResources().getString(R.string.Msg_Info_Member_edit), Snackbar.LENGTH_LONG).show();
-                        Navigation.findNavController(v).navigate(R.id.action_profile_to_editTrombi,getArguments());//Retour à la page des membres
+                        Navigation.findNavController(v).navigate(R.id.action_Member_Profil_to_editTrombi,getArguments());//Retour à la page des membres
                     }
                     else
                         Snackbar.make(v, getResources().getString(R.string.Err_Member_edit), Snackbar.LENGTH_LONG).show();

@@ -1,5 +1,6 @@
 package com.example.trombinoscope;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -12,17 +13,15 @@ import androidx.navigation.NavGraph;
 import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
@@ -35,20 +34,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.trombinoscope.certificate.Certificate;
-import com.example.trombinoscope.dataStructure.User;
 import com.example.trombinoscope.fragments.Nav_drawer_fragments.HideNavDrawer;
-import com.example.trombinoscope.fragments.Nav_drawer_fragments.User_profil;
 import com.example.trombinoscope.view.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookieStore;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements HideNavDrawer {
@@ -76,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         NavigationUI.setupWithNavController(navigationView, navController);
         drawer = findViewById(R.id.drawer_layout);
         navigationView.setItemIconTintList(null);
-        //NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
-        //NavigationUI.setupActionBarWithNavController(this, navController, drawer);
 
         //Nav header
         View headerView = navigationView.getHeaderView(0);
@@ -93,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
                 NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);  // Hostfragment
                 NavInflater inflater = navHostFragment.getNavController().getNavInflater();
                 NavGraph graph = inflater.inflate(R.navigation.nav_file);
-                graph.setStartDestination(R.id.trombinoscopes3);
-
+                graph.setStartDestination(R.id.trombinoscopesList);
                 navHostFragment.getNavController().setGraph(graph);
             }
         });
@@ -114,6 +106,17 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
         search.setVisibility(View.INVISIBLE);
         search.setQueryHint("Recherche..");
         search.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        //Deconnexion
+        (navigationView.getMenu().findItem(R.id.logout)).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                logout();
+                return false;
+            }
+        });
+
+
         //deep link
         Uri uri = getIntent().getData();
         if(uri!=null)
@@ -197,5 +200,16 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
             }
         });
         s.addToRequestQueue(jsonObjectRequest);
+    }
+
+
+    public void logout() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);  // Hostfragment
+        NavInflater inflater = navHostFragment.getNavController().getNavInflater();
+        NavGraph graph = inflater.inflate(R.navigation.nav_file);
+        graph.setStartDestination(R.id.logginFragment);
+        navHostFragment.getNavController().setGraph(graph);
+        cookieStore.removeAll();
+
     }
 }

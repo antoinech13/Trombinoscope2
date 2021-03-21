@@ -17,7 +17,7 @@ import com.example.trombinoscope.view.TrombViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> implements Filterable {
+public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> {
 
     // FOR DATA
     private List<Trombi> Trombis;
@@ -71,34 +71,5 @@ public class TrombiAdapter extends RecyclerView.Adapter<TrombViewHolder> impleme
         return this.Trombis.get(position);
     }
 
-    @Override
-    public Filter getFilter() {
-        return trombiFilter;
-    }
 
-    private Filter trombiFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Trombi> filteredListTrombi = new ArrayList<>();
-            if(constraint == null || constraint.length() == 0)
-                filteredListTrombi.addAll(TrombiCopy);
-            else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Trombi trombi : TrombiCopy){
-                    if(trombi.getFormation().toLowerCase().trim().contains(filterPattern))
-                        filteredListTrombi.add(trombi);
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredListTrombi;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            Trombis.clear();
-            Trombis.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
 }

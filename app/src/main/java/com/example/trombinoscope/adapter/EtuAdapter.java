@@ -4,24 +4,31 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trombinoscope.R;
 import com.example.trombinoscope.dataStructure.Etudiant;
+import com.example.trombinoscope.dataStructure.Trombi;
 import com.example.trombinoscope.view.EtuViewHolder;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EtuAdapter extends RecyclerView.Adapter<EtuViewHolder> {
 
     // FOR DATA
     private List<Etudiant> etudiants;
+    private List<Etudiant> memberCopy;
 
     // CONSTRUCTOR
     public EtuAdapter(List<Etudiant> etudiants) {
+
         this.etudiants = etudiants;
+        memberCopy =new ArrayList<>(etudiants);
     }
 
     @Override
@@ -33,8 +40,6 @@ public class EtuAdapter extends RecyclerView.Adapter<EtuViewHolder> {
 
         return new EtuViewHolder(view);
     }
-
-
 
     @Override
     public void onBindViewHolder(EtuViewHolder viewHolder, int position) {
@@ -50,5 +55,6 @@ public class EtuAdapter extends RecyclerView.Adapter<EtuViewHolder> {
     public Etudiant getEtu(int position){
         return this.etudiants.get(position);
     }
+
 }
 

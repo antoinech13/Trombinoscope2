@@ -57,6 +57,11 @@ import java.util.List;
 
 public class trombinoscopes extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
     //Instances
     private TrombinoscopesViewModel mViewModel;
     protected Button add;
@@ -68,6 +73,7 @@ public class trombinoscopes extends Fragment {
     private Spinner s;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<Trombi> trombis;
+    private List<Trombi> trombisCopy;
     private TrombiAdapter adapter;
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
     private List<User> users;
@@ -75,8 +81,38 @@ public class trombinoscopes extends Fragment {
     private JSONArray EmailU;
     private  SearchView search;
 
-    public static trombinoscopes newInstance() {
-        return new trombinoscopes();
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public trombinoscopes() {
+        // Required empty public constructor
+    }
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment LogginFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static trombinoscopes newInstance(String param1, String param2) {
+            trombinoscopes fragment = new trombinoscopes();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            args.putString(ARG_PARAM2, param2);
+            fragment.setArguments(args);
+            return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
@@ -89,6 +125,7 @@ public class trombinoscopes extends Fragment {
         search = (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch);
         search.setQueryHint(getString(R.string.Hint_Trombi));
         search.setVisibility(View.VISIBLE);
+
 
         mViewModel = ViewModelProviders.of(this).get(TrombinoscopesViewModel.class);
         mViewModel.initTrrombinoscopesViewModel();
@@ -115,12 +152,20 @@ public class trombinoscopes extends Fragment {
         });
         searchTrombi();
 
-        //adapter.notifyDataSetChanged();
+        search.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                trombis= new ArrayList<>(trombisCopy);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
         add = view.findViewById(R.id.addTro);
         add.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(
-                        R.id.action_trombinoscopes3_to_addTrombinoscopes);
+                        R.id.action_trombinoscopesList_to_addTrombinoscopes);
                 //finish();
             }
          });
@@ -137,8 +182,14 @@ public class trombinoscopes extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                configureRecyclerView();
+                trombis.clear();
+                for (Trombi trombi : trombisCopy) {
+                    if (trombi.getFormation().toLowerCase().trim().contains(newText) ||
+                            trombi.getTag().toLowerCase().trim().contains(newText) )
+                        trombis.add(trombi);
+
+                }
+                adapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -294,7 +345,7 @@ public class trombinoscopes extends Fragment {
                         Trombi trombi = adapter.getTrombi(position);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Trombi", trombi);
-                        Navigation.findNavController(v).navigate(R.id.action_trombinoscopes3_to_editTrombi, bundle);
+                        Navigation.findNavController(v).navigate(R.id.action_trombinoscopesList_to_editTrombi, bundle);
                     }
                 });
     }
@@ -350,6 +401,7 @@ public class trombinoscopes extends Fragment {
                             mViewModel.setTrombinoscopesViewModel(trombis);
                         }
                         adapter.notifyDataSetChanged();
+                        trombisCopy = new ArrayList<>(trombis);
                     }
                     else if(flag == 1){
 

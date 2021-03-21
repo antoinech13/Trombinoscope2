@@ -203,10 +203,10 @@ public class AddTrombinoscopes extends Fragment {
                     try {
                         if(response.getString("res").equals("true")){
                             Snackbar.make(view, getResources().getString(R.string.Msg_Info_Trombi_Add), 1000).show();
-                            Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);}
+                            Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopesList);}
                         else if(response.getString("res").equals("none")) {
                             Snackbar.make(view, getResources().getString(R.string.Err_Trombi_Already_Exist), 2000).show();
-                            Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopes3);
+                            Navigation.findNavController(view).navigate(R.id.action_addTrombinoscopes_to_trombinoscopesList);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

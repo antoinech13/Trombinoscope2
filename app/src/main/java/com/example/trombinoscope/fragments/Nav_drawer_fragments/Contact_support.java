@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.trombinoscope.MainActivity;
 import com.example.trombinoscope.R;
 
 public class Contact_support extends Fragment {
@@ -14,6 +15,10 @@ public class Contact_support extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                          Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_support, container, false);
+        View view= inflater.inflate(R.layout.fragment_contact_support, container, false);
+        ((MainActivity)getActivity()).setDrawer_UnLocked(); //Gestion du nav drawer
+        ((MainActivity)getActivity()).getSupportActionBar().show(); //Gestion de la toolbar
+        (((MainActivity)getActivity()).findViewById(R.id.toolbar)).findViewById(R.id.toolbarSearch).setVisibility(View.INVISIBLE);//Gestion de la fonction search de la toolbar
+        return view;
     }
 }
