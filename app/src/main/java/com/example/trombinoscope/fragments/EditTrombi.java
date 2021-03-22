@@ -107,8 +107,6 @@ public class EditTrombi extends Fragment {
     private int cpt;
     private ImageView save;
     private  SearchView search;
-
-    //public FtpConnection co;
     private Button add;
     // Get a non-default Storage bucket
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
@@ -156,9 +154,18 @@ public class EditTrombi extends Fragment {
         search.setQueryHint(getString(R.string.Hint_member));
         search.setVisibility(View.VISIBLE);
         membresCopy=new ArrayList<>();
+        //Fermeture de la barre de recherche
+        search.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                etudiants= new ArrayList<>(membresCopy);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        //Export pdf
         save = view.findViewById(R.id.save);
-
-
         save.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -170,15 +177,24 @@ public class EditTrombi extends Fragment {
             }
         });
 
-
+        //Ajouter un étudiant
         add = view.findViewById(R.id.ajouter);
         this.recyclerView = view.findViewById(R.id.EtuRecyclerView);
         this.promo = getArguments().getParcelable("Trombi");
         if(this.promo.getRight() < 2)
             add.setVisibility(View.INVISIBLE);
+        add.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_editTrombi_to_addToTrombi, getArguments());
+                //finish();
+            }
+        });
 
+        //Profil membre
         this.configureOnClickRecyclerView(); //methode pour passer dans la fiche profil
         update();
+
+        //Affichage liste membres
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -186,29 +202,7 @@ public class EditTrombi extends Fragment {
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
             requestEtu();
-            Log.e("tab etu 0", String.valueOf(etudiants));
-
         }
-
-        //searchMember();
-        Log.e("Search member tab", String.valueOf(etudiants));
-        search.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                etudiants= new ArrayList<>(membresCopy);
-                adapter.notifyDataSetChanged();
-                return false;
-            }
-        });
-
-
-        add.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
-                Log.e("onClick", getArguments().toString());
-                Navigation.findNavController(view).navigate(R.id.action_editTrombi_to_addToTrombi, getArguments());
-                //finish();
-            }
-        });
 
         return view;
     }
@@ -229,7 +223,6 @@ public class EditTrombi extends Fragment {
                     if (membre.getPrenom().toLowerCase().trim().contains(newText) ||
                             membre.getNom().toLowerCase().trim().contains(newText) )
                         etudiants.add(membre);
-
                 }
                 adapter.notifyDataSetChanged();
                 return false;
@@ -273,13 +266,13 @@ public class EditTrombi extends Fragment {
             if(j == 4){
                 j = 0;
             }
-
         }
 
         objDocument.finishPage(firstPage);
         ContextWrapper cw = new ContextWrapper(getContext());
         File directory = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS);
+                Environment.DIRECTORY_DOWNLOADS);
+        Log.e("path", String.valueOf(directory));
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
         String strDate = dateFormat.format(date);
@@ -293,12 +286,11 @@ public class EditTrombi extends Fragment {
         objDocument.close();
     }
 
-
+    //Permissions pour export pdf
     public  boolean isReadStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-
                 return true;
             } else {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 3);
@@ -308,17 +300,14 @@ public class EditTrombi extends Fragment {
         else if(Build.VERSION.SDK_INT >= 30){
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.MANAGE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-
                 return true;
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 startActivity(intent);
                 return false;
             }
-
         }
         else { //permission is automatically granted on sdk<23 upon installation
-
             return true;
         }
     }
@@ -329,7 +318,6 @@ public class EditTrombi extends Fragment {
                 export();
                 return true;
             } else {
-
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_PERM);
                 return false;
             }
@@ -337,7 +325,6 @@ public class EditTrombi extends Fragment {
         else if(Build.VERSION.SDK_INT >= 30) {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.MANAGE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-
                 return true;
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
@@ -346,7 +333,6 @@ public class EditTrombi extends Fragment {
             }
         }
         else{ //permission is automatically granted on sdk<23 upon installation
-
             return true;
         }
     }
@@ -358,10 +344,8 @@ public class EditTrombi extends Fragment {
             case WRITE_EXTERNAL_PERM:
                 export();
                 break;
-
         }
     }
-
 
     private void configureRecyclerView(){
         // 3.1 - Reset list
@@ -381,19 +365,12 @@ public class EditTrombi extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 configureRecyclerView();
-                Log.e("link", "icii");
                 Nom = null;
                 try {
                     Nom = response.getJSONArray("Nom");
                     Prenom = response.getJSONArray("Prenom");
                     Img = response.getJSONArray("Img");
                     Email = response.getJSONArray("Email");
-                    //Link = response.getJSONArray("Link");
-                    Log.e("EditTrombi", "onResponse");
-                    /*for(int i = 0; i < Nom.length(); i++){
-                        Log.e("i", String.valueOf(i));
-                        requestImg(Link.getString(i), Img.optString(i), Nom.getString(i), Prenom.getString(i), Email.getString(i));
-                    }*/
                     StorageReference ref;
                     StreamDownloadTask Task;
                     for (int i = 0; i < Nom.length(); i++) {
@@ -412,19 +389,14 @@ public class EditTrombi extends Fragment {
                                     e.printStackTrace();
                                 }
                                 adapter.notifyDataSetChanged();
-                                Log.e("i", String.valueOf(finalI));
                             }
                         });
                     }
-
                     searchMember();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //etudiants.add(new Etudiant(Nom.getString(i), Prenom.getString(i), Img.getString(i), co.getImage(Img.getString(i)), Email.getString(i)));
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -448,9 +420,7 @@ public class EditTrombi extends Fragment {
         }, 0, 0, null, new Response.ErrorListener() { // Error listener
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Do something with error response
                 error.printStackTrace();
-                //requestImg(mImageURLString, img, nom, prenom, email);
             }
         });
         imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -477,16 +447,11 @@ public class EditTrombi extends Fragment {
                         Etudiant etu = adapter.getEtu(position);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("Etu",etu);
-                        bundle.putParcelable("idTrombi",promo); //testons
+                        bundle.putParcelable("idTrombi",promo);
                         bundle.putParcelable("Trombi",getArguments().getParcelable("Trombi"));
                         Navigation.findNavController(v).navigate(R.id.action_editTrombi_to_Member_Profil,bundle);
                     }
                 });
     }
-
-
-
-
-
 
 }
