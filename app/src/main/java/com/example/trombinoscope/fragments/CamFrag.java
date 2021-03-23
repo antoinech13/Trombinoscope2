@@ -190,7 +190,21 @@ public class CamFrag extends Fragment {
                         requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Navigation.findNavController(v).navigate(R.id.action_camFrag_to_addToTrombi, b);
+                                Log.e("CamFrag",getArguments().getString("origine"));
+                                if(getArguments().getString("origine").equals("user_profil"))
+                                {
+                                    b.putString("source","CamFrag");
+                                    if(getArguments().containsKey("email"))
+                                        b.putString("email", getArguments().getString("email"));
+                                    if(getArguments().containsKey("nom"))
+                                        b.putString("nom", getArguments().getString("nom"));
+                                    if(getArguments().containsKey("prenom"))
+                                        b.putString("prenom", getArguments().getString("prenom"));
+
+                                    Navigation.findNavController(v).navigate(R.id.action_camFrag_to_user_profil,b);
+                                }
+                                else
+                                    Navigation.findNavController(v).navigate(R.id.action_camFrag_to_addToTrombi, b);
                             }
                         });
 

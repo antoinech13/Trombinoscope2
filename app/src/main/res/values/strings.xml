@@ -101,22 +101,11 @@
     <string name="Label_Illustration_1">"Illustration personnage"</string>
     <string name="User_Name">Yogi Prasetyawan</string>
     <string name="User_Description">Like see the sky and interested in programming</string>
-    // Est ce qu'on met vraiment ça ? Stockage ++ dans la BD
-    <string name="Admin_Field">Admin</string>
-    <string name="Admin_Field_Number">2</string>
-    <string name="Edit_Field">Edit</string>
-    <string name="Edit_Field_Number">5</string>
-    <string name="Member_Field">Membre</string>
-    <string name="Member_Field_Number">12</string>
     <string name="Label_Illustration_4">"Enveloppe"</string>
     <string name="User_Email">yogi.enjoyers22@gmail.com</string>
-    <string name="Label_Illustration_5">"Telephone"</string>
-    <string name="User_Phone_Number">+62 853 3424 1984</string>
     // A gerer dans la BD
-    <string name="Label_Illustration_3">Carte personnage</string>
-    <string name="User_Profession">professeure de design thinking</string>
-    <string name="Label_Illustration_6">Notes</string>
     <string name="User_Comment">Feel free to contact me</string>
+    <string name="Msg_Info_Update_Img">\"La photo a été mise à jour\"</string>
 
     <!-- Fragment A propos-->
     <string name="Title_About_Us">Qu\'est-ce que Trombi ?</string>
@@ -163,11 +152,9 @@
     <string name="student_name">Nom du membre</string>
 
     <!-- Strings used for le fragment edit_trombi -->
-
     <string name="title_membre">Liste des membres</string>
 
     <!-- Strings used for le fragment etu_frag -->
-
     <string name="nom_membre">Nom du membre</string>
     <string name="prenom_membre">Prénom du membre</string>
     <string name="image_membre">Image du membre</string>

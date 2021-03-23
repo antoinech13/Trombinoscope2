@@ -129,7 +129,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:contentDescription="@string/Label_Illustration_6"
+                    android:contentDescription="@string/nom_membre"
                     android:src="@drawable/ic_coment"
                     android:text="@string/User_Comment" />
 
@@ -154,7 +154,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:contentDescription="@string/Label_Illustration_6"
+                    android:contentDescription="@string/prenom_membre"
                     android:src="@drawable/ic_coment"
                     android:text="@string/User_Comment" />
 

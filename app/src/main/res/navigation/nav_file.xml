@@ -96,6 +96,10 @@
             android:id="@+id/action_camFrag_to_addToTrombi"
             app:destination="@id/addToTrombi"
             app:popUpTo="@+id/editTrombi"/>
+        <action
+            android:id="@+id/action_camFrag_to_user_profil"
+            app:destination="@id/user_profil"
+            app:popUpTo="@+id/trombinoscopesList"/>
     </fragment>
     <fragment
         android:id="@+id/signIn"
@@ -148,7 +152,12 @@
     <fragment
         android:id="@+id/user_profil"
         android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.User_profil"
-        android:label="User_profil" />
+        android:label="User_profil"
+        tools:layout="@layout/fragment_user_profil" >
+        <action
+            android:id="@+id/action_user_profil_to_camFrag"
+            app:destination="@id/camFrag" />
+    </fragment>
     <fragment
         android:id="@+id/info"
         android:name="com.example.trombinoscope.fragments.Nav_drawer_fragments.Info"

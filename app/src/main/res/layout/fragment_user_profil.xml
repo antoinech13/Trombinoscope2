@@ -2,9 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    tools:context=".fragments.Nav_drawer_fragments.User_profil">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="405dp">
+            android:layout_height="305dp">
             <LinearLayout
                 android:id="@+id/uselessParent"
                 android:layout_width="match_parent"
@@ -56,7 +58,7 @@
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="275dp">
+                android:layout_marginTop="200dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -69,24 +71,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/user_admin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Admin_Field"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            />
-                        <TextView
-                            android:id="@+id/user_admin_ndr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Admin_Field_Number"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/bleu_cobalt"
-                            />
                     </LinearLayout>
                     <LinearLayout
                         android:gravity="center"
@@ -94,24 +78,15 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/user_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Edit_Field"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            />
-                        <TextView
-                            android:id="@+id/user_edit_ndr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Edit_Field_Number"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/bleu_cobalt"
-                            />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/camera_user"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="21dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:src="@drawable/ic_camera" />
                     </LinearLayout>
                     <LinearLayout
                         android:gravity="center"
@@ -119,24 +94,16 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/user_member"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:text="@string/Member_Field"
-                            android:textSize="20sp"
-                            />
-                        <TextView
-                            android:id="@+id/user_member_ndr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Member_Field_Number"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/bleu_cobalt"
-                            />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/valide_img"
+                            android:layout_marginTop="15dp"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/white_bg"
+                            android:textColor="@color/blue_azur"
+                            android:visibility="invisible"
+                            android:text="@string/Action_Valider" />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -144,6 +111,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -176,7 +144,7 @@
                     android:layout_height="36dp"
                     android:text="@string/User_Comment"
                     android:src="@drawable/ic_coment"
-                    android:contentDescription="@string/Label_Illustration_6" />
+                    android:contentDescription="@string/Label_Profil_Details" />
                 <TextView
                     android:id="@+id/user_comment"
                     android:textStyle="bold"
@@ -186,7 +154,6 @@
                     android:paddingStart="20dp"
                     android:text="@string/User_Comment"/>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
