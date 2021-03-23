@@ -77,6 +77,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -103,11 +105,11 @@ public class EditTrombi extends Fragment {
     private RecyclerView recyclerView;
     private JSONObject js = new JSONObject();
     private Trombi promo;
-    private JSONArray Link, Email, Img, Prenom, Nom;
-    private int cpt;
+    private JSONArray Email, Img, Prenom, Nom;
     private ImageView save;
     private  SearchView search;
     private Button add;
+    private int maxMbPage=24;
     // Get a non-default Storage bucket
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://trombi-f6e10.appspot.com");
 
@@ -218,7 +220,6 @@ public class EditTrombi extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 etudiants.clear();
-                Log.e("onsearch", String.valueOf(membresCopy.size()));
                 for (Etudiant membre : membresCopy) {
                     if (membre.getPrenom().toLowerCase().trim().contains(newText) ||
                             membre.getNom().toLowerCase().trim().contains(newText) )
@@ -231,55 +232,73 @@ public class EditTrombi extends Fragment {
         return true;
     }
 
+    //Compteur nbr page pfd
+    public int countPage(int nbMb){
+        int nbPage=0;
+        int maxMbPage=24;
+        if(nbMb % maxMbPage == 0 ){
+            nbPage = (nbMb / maxMbPage);
+        }
+        else{
+            nbPage = (nbMb / maxMbPage) +1;
+        }
+        return nbPage;
+    }
+
     private void export(){
         PdfDocument objDocument  = new PdfDocument();
         Paint myPaint = new Paint();
         int width = 842, height = 595, margingTextTop = 13, imageDim = 80;
         int cellsCentre = (int)137/2 - (int)imageDim/2;
         String nom, prenom;
+        int nbPage = countPage(etudiants.size());
+        if(nbPage>0){
+            int mbN=0;
+            for (int pageNb =1; pageNb<=nbPage; pageNb++){
+                PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(width, height, pageNb).create();
+                PdfDocument.Page page = objDocument.startPage(myPageInfo);
+                Canvas canvas = page.getCanvas();
+                Bitmap scaleBitmap;
+                int ligne = 0, colonne = 1;
 
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(width, height, (int)(((double)etudiants.size()/18)*0.999999999999)).create();
-        PdfDocument.Page firstPage = objDocument.startPage(myPageInfo);
-        Canvas canvas = firstPage.getCanvas();
-        Bitmap scaleBitmap;
-        int j = 0, k = 1;
-        scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(0).getImg(), imageDim,imageDim,false);
-        canvas.drawBitmap(scaleBitmap, cellsCentre,cellsCentre, myPaint);
-        canvas.drawText("Nom: " + etudiants.get(0).getNom(),cellsCentre, cellsCentre+margingTextTop + imageDim, myPaint);
-        canvas.drawText("Prénom: " + etudiants.get(0).getPrenom(), cellsCentre, cellsCentre + 2*margingTextTop + imageDim, myPaint);
-        Log.e("sire",String.valueOf(etudiants.size()));
-        for(int i = 1; i < etudiants.size(); i++){
-
-            scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(i).getImg(), imageDim,imageDim,false);
-            nom = etudiants.get(i).getNom();
-            prenom = etudiants.get(i).getPrenom();
-
-            if(i%6 == 0) {
-                j++;
-                k = 0;
-            }
-            Log.e("j", String.valueOf(j));
-            canvas.drawBitmap(scaleBitmap, 137*k + cellsCentre ,143*j + cellsCentre, myPaint);
-            canvas.drawText("Nom: " + nom,cellsCentre + 137*k, cellsCentre+margingTextTop + 143*j + imageDim, myPaint);
-            canvas.drawText("Prénom: " + prenom, cellsCentre + 137*k, cellsCentre + 2*margingTextTop + imageDim + 143*j, myPaint);
-            k++;
-            if(j == 4){
-                j = 0;
+                for (mbN=mbN ;mbN<(pageNb*24) ; mbN++){
+                    if(mbN<etudiants.size()) {
+                        if (mbN == 0 || mbN%24==0) {
+                            scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(mbN).getImg(), imageDim, imageDim, false);
+                            canvas.drawBitmap(scaleBitmap, cellsCentre, cellsCentre, myPaint);
+                            canvas.drawText("Nom: " + etudiants.get(mbN).getNom(), cellsCentre, cellsCentre + margingTextTop + imageDim, myPaint);
+                            canvas.drawText("Prénom: " + etudiants.get(mbN).getPrenom(), cellsCentre, cellsCentre + 2 * margingTextTop + imageDim, myPaint);
+                        } else {
+                            scaleBitmap = Bitmap.createScaledBitmap(etudiants.get(mbN).getImg(), imageDim, imageDim, false);
+                            nom = etudiants.get(mbN).getNom();
+                            prenom = etudiants.get(mbN).getPrenom();
+                            if (mbN % 6 == 0) {
+                                ligne++;
+                                colonne = 0;
+                            }
+                            canvas.drawBitmap(scaleBitmap, 137 * colonne + cellsCentre, 143 * ligne + cellsCentre, myPaint);
+                            canvas.drawText("Nom: " + nom, cellsCentre + 137 * colonne, cellsCentre + margingTextTop + 143 * ligne + imageDim, myPaint);
+                            canvas.drawText("Prénom: " + prenom, cellsCentre + 137 * colonne, cellsCentre + 2 * margingTextTop + imageDim + 143 * ligne, myPaint);
+                            colonne++;
+                            if (ligne == 4) {
+                                ligne = 0;
+                            }
+                        }
+                    }
+                }
+                objDocument.finishPage(page);
             }
         }
 
-        objDocument.finishPage(firstPage);
-        ContextWrapper cw = new ContextWrapper(getContext());
         File directory = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS);
-        Log.e("path", String.valueOf(directory));
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
         String strDate = dateFormat.format(date);
         File file = new File(directory, "/"+promo.getFormation().replace(" ","")+ "_"+strDate+".pdf");
         try {
             objDocument.writeTo(new FileOutputStream(file));
-            Snackbar.make(getView(), getResources().getString(R.string.dir_pdf) + directory.toString(), 1000).show();
+            Snackbar.make(getView(), getResources().getString(R.string.dir_pdf) + directory.toString(), 2000).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -405,26 +424,6 @@ public class EditTrombi extends Fragment {
         });
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy( DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         s.addToRequestQueue(jsonObjectRequest);
-    }
-
-
-    private void requestImg(String mImageURLString, String img, String nom, String prenom, String email){
-        MySingleton s = MySingleton.getInstance(getContext());
-        String url = s.getUrl();
-        ImageRequest imageRequest = new ImageRequest(mImageURLString, new Response.Listener<Bitmap>() { // Bitmap listener
-            @Override
-            public void onResponse(Bitmap response) {
-                etudiants.add(new Etudiant(nom, prenom, img, response, email));
-                adapter.notifyDataSetChanged();
-            }
-        }, 0, 0, null, new Response.ErrorListener() { // Error listener
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        imageRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        s.addToRequestQueue(imageRequest);
     }
 
     private void update(){
