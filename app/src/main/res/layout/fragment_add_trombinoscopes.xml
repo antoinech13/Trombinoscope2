@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/Label_Illustration_1"
-        android:src="@drawable/woman"
+        android:src="@drawable/jpg_woman"
         app:layout_constraintBottom_toTopOf="@+id/val"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

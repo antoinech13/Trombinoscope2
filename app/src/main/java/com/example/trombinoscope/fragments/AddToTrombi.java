@@ -249,10 +249,12 @@ public class AddToTrombi extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == IMAGE_PICK_CODE) {
-            image.setImageURI(data.getData());
+           if(data != null) {
+               image.setImageURI(data.getData());
 
-            BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-            img = drawable.getBitmap();
+               BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+               img = drawable.getBitmap();
+           }
         }
     }
 

@@ -1,56 +1,56 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="0dip"
-    android:layout_margin="15dp"
-    android:background="@drawable/customborder">
+    android:layout_margin="5dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="0dip">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/containerEtu"
-        android:layout_width="209dp"
+        android:layout_width="158dp"
         android:layout_height="190dp"
-        android:background="@color/white"
-        >
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:background="@drawable/bg_border_gradient"
+        android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePictureEtu"
-            android:layout_width="160dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/image_membre"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:scaleType="centerCrop"
+            tools:src="@drawable/jpg_woman" />
 
         <TextView
             android:id="@+id/nomEtu"
-            android:layout_width="60dp"
+            android:layout_width="158dp"
             android:layout_height="18dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
             android:text="@string/nom_membre"
+            android:textAlignment="center"
+            android:textColor="#FFF"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/prenomEtu"
-            android:layout_width="60dp"
+            android:layout_width="158dp"
             android:layout_height="18dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="5dp"
             android:text="@string/prenom_membre"
+            android:textAlignment="center"
+            android:textColor="#FFF"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/nomEtu" />
+            android:textStyle="bold" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
