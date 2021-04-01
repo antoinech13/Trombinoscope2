@@ -100,7 +100,7 @@
                 android:layout_marginRight="20dp"
                 android:textSize="15sp"
                 android:textColor="@color/white"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/bg_bouton"
                 android:text="@string/Action_Valider"
                 android:textStyle="bold"
                 />

@@ -149,7 +149,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/bg_bouton"
             android:textColor="@color/white"
             android:text="@string/Action_Valider" />
     </LinearLayout>

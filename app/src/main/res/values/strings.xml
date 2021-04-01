@@ -187,14 +187,19 @@
     <string name="Msg_Info_Member_edit">\"Le membre a bien été éditer \"</string>
     <string name="Err_Member_edit">Le membre n\'a pas pu être éditer</string>
 
-    <string name="delet_msg">Message supprimer</string>
-    <string name="action_impossible">action impossible</string>
-    <string name="action_not_allow">action pas autorisé</string>
-
-    <string name="dir_pdf">chemin: </string>
 
     <string name="modify_val">Modifications validé. Refraichire la page.</string>
 
 
+    <!-- Messagerie et salon de messages -->
+    <string name="delet_msg">Message supprimer</string>
+    <string name="action_impossible">action impossible</string>
+    <string name="action_not_allow">action pas autorisé</string>
+    <string name="dir_pdf">chemin: </string>
+    <string name="Msg_Pseudo">Pseudo de l\'utilisateur</string>
+    <string name="Msg_Date">Date d\'envoie</string>
+    <string name="Msg_Content">Contenu du message</string>
+    <string name="MSG_send_msg">Tapez votre message ici...</string>
+    <string name="Send">Envoyer</string>
 
 </resources>

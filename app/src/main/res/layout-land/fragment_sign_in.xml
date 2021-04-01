@@ -40,7 +40,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@drawable/btn_bg"
+        android:background="@drawable/bg_bouton"
         android:text="@string/Action_Valid_Inscription"
         android:textColor="@color/white"
         android:textSize="15sp"
