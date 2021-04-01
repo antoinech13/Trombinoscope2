@@ -157,7 +157,8 @@ public class MainActivity extends AppCompatActivity implements HideNavDrawer {
     }
 
     public void setDrawer_Locked() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        if (drawer != null)
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
     public void setDrawer_UnLocked() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);

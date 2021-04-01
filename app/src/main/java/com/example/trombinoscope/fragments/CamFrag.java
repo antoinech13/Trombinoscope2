@@ -190,7 +190,7 @@ public class CamFrag extends Fragment {
                         requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Log.e("CamFrag",getArguments().getString("origine"));
+
                                 if(getArguments().getString("origine").equals("user_profil"))
                                 {
                                     b.putString("source","CamFrag");

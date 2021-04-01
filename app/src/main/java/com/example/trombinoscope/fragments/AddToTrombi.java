@@ -180,10 +180,10 @@ public class AddToTrombi extends Fragment {
 
 
         ocr.setOnClickListener(new View.OnClickListener(){
-           public void onClick(View view){
-               runTextRecognition();
+            public void onClick(View view){
+                runTextRecognition();
 
-           }
+            }
         });
 
         photo.setOnClickListener(new View.OnClickListener(){
@@ -249,12 +249,10 @@ public class AddToTrombi extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == IMAGE_PICK_CODE) {
-           if(data != null) {
-               image.setImageURI(data.getData());
+            image.setImageURI(data.getData());
 
-               BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-               img = drawable.getBitmap();
-           }
+            BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+            img = drawable.getBitmap();
         }
     }
 
@@ -285,17 +283,20 @@ public class AddToTrombi extends Fragment {
         if(prenom.getText().toString().length() > 0)
             b.putString("prenom", prenom.getText().toString());
 
-       NavController c =  Navigation.findNavController(view) ;
-       c.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+        NavController c =  Navigation.findNavController(view) ;
+        c.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if(destination.getId() == R.id.camFrag){
+                    Log.e("OnDestiation", String.valueOf(destination.getLabel()));
                     ((MainActivity)getActivity()).setDrawer_Locked(); //Gestion du nav drawer
                     ((MainActivity)getActivity()).getSupportActionBar().hide(); //Gestion de la toolbar
+                    c.removeOnDestinationChangedListener(this);
                 }
             }
         });
+        b.putString("origine","AddToTrombi");
         c.navigate(R.id.action_addToTrombi_to_camFrag, b);
     }
 
@@ -396,21 +397,25 @@ public class AddToTrombi extends Fragment {
         Map<String, String> m = new HashMap<String, String>();
         for(int i = 0; i < tab.length; i++){
             if(tab[i].toLowerCase().equals("email") || tab[i].toLowerCase().equals("email:") || tab[i].toLowerCase().equals("email=")){
-                m.put("email", tab[i+1]);
+                if(i + 1 < tab.length)
+                    m.put("email", tab[i+1]);
             }
             else if(tab[i].toLowerCase().equals("prenom") || tab[i].toLowerCase().equals("prenom:") || tab[i].toLowerCase().equals("prenom=") || tab[i].toLowerCase().equals("prénom") || tab[i].toLowerCase().equals("prénom:") || tab[i].toLowerCase().equals("prénom=") || tab[i].toLowerCase().equals("prènom") || tab[i].toLowerCase().equals("prènom:") || tab[i].toLowerCase().equals("prènom=")){
-                m.put("prenom", tab[i+1]);
+                if(i + 1 < tab.length)
+                    m.put("prenom", tab[i+1]);
             }
             else if(tab[i].toLowerCase().equals("nom") || tab[i].toLowerCase().equals("nom:") || tab[i].toLowerCase().equals("nom=")){
-                m.put("nom", tab[i+1]);
+                if(i + 1 < tab.length)
+                    m.put("nom", tab[i+1]);
             }
         }
         return m;
     }
 
     public void setText(Map<String, String> m){
-        if(m.containsKey("email"))
-            email.setText(m.get("email"));
+        if(m.containsKey("email")){
+            Log.e("hu","nfj");
+            email.setText(m.get("email"));}
         else if(m.containsKey("prenom"))
             prenom.setText(m.get("prenom"));
         else if(m.containsKey("nom"))

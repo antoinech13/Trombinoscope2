@@ -140,6 +140,7 @@
                     android:padding="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/Hint_LastName"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
@@ -165,6 +166,7 @@
                     android:padding="10dp"
                     android:background="@drawable/white_bg"
                     android:hint="@string/Hint_FirstName"
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
@@ -188,7 +190,9 @@
                     android:layout_height="40dp"
                     android:padding="10dp"
                     android:background="@drawable/white_bg"
-                    android:hint="@string/Hint_Email" />
+                    android:hint="@string/Hint_Email"
+                    android:textColor="@color/black"/>
+
             </LinearLayout>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
@@ -199,6 +203,7 @@
             android:layout_gravity="center"
             android:background="@drawable/btn_bg"
             android:textColor="@color/white"
+
             android:text="@string/Action_Next" />
     </LinearLayout>
 </ScrollView>

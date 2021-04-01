@@ -217,14 +217,16 @@ public class trombinoscopes extends Fragment {
                 createPopupDel(trombis.get(position), position);
                 builder.show();
 
+            case 5:
+                createPopupModify(trombis.get(position));
+                builder.show();
+
 
         }
         return super.onContextItemSelected(item);
     }
 
-    public void pdf(){
 
-    }
 
 
     private void createPopupModify(Trombi tr){
@@ -234,15 +236,15 @@ public class trombinoscopes extends Fragment {
         formation = (EditText) viewInflated.findViewById(R.id.popup_form);
         tag = (EditText) viewInflated.findViewById(R.id.popup_tag);
         date = (EditText) viewInflated.findViewById(R.id.popup_date);
-        s = (Spinner) viewInflated.findViewById(R.id.spinnerPopup);
+
 
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                update(2, tr.getId());
-                RequestTrombis(getView(),2, -1, null);
+                update(6, tr.getId());
+                RequestTrombis(getView(),6, -1, null);
                 dialog.dismiss();
             }
         });
@@ -472,6 +474,14 @@ public class trombinoscopes extends Fragment {
                         Log.e("position",String.valueOf(position));
                         Snackbar.make(view, getResources().getString(R.string.Msg_Info_Deleted), 1000).show();
                     }
+
+                    else if(flag == 6){
+                        if(response.getString("Flag").equals("true"))
+                            Snackbar.make(view, getResources().getString(R.string.modify_val), 1000).show();
+                        if(response.getString("Flag").equals("notAllow"))
+                            Snackbar.make(view, getResources().getString(R.string.action_not_allow), 1000).show();
+
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -527,6 +537,14 @@ public class trombinoscopes extends Fragment {
 
             else if(flag == 5) {
                 js.put("request", "delFor");
+                js.put("idTrombi", idTrombi);
+            }
+
+            else if(flag == 6){
+                js.put("request","modify");
+                js.put("formation",formation.getText().toString());
+                js.put("tag", tag.getText().toString());
+                js.put("date", date.getText().toString());
                 js.put("idTrombi", idTrombi);
             }
         } catch (JSONException e) {
